@@ -35,7 +35,7 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         sx={{
@@ -49,53 +49,51 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Iniciar sesión
         </Typography>
-        <Container maxWidth="xs">
-          <Box component="form" onSubmit={handleSubmit} noValidate mt={1}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Correo electrónico"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Contraseña"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            {error && (
-              <Alert severity="error" sx={{ width: "100%" }}>
-                Las credenciales ingresadas no son válidas.
-              </Alert>
-            )}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Iniciar sesión
-            </Button>
-            <Grid container>
-              <Grid item xs></Grid>
-              <Grid item>
-                <Link href={"/signup"}>
-                  <MuiLink variant="body2" sx={{ cursor: "pointer" }}>
-                    ¿Aún no tienes una cuenta? Regístrate
-                  </MuiLink>
-                </Link>
-              </Grid>
+        <Box component="form" onSubmit={handleSubmit} noValidate mt={1}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Correo electrónico"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Contraseña"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          {error && (
+            <Alert severity="error" sx={{ width: "100%" }}>
+              Las credenciales ingresadas no son válidas.
+            </Alert>
+          )}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Iniciar sesión
+          </Button>
+          <Grid container>
+            <Grid item xs></Grid>
+            <Grid item>
+              <Link href={"/signup"}>
+                <MuiLink variant="body2" sx={{ cursor: "pointer" }}>
+                  ¿Aún no tienes una cuenta? Regístrate
+                </MuiLink>
+              </Link>
             </Grid>
-          </Box>
-        </Container>
+          </Grid>
+        </Box>
       </Box>
     </Container>
   );
