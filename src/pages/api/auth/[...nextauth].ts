@@ -31,6 +31,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/signin", 
+  },
   jwt: {
     secret: "123",
   },
