@@ -8,18 +8,32 @@ import {
 	Container,
 	Link as MuiLink,
 } from '@mui/material';
+import { useFormik } from 'formik';
 import Link from 'next/link';
 import Logo from '../components/Logo';
+import * as yup from 'yup';
+import {name, lastName, email, password} from '../utils/yupValidations';
+
+const validationSchema = yup.object({
+	name,
+	lastName,
+	email,
+	password
+});
 
 export default function SignUp() {
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
-	};
+	const formik = useFormik({
+		initialValues: {
+			name: '',
+			lastName: '',
+			email: '',
+			password: ''
+		},
+		validationSchema: validationSchema,
+		onSubmit: values => {
+			console.log(values);
+		}
+	});
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -36,17 +50,21 @@ export default function SignUp() {
 				<Typography component="h1" variant="h5">
           Registrarse
 				</Typography>
-				<Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+				<Box component="form" noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
 							<TextField
 								autoComplete="given-name"
-								name="firstName"
+								name="name"
 								required
 								fullWidth
-								id="firstName"
+								id="name"
 								label="Nombre"
 								autoFocus
+								value={formik.values.name}
+								onChange={formik.handleChange}
+								error={formik.touched.name && Boolean(formik.errors.name)}
+								helperText={formik.touched.name && formik.errors.name}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6}>
@@ -57,6 +75,10 @@ export default function SignUp() {
 								label="Apellidos"
 								name="lastName"
 								autoComplete="family-name"
+								value={formik.values.lastName}
+								onChange={formik.handleChange}
+								error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+								helperText={formik.touched.lastName && formik.errors.lastName}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -67,6 +89,10 @@ export default function SignUp() {
 								label="Correo electrónico"
 								name="email"
 								autoComplete="email"
+								value={formik.values.email}
+								onChange={formik.handleChange}
+								error={formik.touched.email && Boolean(formik.errors.email)}
+								helperText={formik.touched.email && formik.errors.email}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -78,6 +104,10 @@ export default function SignUp() {
 								type="password"
 								id="password"
 								autoComplete="new-password"
+								value={formik.values.password}
+								onChange={formik.handleChange}
+								error={formik.touched.password && Boolean(formik.errors.password)}
+								helperText={formik.touched.password && formik.errors.password}
 							/>
 						</Grid>
 						<Grid item xs={12}></Grid>

@@ -13,25 +13,33 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Logo from '../components/Logo';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { email, password } from '../utils/yupValidations';
+
+const validationSchema = yup.object({
+	email,
+	password
+});
 
 export default function SignIn() {
 	const router = useRouter();
 	const { error } = router.query;
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		const credentials = {
-			email: data.get('email'),
-			password: data.get('password'),
-		};
-
-		signIn('credentials', {
-			callbackUrl: '/',
-			email: credentials.email,
-			password: credentials.password,
-		});
-	};
+	const formik = useFormik({
+		initialValues: {
+			email: '',
+			password: ''
+		},
+		validationSchema: validationSchema,
+		onSubmit: (values) => {
+			signIn('credentials', {
+				callbackUrl: '/',
+				email: values.email,
+				password: values.password,
+			});
+		}
+	});
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -48,7 +56,7 @@ export default function SignIn() {
 				<Typography component="h1" variant="h5">
           Iniciar sesión
 				</Typography>
-				<Box component="form" onSubmit={handleSubmit} noValidate mt={1}>
+				<Box component="form" onSubmit={formik.handleSubmit} noValidate mt={1}>
 					<TextField
 						margin="normal"
 						required
@@ -58,6 +66,10 @@ export default function SignIn() {
 						name="email"
 						autoComplete="email"
 						autoFocus
+						value={formik.values.email}
+						onChange={formik.handleChange}
+						error={formik.touched.email && Boolean(formik.errors.email)}
+						helperText={formik.touched.email && formik.errors.email}
 					/>
 					<TextField
 						margin="normal"
@@ -68,6 +80,10 @@ export default function SignIn() {
 						type="password"
 						id="password"
 						autoComplete="current-password"
+						value={formik.values.password}
+						onChange={formik.handleChange}
+						error={formik.touched.password && Boolean(formik.errors.password)}
+						helperText={formik.touched.password && formik.errors.password}
 					/>
 					{error && (
 						<Alert severity="error" sx={{ width: '100%' }}>
