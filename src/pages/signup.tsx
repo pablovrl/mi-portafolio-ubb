@@ -7,18 +7,25 @@ import {
 	Typography,
 	Container,
 	Link as MuiLink,
+	Select,
+	MenuItem,
+	InputLabel,
+	FormControl,
+	FormHelperText,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import Logo from '../components/Logo';
 import * as yup from 'yup';
-import {name, lastName, email, password} from '../utils/yupValidations';
+import {name, lastName, email, password, career} from '../utils/yupValidations';
+import axios from 'axios';
 
 const validationSchema = yup.object({
 	name,
 	lastName,
 	email,
-	password
+	password,
+	career
 });
 
 export default function SignUp() {
@@ -26,12 +33,13 @@ export default function SignUp() {
 		initialValues: {
 			name: '',
 			lastName: '',
+			career: '',
 			email: '',
 			password: ''
 		},
 		validationSchema: validationSchema,
-		onSubmit: values => {
-			console.log(values);
+		onSubmit: async values => {
+			const res = await axios.post('/api/auth/register', values);
 		}
 	});
 
@@ -80,6 +88,26 @@ export default function SignUp() {
 								error={formik.touched.lastName && Boolean(formik.errors.lastName)}
 								helperText={formik.touched.lastName && formik.errors.lastName}
 							/>
+						</Grid>
+						<Grid item xs={12}>
+							<FormControl fullWidth 
+								error={formik.touched.career && Boolean(formik.errors.career)}
+							>
+								<InputLabel
+								>Carrera *</InputLabel>
+								<Select
+									required
+									fullWidth
+									label="Carrera" 
+									name="career"
+									value={formik.values.career}
+									onChange={formik.handleChange}
+								>
+									<MenuItem value="IECI">IECI</MenuItem>
+									<MenuItem value="ICINF">ICINF</MenuItem>
+								</Select>
+								<FormHelperText>{formik.errors.career}</FormHelperText>
+							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
