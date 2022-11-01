@@ -72,7 +72,7 @@ export default function SignUp() {
 								required
 								fullWidth
 								id="lastName"
-								label="Apellidos"
+								label="Apellido"
 								name="lastName"
 								autoComplete="family-name"
 								value={formik.values.lastName}
