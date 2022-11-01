@@ -19,3 +19,7 @@ export const lastName = yup
 	.string()
 	.min(3, 'El apellido debe tener un mínimo de 3 caracteres')
 	.required('Debe ingresar un apellido');
+
+export const career = yup
+	.string()
+	.required('Debe ingresar una carrera');
