@@ -1,15 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
 import { prisma } from '../../../utils/db';
+import { User } from '@prisma/client';
 
 export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
 	if(req.method === 'POST') {
-		const { email, password } = req.body;
-		if(!email || !password) {
-			return res.status(400).json({message: 'Email and password are required'}); 
+		const {name, lastName, career, email, password} = req.body as User;
+  
+		if(!name || !lastName || !career || !email || !password) {
+			return res.status(400).json({message: 'Missing body params'});
 		}
 
 		const user = await prisma.user.findMany({ where: { email: email } });
@@ -20,7 +22,10 @@ export default async function handler(
 		const hashedPassword = bcrypt.hashSync(password, 10);
 		const newUser = await prisma.user.create({
 			data: {
-				email: email,
+				name,
+				lastName,
+				career,
+				email,
 				password: hashedPassword,
 			},
 		});
