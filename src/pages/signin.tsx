@@ -66,14 +66,14 @@ export default function SignIn() {
 								autoFocus
 								name='email'
 								label='Correo electrónico'
-								margin
+								margin="normal"
 							/>
 							<FormikInput
 								autoFocus
 								name='password'
 								label='Contraseña'
 								type={'password'}
-								margin
+								margin="normal"
 							/>
 							<Button
 								type="submit"

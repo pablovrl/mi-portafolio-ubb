@@ -8,7 +8,7 @@ interface FormikInputProps {
 	label: string
 	autoFocus?: boolean
 	type?: HTMLInputTypeAttribute
-	margin?: boolean
+	margin?: 'none' | 'normal'
 }
 
 const FormikInput = ({ name, label, autoFocus, type, margin }: FormikInputProps) => {
@@ -16,7 +16,7 @@ const FormikInput = ({ name, label, autoFocus, type, margin }: FormikInputProps)
 	console.log(context);
 	return (
 		<TextField
-			margin={margin ? 'normal' : 'none'}
+			margin={margin}
 			fullWidth
 			autoFocus={autoFocus}
 			id={name}
