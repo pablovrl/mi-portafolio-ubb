@@ -15,10 +15,10 @@ model User {
   name String
   lastName String
   email String @unique
-  password String?
+  password String
   career Career
   about String?
-  Avatar String?
+  avatar String?
 }
 
 enum Career {
