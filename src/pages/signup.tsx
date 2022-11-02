@@ -19,9 +19,9 @@ import Logo from '../components/Logo';
 import * as yup from 'yup';
 import { name, lastName, email, password, career } from '../utils/yupValidations';
 import { useMutation } from 'react-query';
-import axios from 'axios';
-import { SignUpFormData } from '../types';
+import { CreateUser } from '../types';
 import FormikInput from '../components/FormikInput';
+import { register } from '../api/user';
 
 const validationSchema = yup.object({
 	name,
@@ -32,7 +32,7 @@ const validationSchema = yup.object({
 });
 
 export default function SignUp() {
-	const mutation = useMutation((user: SignUpFormData) => axios.post('/api/auth/register', user));
+	const mutation = useMutation((user: CreateUser) => register(user));
 
 	return (
 		<Container component="main" maxWidth="xs">

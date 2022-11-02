@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import { useFormikContext } from 'formik';
 import { HTMLInputTypeAttribute } from 'react';
-import { SignUpFormData } from '../types';
+import { CreateUser } from '../types';
 
 interface FormikInputProps {
 	name: string
@@ -12,7 +12,7 @@ interface FormikInputProps {
 }
 
 const FormikInput = ({ name, label, autoFocus, type, margin }: FormikInputProps) => {
-	const context = useFormikContext<SignUpFormData>();
+	const context = useFormikContext<CreateUser>();
 	console.log(context);
 	return (
 		<TextField

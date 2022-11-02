@@ -1,4 +1,4 @@
-export interface SignUpFormData {
+export interface CreateUser {
 	[name: string]: string,
 	lastName: string,
 	career: string,
