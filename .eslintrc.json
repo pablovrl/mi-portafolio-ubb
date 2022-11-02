@@ -36,6 +36,7 @@
 			"error",
 			"always"
 		],
+		"react/prop-types": "off",
 		"react/react-in-jsx-scope": "off",
 		"@typescript-eslint/ban-ts-comment": "off"
 	}
