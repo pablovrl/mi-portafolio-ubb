@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
 					return null;
 				}
 
-				const isValid = await bcrypt.compare(password, user.password);
+				const isValid = await bcrypt.compare(password, user.password || '');
 				if (!isValid) {
 					return null;
 				}
@@ -37,6 +37,7 @@ export const authOptions: NextAuthOptions = {
 	jwt: {
 		secret: '123',
 	},
+	secret: '123'
 };
 
 export default NextAuth(authOptions);
