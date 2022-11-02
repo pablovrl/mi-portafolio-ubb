@@ -12,13 +12,16 @@ import {
 	InputLabel,
 	FormControl,
 	FormHelperText,
+	Alert,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import Logo from '../components/Logo';
 import * as yup from 'yup';
-import {name, lastName, email, password, career} from '../utils/yupValidations';
+import { name, lastName, email, password, career } from '../utils/yupValidations';
+import { useMutation } from 'react-query';
 import axios from 'axios';
+import Router from 'next/router';
 
 const validationSchema = yup.object({
 	name,
@@ -39,7 +42,12 @@ export default function SignUp() {
 		},
 		validationSchema: validationSchema,
 		onSubmit: async values => {
-			const res = await axios.post('/api/auth/register', values);
+			mutation.mutate(values);
+		}
+	});
+	const mutation = useMutation((user: typeof formik.values) => axios.post('/api/auth/register', user), {
+		onSuccess: () => {
+			Router.replace('/signin');
 		}
 	});
 
@@ -56,7 +64,7 @@ export default function SignUp() {
 			>
 				<Logo />
 				<Typography component="h1" variant="h5">
-          Registrarse
+					Registrarse
 				</Typography>
 				<Box component="form" noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
 					<Grid container spacing={2}>
@@ -90,7 +98,7 @@ export default function SignUp() {
 							/>
 						</Grid>
 						<Grid item xs={12}>
-							<FormControl fullWidth 
+							<FormControl fullWidth
 								error={formik.touched.career && Boolean(formik.errors.career)}
 							>
 								<InputLabel
@@ -98,7 +106,7 @@ export default function SignUp() {
 								<Select
 									required
 									fullWidth
-									label="Carrera" 
+									label="Carrera"
 									name="career"
 									value={formik.values.career}
 									onChange={formik.handleChange}
@@ -140,19 +148,21 @@ export default function SignUp() {
 						</Grid>
 						<Grid item xs={12}></Grid>
 					</Grid>
+					{mutation.isError && <Alert severity='error' sx={{ width: '100%' }}>El correo electrónico ya ha sido registrado</Alert>}
 					<Button
 						type="submit"
 						fullWidth
 						variant="contained"
 						sx={{ mt: 3, mb: 2 }}
+						disabled={mutation.isLoading}
 					>
-            Registrarse
+						Registrarse
 					</Button>
 					<Grid container justifyContent="flex-end">
 						<Grid item>
 							<Link href={'/signin'}>
 								<MuiLink variant="body2" sx={{ cursor: 'pointer' }}>
-                  ¿Ya tienes una cuenta? Inicia sesión
+									¿Ya tienes una cuenta? Inicia sesión
 								</MuiLink>
 							</Link>
 						</Grid>
