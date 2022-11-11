@@ -19,6 +19,65 @@ model User {
   career Career
   about String?
   avatar String?
+  experiences Experience[]
+  projects Project[]
+  technologies TechnologiesOnUser[]
+}
+
+model Experience {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  company String
+  description String
+  startedAt DateTime
+  endedAt DateTime
+}
+
+model Course {
+  id Int @id @default(autoincrement())
+  name String
+  teacher String?
+  projects Project[]
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  course Course @relation(fields: [courseId], references: [id])
+  courseId Int
+  name String
+  description String
+  file String
+  image String?
+  deploy String?
+  technologies TechnologiesOnProjects[]
+}
+
+model Technology {
+  id Int @id @default(autoincrement())
+  name String
+  projects TechnologiesOnProjects[]
+  users TechnologiesOnUser[]
+}
+
+model TechnologiesOnProjects {
+  project Project @relation(fields: [projectId], references: [id])
+  projectId Int
+  technology Technology @relation(fields: [technologyId], references: [id])
+  technologyId Int
+
+  @@id([projectId, technologyId])
+}
+
+model TechnologiesOnUser {
+  user User @relation(fields: [userId], references: [id]) 
+  userId Int
+  technology Technology @relation(fields: [technologyId], references: [id])
+  technologyId Int
+
+  @@id([userId, technologyId])
 }
 
 enum Career {
