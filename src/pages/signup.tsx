@@ -45,7 +45,9 @@ export default function SignUp() {
 					alignItems: 'center',
 				}}
 			>
-				<Logo />
+				<Box mb={2}>
+					<Logo />
+				</Box>
 				<Typography component="h1" variant="h5">
 					Registrarse
 				</Typography>

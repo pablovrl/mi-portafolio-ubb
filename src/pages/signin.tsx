@@ -37,7 +37,9 @@ export default function SignIn() {
 					alignItems: 'center',
 				}}
 			>
-				<Logo />
+				<Box mb={2}>
+					<Logo />
+				</Box>
 				<Typography component="h1" variant="h5">
 					Iniciar sesión
 				</Typography>
