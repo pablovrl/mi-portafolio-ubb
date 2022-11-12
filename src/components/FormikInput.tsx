@@ -13,7 +13,6 @@ interface FormikInputProps {
 
 const FormikInput = ({ name, label, autoFocus, type, margin }: FormikInputProps) => {
 	const context = useFormikContext<CreateUser>();
-	console.log(context);
 	return (
 		<TextField
 			margin={margin}
