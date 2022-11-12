@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
 		}),
 	],
 	pages: {
-		signIn: '/signin',
+		signIn: '/iniciar-sesion',
 	},
 	jwt: {
 		secret: '123',

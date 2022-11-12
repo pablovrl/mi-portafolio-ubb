@@ -58,7 +58,7 @@ export default function SignUp() {
 				}
 				{mutation.isSuccess && 
 					<Alert severity="success" sx={{ width: '100%', mt: 2 }}>
-						La cuenta ha sido creada con éxito, ahora puedes <Link href={'/signin'}>iniciar sesión.</Link> 
+						La cuenta ha sido creada con éxito, ahora puedes <Link href={'/iniciar-sesion'}>iniciar sesión.</Link> 
 					</Alert>
 				}
 				<Formik
@@ -134,7 +134,7 @@ export default function SignUp() {
 							</Button>
 							<Grid container justifyContent="flex-end">
 								<Grid item>
-									<Link href={'/signin'}>
+									<Link href={'/iniciar-sesion'}>
 										<MuiLink variant="body2" sx={{ cursor: 'pointer' }}>
 											¿Ya tienes una cuenta? Inicia sesión
 										</MuiLink>

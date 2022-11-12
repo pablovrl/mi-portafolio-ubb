@@ -12,7 +12,7 @@ export const requireAuth = (func: GetServerSideProps) => async (ctx: GetServerSi
 	if(!session) {
 		return {
 			redirect: {
-				destination: '/signin',
+				destination: '/iniciar-sesion',
 				permanent: false
 			}
 		};

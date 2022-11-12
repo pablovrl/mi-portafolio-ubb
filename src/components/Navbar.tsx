@@ -11,10 +11,10 @@ const navLinks = [
 ];
 
 const editLinks = [
-	{ text: 'Información Personal', href: 'edit/informacion-personal' },
-	{ text: 'Tecnologías', href: '/edit/tecnologías' },
-	{ text: 'Experiencia', href: '/edit/experiencia' },
-	{ text: 'Proyectos', href: '/edit/proyectos' }
+	{ text: 'Información Personal', href: 'editar/informacion-personal' },
+	{ text: 'Tecnologías', href: '/editar/tecnologías' },
+	{ text: 'Experiencia', href: '/editar/experiencia' },
+	{ text: 'Proyectos', href: '/editar/proyectos' }
 ];
 
 const Navbar = () => {

@@ -88,7 +88,7 @@ export default function SignIn() {
 							<Grid container>
 								<Grid item xs></Grid>
 								<Grid item>
-									<Link href={'/signup'}>
+									<Link href={'/registrarse'}>
 										<MuiLink variant="body2" sx={{ cursor: 'pointer' }}>
 											¿Aún no tienes una cuenta? Regístrate
 										</MuiLink>
