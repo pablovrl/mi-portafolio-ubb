@@ -17,17 +17,24 @@ model User {
   email String @unique
   password String
   career Career
-  about String?
-  image String?
+  portfolio Portfolio?
+}
+
+model Portfolio {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
+  career Career
+  about String
+  technologies TechnologiesOnPortfolios[]
   experiences Experience[]
   projects Project[]
-  technologies TechnologiesOnUser[]
 }
 
 model Experience {
   id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+  portfolioId Int
   company String
   description String
   startedAt DateTime
@@ -43,8 +50,8 @@ model Course {
 
 model Project {
   id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  user Portfolio @relation(fields: [portfolioId], references: [id])
+  portfolioId Int
   course Course @relation(fields: [courseId], references: [id])
   courseId Int
   name String
@@ -59,7 +66,7 @@ model Technology {
   id Int @id @default(autoincrement())
   name String
   projects TechnologiesOnProjects[]
-  users TechnologiesOnUser[]
+  portfolios TechnologiesOnPortfolios[]
 }
 
 model TechnologiesOnProjects {
@@ -71,13 +78,13 @@ model TechnologiesOnProjects {
   @@id([projectId, technologyId])
 }
 
-model TechnologiesOnUser {
-  user User @relation(fields: [userId], references: [id]) 
-  userId Int
+model TechnologiesOnPortfolios {
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id]) 
+  portfolioId Int
   technology Technology @relation(fields: [technologyId], references: [id])
   technologyId Int
 
-  @@id([userId, technologyId])
+  @@id([portfolioId, technologyId])
 }
 
 enum Career {
