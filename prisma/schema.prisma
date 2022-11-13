@@ -30,6 +30,7 @@ model Portfolio {
   technologies TechnologiesOnPortfolios[]
   experiences Experience[]
   projects Project[]
+  contacts Contact[]
 }
 
 model Experience {
@@ -51,7 +52,7 @@ model Course {
 
 model Project {
   id Int @id @default(autoincrement())
-  user Portfolio @relation(fields: [portfolioId], references: [id])
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
   portfolioId Int
   course Course @relation(fields: [courseId], references: [id])
   courseId Int
@@ -68,6 +69,14 @@ model Technology {
   name String
   projects TechnologiesOnProjects[]
   portfolios TechnologiesOnPortfolios[]
+}
+
+model Contact {
+  id Int @id @default(autoincrement())
+  name String
+  url String
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+  portfolioId Int
 }
 
 model TechnologiesOnProjects {
