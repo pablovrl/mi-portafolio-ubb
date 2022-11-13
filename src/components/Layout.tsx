@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import Navbar from './Navbar';
 
 interface LayoutProps {
@@ -6,10 +7,10 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
 	return (
-		<>
+		<Box overflow="hidden">
 			<Navbar />
 			{children}
-		</>
+		</Box>
 	);
 };
 
