@@ -27,7 +27,7 @@ export default async function handler(
 				career,
 				email,
 				password: hashedPassword,
-				image: '/uploads/images/user.png'
+				image: '/uploads/images/default.png'
 			},
 		});
 
