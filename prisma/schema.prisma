@@ -17,7 +17,7 @@ model User {
   email String @unique
   password String
   career Career
-  image String 
+  image String?
   portfolio Portfolio?
 }
 
