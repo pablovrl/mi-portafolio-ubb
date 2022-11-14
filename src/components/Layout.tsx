@@ -7,9 +7,11 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
 	return (
-		<Box overflow="hidden" pb={2}>
+		<Box>
 			<Navbar />
-			{children}
+			<Box overflow="hidden" pb={2} px={2}>
+				{children}
+			</Box>
 		</Box>
 	);
 };
