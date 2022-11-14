@@ -1,0 +1,1106 @@
+[
+  {
+    "name": "adonisjs",
+    "icon": "devicon-adonisjs-original"
+  },
+  {
+    "name": "aftereffects",
+    "icon": "devicon-aftereffects-plain"
+  },
+  {
+    "name": "amazonwebservices",
+    "icon": "devicon-amazonwebservices-original"
+  },
+  {
+    "name": "android",
+    "icon": "devicon-android-plain"
+  },
+  {
+    "name": "androidstudio",
+    "icon": "devicon-androidstudio-plain"
+  },
+  {
+    "name": "aarch64",
+    "icon": "devicon-aarch64-plain"
+  },
+  {
+    "name": "angularjs",
+    "icon": "devicon-angularjs-plain"
+  },
+  {
+    "name": "ansible",
+    "icon": "devicon-ansible-plain"
+  },
+  {
+    "name": "apache",
+    "icon": "devicon-apache-plain"
+  },
+  {
+    "name": "apachekafka",
+    "icon": "devicon-apachekafka-original"
+  },
+  {
+    "name": "appcelerator",
+    "icon": "devicon-appcelerator-original"
+  },
+  {
+    "name": "apple",
+    "icon": "devicon-apple-original"
+  },
+  {
+    "name": "appwrite",
+    "icon": "devicon-appwrite-plain"
+  },
+  {
+    "name": "arduino",
+    "icon": "devicon-arduino-plain"
+  },
+  {
+    "name": "atom",
+    "icon": "devicon-atom-original"
+  },
+  {
+    "name": "azure",
+    "icon": "devicon-azure-plain"
+  },
+  {
+    "name": "babel",
+    "icon": "devicon-babel-plain"
+  },
+  {
+    "name": "backbonejs",
+    "icon": "devicon-backbonejs-plain"
+  },
+  {
+    "name": "bamboo",
+    "icon": "devicon-bamboo-original"
+  },
+  {
+    "name": "bash",
+    "icon": "devicon-bash-plain"
+  },
+  {
+    "name": "behance",
+    "icon": "devicon-behance-plain"
+  },
+  {
+    "name": "bitbucket",
+    "icon": "devicon-bitbucket-original"
+  },
+  {
+    "name": "bootstrap",
+    "icon": "devicon-bootstrap-plain"
+  },
+  {
+    "name": "bulma",
+    "icon": "devicon-bulma-plain"
+  },
+  {
+    "name": "bower",
+    "icon": "devicon-bower-plain"
+  },
+  {
+    "name": "c",
+    "icon": "devicon-c-plain"
+  },
+  {
+    "name": "cakephp",
+    "icon": "devicon-cakephp-plain"
+  },
+  {
+    "name": "canva",
+    "icon": "devicon-canva-original"
+  },
+  {
+    "name": "centos",
+    "icon": "devicon-centos-plain"
+  },
+  {
+    "name": "ceylon",
+    "icon": "devicon-ceylon-plain"
+  },
+  {
+    "name": "chrome",
+    "icon": "devicon-chrome-plain"
+  },
+  {
+    "name": "circleci",
+    "icon": "devicon-circleci-plain"
+  },
+  {
+    "name": "clojure",
+    "icon": "devicon-clojure-line"
+  },
+  {
+    "name": "cmake",
+    "icon": "devicon-cmake-plain"
+  },
+  {
+    "name": "clojurescript",
+    "icon": "devicon-clojurescript-plain"
+  },
+  {
+    "name": "codecov",
+    "icon": "devicon-codecov-plain"
+  },
+  {
+    "name": "codeigniter",
+    "icon": "devicon-codeigniter-plain"
+  },
+  {
+    "name": "codepen",
+    "icon": "devicon-codepen-plain"
+  },
+  {
+    "name": "coffeescript",
+    "icon": "devicon-coffeescript-original"
+  },
+  {
+    "name": "composer",
+    "icon": "devicon-composer-line"
+  },
+  {
+    "name": "confluence",
+    "icon": "devicon-confluence-original"
+  },
+  {
+    "name": "couchdb",
+    "icon": "devicon-couchdb-plain"
+  },
+  {
+    "name": "cplusplus",
+    "icon": "devicon-cplusplus-plain"
+  },
+  {
+    "name": "csharp",
+    "icon": "devicon-csharp-plain"
+  },
+  {
+    "name": "css3",
+    "icon": "devicon-css3-plain"
+  },
+  {
+    "name": "cucumber",
+    "icon": "devicon-cucumber-plain"
+  },
+  {
+    "name": "crystal",
+    "icon": "devicon-crystal-original"
+  },
+  {
+    "name": "d3js",
+    "icon": "devicon-d3js-plain"
+  },
+  {
+    "name": "dart",
+    "icon": "devicon-dart-plain"
+  },
+  {
+    "name": "debian",
+    "icon": "devicon-debian-plain"
+  },
+  {
+    "name": "denojs",
+    "icon": "devicon-denojs-original"
+  },
+  {
+    "name": "devicon",
+    "icon": "devicon-devicon-plain"
+  },
+  {
+    "name": "django",
+    "icon": "devicon-django-plain"
+  },
+  {
+    "name": "docker",
+    "icon": "devicon-docker-plain"
+  },
+  {
+    "name": "doctrine",
+    "icon": "devicon-doctrine-plain"
+  },
+  {
+    "name": "dotnetcore",
+    "icon": "devicon-dotnetcore-plain"
+  },
+  {
+    "name": "drupal",
+    "icon": "devicon-drupal-plain"
+  },
+  {
+    "name": "digitalocean",
+    "icon": "devicon-digitalocean-plain"
+  },
+  {
+    "name": "discordjs",
+    "icon": "devicon-discordjs-plain"
+  },
+  {
+    "name": "electron",
+    "icon": "devicon-electron-original"
+  },
+  {
+    "name": "eleventy",
+    "icon": "devicon-eleventy-plain"
+  },
+  {
+    "name": "elixir",
+    "icon": "devicon-elixir-plain"
+  },
+  {
+    "name": "elm",
+    "icon": "devicon-elm-plain"
+  },
+  {
+    "name": "ember",
+    "icon": "devicon-ember-original-wordmark"
+  },
+  {
+    "name": "embeddedc",
+    "icon": "devicon-embeddedc-plain"
+  },
+  {
+    "name": "erlang",
+    "icon": "devicon-erlang-plain"
+  },
+  {
+    "name": "eslint",
+    "icon": "devicon-eslint-original"
+  },
+  {
+    "name": "express",
+    "icon": "devicon-express-original"
+  },
+  {
+    "name": "facebook",
+    "icon": "devicon-facebook-plain"
+  },
+  {
+    "name": "feathersjs",
+    "icon": "devicon-feathersjs-original"
+  },
+  {
+    "name": "figma",
+    "icon": "devicon-figma-plain"
+  },
+  {
+    "name": "filezilla",
+    "icon": "devicon-filezilla-plain"
+  },
+  {
+    "name": "firebase",
+    "icon": "devicon-firebase-plain"
+  },
+  {
+    "name": "firefox",
+    "icon": "devicon-firefox-plain"
+  },
+  {
+    "name": "flask",
+    "icon": "devicon-flask-original"
+  },
+  {
+    "name": "flutter",
+    "icon": "devicon-flutter-plain"
+  },
+  {
+    "name": "foundation",
+    "icon": "devicon-foundation-plain"
+  },
+  {
+    "name": "fsharp",
+    "icon": "devicon-fsharp-plain"
+  },
+  {
+    "name": "gatling",
+    "icon": "devicon-gatling-plain"
+  },
+  {
+    "name": "gatsby",
+    "icon": "devicon-gatsby-plain"
+  },
+  {
+    "name": "rect",
+    "icon": "devicon-rect-plain"
+  },
+  {
+    "name": "gcc",
+    "icon": "devicon-gcc-plain"
+  },
+  {
+    "name": "gentoo",
+    "icon": "devicon-gentoo-plain-wordmark"
+  },
+  {
+    "name": "gimp",
+    "icon": "devicon-gimp-plain"
+  },
+  {
+    "name": "git",
+    "icon": "devicon-git-plain"
+  },
+  {
+    "name": "github",
+    "icon": "devicon-github-original"
+  },
+  {
+    "name": "gitlab",
+    "icon": "devicon-gitlab-plain"
+  },
+  {
+    "name": "gitter",
+    "icon": "devicon-gitter-plain"
+  },
+  {
+    "name": "go",
+    "icon": "devicon-go-original-wordmark"
+  },
+  {
+    "name": "google",
+    "icon": "devicon-google-plain"
+  },
+  {
+    "name": "googlecloud",
+    "icon": "devicon-googlecloud-plain"
+  },
+  {
+    "name": "gradle",
+    "icon": "devicon-gradle-plain"
+  },
+  {
+    "name": "grafana",
+    "icon": "devicon-grafana-original"
+  },
+  {
+    "name": "grails",
+    "icon": "devicon-grails-plain"
+  },
+  {
+    "name": "graphql",
+    "icon": "devicon-graphql-plain"
+  },
+  {
+    "name": "groovy",
+    "icon": "devicon-groovy-plain"
+  },
+  {
+    "name": "grunt",
+    "icon": "devicon-grunt-plain"
+  },
+  {
+    "name": "gulp",
+    "icon": "devicon-gulp-plain"
+  },
+  {
+    "name": "godot",
+    "icon": "devicon-godot-plain"
+  },
+  {
+    "name": "haskell",
+    "icon": "devicon-haskell-plain"
+  },
+  {
+    "name": "handlebars",
+    "icon": "devicon-handlebars-plain"
+  },
+  {
+    "name": "haxe",
+    "icon": "devicon-haxe-plain"
+  },
+  {
+    "name": "heroku",
+    "icon": "devicon-heroku-original"
+  },
+  {
+    "name": "html5",
+    "icon": "devicon-html5-plain"
+  },
+  {
+    "name": "hugo",
+    "icon": "devicon-hugo-plain"
+  },
+  {
+    "name": "ie10",
+    "icon": "devicon-ie10-original"
+  },
+  {
+    "name": "ifttt",
+    "icon": "devicon-ifttt-original"
+  },
+  {
+    "name": "illustrator",
+    "icon": "devicon-illustrator-plain"
+  },
+  {
+    "name": "inkscape",
+    "icon": "devicon-inkscape-plain"
+  },
+  {
+    "name": "intellij",
+    "icon": "devicon-intellij-plain"
+  },
+  {
+    "name": "ionic",
+    "icon": "devicon-ionic-original"
+  },
+  {
+    "name": "jamstack",
+    "icon": "devicon-jamstack-original"
+  },
+  {
+    "name": "jasmine",
+    "icon": "devicon-jasmine-plain"
+  },
+  {
+    "name": "java",
+    "icon": "devicon-java-plain"
+  },
+  {
+    "name": "javascript",
+    "icon": "devicon-javascript-plain"
+  },
+  {
+    "name": "jeet",
+    "icon": "devicon-jeet-plain"
+  },
+  {
+    "name": "jest",
+    "icon": "devicon-jest-plain"
+  },
+  {
+    "name": "jenkins",
+    "icon": "devicon-jenkins-line"
+  },
+  {
+    "name": "jetbrains",
+    "icon": "devicon-jetbrains-plain"
+  },
+  {
+    "name": "jira",
+    "icon": "devicon-jira-plain"
+  },
+  {
+    "name": "jquery",
+    "icon": "devicon-jquery-plain"
+  },
+  {
+    "name": "julia",
+    "icon": "devicon-julia-plain"
+  },
+  {
+    "name": "jupyter",
+    "icon": "devicon-jupyter-plain"
+  },
+  {
+    "name": "kaggle",
+    "icon": "devicon-kaggle-original"
+  },
+  {
+    "name": "karma",
+    "icon": "devicon-karma-plain"
+  },
+  {
+    "name": "kotlin",
+    "icon": "devicon-kotlin-plain"
+  },
+  {
+    "name": "knockout",
+    "icon": "devicon-knockout-plain-wordmark"
+  },
+  {
+    "name": "krakenjs",
+    "icon": "devicon-krakenjs-plain"
+  },
+  {
+    "name": "kubernetes",
+    "icon": "devicon-kubernetes-plain"
+  },
+  {
+    "name": "labview",
+    "icon": "devicon-labview-plain"
+  },
+  {
+    "name": "laravel",
+    "icon": "devicon-laravel-plain"
+  },
+  {
+    "name": "latex",
+    "icon": "devicon-latex-original"
+  },
+  {
+    "name": "less",
+    "icon": "devicon-less-plain-wordmark"
+  },
+  {
+    "name": "linkedin",
+    "icon": "devicon-linkedin-plain"
+  },
+  {
+    "name": "lua",
+    "icon": "devicon-lua-plain"
+  },
+  {
+    "name": "linux",
+    "icon": "devicon-linux-plain"
+  },
+  {
+    "name": "materialui",
+    "icon": "devicon-materialui-plain"
+  },
+  {
+    "name": "matlab",
+    "icon": "devicon-matlab-plain"
+  },
+  {
+    "name": "magento",
+    "icon": "devicon-magento-original"
+  },
+  {
+    "name": "markdown",
+    "icon": "devicon-markdown-original"
+  },
+  {
+    "name": "maya",
+    "icon": "devicon-maya-plain"
+  },
+  {
+    "name": "meteor",
+    "icon": "devicon-meteor-plain"
+  },
+  {
+    "name": "minitab",
+    "icon": "devicon-minitab-plain"
+  },
+  {
+    "name": "mocha",
+    "icon": "devicon-mocha-plain"
+  },
+  {
+    "name": "modx",
+    "icon": "devicon-modx-plain"
+  },
+  {
+    "name": "mongodb",
+    "icon": "devicon-mongodb-plain"
+  },
+  {
+    "name": "moodle",
+    "icon": "devicon-moodle-plain"
+  },
+  {
+    "name": "msdos",
+    "icon": "devicon-msdos-line"
+  },
+  {
+    "name": "mysql",
+    "icon": "devicon-mysql-plain"
+  },
+  {
+    "name": "neo4j",
+    "icon": "devicon-neo4j-plain"
+  },
+  {
+    "name": "nestjs",
+    "icon": "devicon-nestjs-plain"
+  },
+  {
+    "name": "networkx",
+    "icon": "devicon-networkx-original"
+  },
+  {
+    "name": "nextjs",
+    "icon": "devicon-nextjs-original"
+  },
+  {
+    "name": "nginx",
+    "icon": "devicon-nginx-original"
+  },
+  {
+    "name": "nixos",
+    "icon": "devicon-nixos-plain"
+  },
+  {
+    "name": "nodejs",
+    "icon": "devicon-nodejs-plain"
+  },
+  {
+    "name": "nodewebkit",
+    "icon": "devicon-nodewebkit-plain"
+  },
+  {
+    "name": "npm",
+    "icon": "devicon-npm-original-wordmark"
+  },
+  {
+    "name": "nuget",
+    "icon": "devicon-nuget-original"
+  },
+  {
+    "name": "numpy",
+    "icon": "devicon-numpy-original"
+  },
+  {
+    "name": "nuxtjs",
+    "icon": "devicon-nuxtjs-plain"
+  },
+  {
+    "name": "objectivec",
+    "icon": "devicon-objectivec-plain"
+  },
+  {
+    "name": "opera",
+    "icon": "devicon-opera-plain"
+  },
+  {
+    "name": "ocaml",
+    "icon": "devicon-ocaml-plain"
+  },
+  {
+    "name": "openal",
+    "icon": "devicon-openal-plain"
+  },
+  {
+    "name": "opengl",
+    "icon": "devicon-opengl-plain"
+  },
+  {
+    "name": "opensuse",
+    "icon": "devicon-opensuse-plain"
+  },
+  {
+    "name": "oracle",
+    "icon": "devicon-oracle-original"
+  },
+  {
+    "name": "pandas",
+    "icon": "devicon-pandas-original"
+  },
+  {
+    "name": "perl",
+    "icon": "devicon-perl-plain"
+  },
+  {
+    "name": "phalcon",
+    "icon": "devicon-phalcon-plain"
+  },
+  {
+    "name": "photoshop",
+    "icon": "devicon-photoshop-plain"
+  },
+  {
+    "name": "php",
+    "icon": "devicon-php-plain"
+  },
+  {
+    "name": "phpstorm",
+    "icon": "devicon-phpstorm-plain"
+  },
+  {
+    "name": "podman",
+    "icon": "devicon-podman-plain"
+  },
+  {
+    "name": "polygon",
+    "icon": "devicon-polygon-plain"
+  },
+  {
+    "name": "postgresql",
+    "icon": "devicon-postgresql-plain"
+  },
+  {
+    "name": "premierepro",
+    "icon": "devicon-premierepro-plain"
+  },
+  {
+    "name": "processing",
+    "icon": "devicon-processing-plain"
+  },
+  {
+    "name": "protractor",
+    "icon": "devicon-protractor-plain"
+  },
+  {
+    "name": "putty",
+    "icon": "devicon-putty-plain"
+  },
+  {
+    "name": "pycharm",
+    "icon": "devicon-pycharm-plain"
+  },
+  {
+    "name": "python",
+    "icon": "devicon-python-plain"
+  },
+  {
+    "name": "pytorch",
+    "icon": "devicon-pytorch-original"
+  },
+  {
+    "name": "raspberrypi",
+    "icon": "devicon-raspberrypi-line"
+  },
+  {
+    "name": "phoenix",
+    "icon": "devicon-phoenix-plain"
+  },
+  {
+    "name": "qt",
+    "icon": "devicon-qt-original"
+  },
+  {
+    "name": "r",
+    "icon": "devicon-r-original"
+  },
+  {
+    "name": "rails",
+    "icon": "devicon-rails-plain"
+  },
+  {
+    "name": "react",
+    "icon": "devicon-react-original"
+  },
+  {
+    "name": "redhat",
+    "icon": "devicon-redhat-plain"
+  },
+  {
+    "name": "redis",
+    "icon": "devicon-redis-plain"
+  },
+  {
+    "name": "redux",
+    "icon": "devicon-redux-original"
+  },
+  {
+    "name": "rocksdb",
+    "icon": "devicon-rocksdb-plain"
+  },
+  {
+    "name": "ruby",
+    "icon": "devicon-ruby-plain"
+  },
+  {
+    "name": "rubymine",
+    "icon": "devicon-rubymine-plain"
+  },
+  {
+    "name": "rust",
+    "icon": "devicon-rust-plain"
+  },
+  {
+    "name": "safari",
+    "icon": "devicon-safari-plain"
+  },
+  {
+    "name": "salesforce",
+    "icon": "devicon-salesforce-plain"
+  },
+  {
+    "name": "sdl",
+    "icon": "devicon-sdl-plain"
+  },
+  {
+    "name": "rstudio",
+    "icon": "devicon-rstudio-plain"
+  },
+  {
+    "name": "sass",
+    "icon": "devicon-sass-original"
+  },
+  {
+    "name": "scala",
+    "icon": "devicon-scala-plain"
+  },
+  {
+    "name": "selenium",
+    "icon": "devicon-selenium-original"
+  },
+  {
+    "name": "sequelize",
+    "icon": "devicon-sequelize-plain"
+  },
+  {
+    "name": "shopware",
+    "icon": "devicon-shopware-original"
+  },
+  {
+    "name": "shotgrid",
+    "icon": "devicon-shotgrid-plain"
+  },
+  {
+    "name": "sketch",
+    "icon": "devicon-sketch-line"
+  },
+  {
+    "name": "slack",
+    "icon": "devicon-slack-plain"
+  },
+  {
+    "name": "socketio",
+    "icon": "devicon-socketio-original"
+  },
+  {
+    "name": "solidity",
+    "icon": "devicon-solidity-plain"
+  },
+  {
+    "name": "sourcetree",
+    "icon": "devicon-sourcetree-original"
+  },
+  {
+    "name": "spring",
+    "icon": "devicon-spring-plain"
+  },
+  {
+    "name": "spss",
+    "icon": "devicon-spss-plain"
+  },
+  {
+    "name": "sqlalchemy",
+    "icon": "devicon-sqlalchemy-plain"
+  },
+  {
+    "name": "sqlite",
+    "icon": "devicon-sqlite-plain"
+  },
+  {
+    "name": "subversion",
+    "icon": "devicon-subversion-original"
+  },
+  {
+    "name": "microsoftsqlserver",
+    "icon": "devicon-microsoftsqlserver-plain"
+  },
+  {
+    "name": "ssh",
+    "icon": "devicon-ssh-original"
+  },
+  {
+    "name": "stylus",
+    "icon": "devicon-stylus-original"
+  },
+  {
+    "name": "svelte",
+    "icon": "devicon-svelte-plain"
+  },
+  {
+    "name": "swift",
+    "icon": "devicon-swift-plain"
+  },
+  {
+    "name": "symfony",
+    "icon": "devicon-symfony-original"
+  },
+  {
+    "name": "storybook",
+    "icon": "devicon-storybook-plain"
+  },
+  {
+    "name": "tailwindcss",
+    "icon": "devicon-tailwindcss-original-wordmark"
+  },
+  {
+    "name": "tensorflow",
+    "icon": "devicon-tensorflow-original"
+  },
+  {
+    "name": "terraform",
+    "icon": "devicon-terraform-plain"
+  },
+  {
+    "name": "threejs",
+    "icon": "devicon-threejs-original"
+  },
+  {
+    "name": "tomcat",
+    "icon": "devicon-tomcat-line"
+  },
+  {
+    "name": "tortoisegit",
+    "icon": "devicon-tortoisegit-plain"
+  },
+  {
+    "name": "towergit",
+    "icon": "devicon-towergit-plain"
+  },
+  {
+    "name": "travis",
+    "icon": "devicon-travis-plain"
+  },
+  {
+    "name": "thealgorithms",
+    "icon": "devicon-thealgorithms-plain"
+  },
+  {
+    "name": "trello",
+    "icon": "devicon-trello-plain"
+  },
+  {
+    "name": "twitter",
+    "icon": "devicon-twitter-original"
+  },
+  {
+    "name": "typescript",
+    "icon": "devicon-typescript-plain"
+  },
+  {
+    "name": "typo3",
+    "icon": "devicon-typo3-plain"
+  },
+  {
+    "name": "ubuntu",
+    "icon": "devicon-ubuntu-plain"
+  },
+  {
+    "name": "unity",
+    "icon": "devicon-unity-original"
+  },
+  {
+    "name": "unix",
+    "icon": "devicon-unix-original"
+  },
+  {
+    "name": "unrealengine",
+    "icon": "devicon-unrealengine-original"
+  },
+  {
+    "name": "uwsgi",
+    "icon": "devicon-uwsgi-plain"
+  },
+  {
+    "name": "vagrant",
+    "icon": "devicon-vagrant-plain"
+  },
+  {
+    "name": "vim",
+    "icon": "devicon-vim-plain"
+  },
+  {
+    "name": "visualstudio",
+    "icon": "devicon-visualstudio-plain"
+  },
+  {
+    "name": "vuejs",
+    "icon": "devicon-vuejs-plain"
+  },
+  {
+    "name": "vuestorefront",
+    "icon": "devicon-vuestorefront-plain"
+  },
+  {
+    "name": "vscode",
+    "icon": "devicon-vscode-plain"
+  },
+  {
+    "name": "webflow",
+    "icon": "devicon-webflow-original"
+  },
+  {
+    "name": "weblate",
+    "icon": "devicon-weblate-plain"
+  },
+  {
+    "name": "webpack",
+    "icon": "devicon-webpack-plain"
+  },
+  {
+    "name": "webstorm",
+    "icon": "devicon-webstorm-plain"
+  },
+  {
+    "name": "windows8",
+    "icon": "devicon-windows8-original"
+  },
+  {
+    "name": "woocommerce",
+    "icon": "devicon-woocommerce-plain"
+  },
+  {
+    "name": "wordpress",
+    "icon": "devicon-wordpress-plain"
+  },
+  {
+    "name": "xamarin",
+    "icon": "devicon-xamarin-original"
+  },
+  {
+    "name": "xcode",
+    "icon": "devicon-xcode-plain"
+  },
+  {
+    "name": "xd",
+    "icon": "devicon-xd-plain"
+  },
+  {
+    "name": "yarn",
+    "icon": "devicon-yarn-plain"
+  },
+  {
+    "name": "yii",
+    "icon": "devicon-yii-plain"
+  },
+  {
+    "name": "yunohost",
+    "icon": "devicon-yunohost-plain"
+  },
+  {
+    "name": "zend",
+    "icon": "devicon-zend-plain"
+  },
+  {
+    "name": "zig",
+    "icon": "devicon-zig-original"
+  },
+  {
+    "name": "pytest",
+    "icon": "devicon-pytest-plain"
+  },
+  {
+    "name": "opencv",
+    "icon": "devicon-opencv-plain"
+  },
+  {
+    "name": "fastapi",
+    "icon": "devicon-fastapi-plain"
+  },
+  {
+    "name": "k3s",
+    "icon": "devicon-k3s-original"
+  },
+  {
+    "name": "packer",
+    "icon": "devicon-packer-original"
+  },
+  {
+    "name": "anaconda",
+    "icon": "devicon-anaconda-original"
+  },
+  {
+    "name": "rspec",
+    "icon": "devicon-rspec-original"
+  },
+  {
+    "name": "argocd",
+    "icon": "devicon-argocd-plain"
+  },
+  {
+    "name": "prometheus",
+    "icon": "devicon-prometheus-original"
+  },
+  {
+    "name": "blender",
+    "icon": "devicon-blender-original"
+  },
+  {
+    "name": "dropwizard",
+    "icon": "devicon-dropwizard-plain"
+  },
+  {
+    "name": "vuetify",
+    "icon": "devicon-vuetify-line"
+  },
+  {
+    "name": "fedora",
+    "icon": "devicon-fedora-plain"
+  }
+]

@@ -66,6 +66,7 @@ model Project {
 model Technology {
   id Int @id @default(autoincrement())
   name String
+  icon String
   projects TechnologiesOnProjects[]
   portfolios TechnologiesOnPortfolios[]
 }
