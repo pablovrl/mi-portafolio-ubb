@@ -1,26 +1,18 @@
 import { AppBar, Box, Divider, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Logo from './Logo';
 import Link from 'next/link';
 
-const navLinks = [
-	{ text: 'Inicio', href: '/' },
-	{ text: 'Mi portafolio', href: '/' },
-];
-
-const editLinks = [
-	{ text: 'Información Personal', href: 'editar/informacion-personal' },
-	{ text: 'Tecnologías', href: '/editar/tecnologías' },
-	{ text: 'Experiencia', href: '/editar/experiencia' },
-	{ text: 'Proyectos', href: '/editar/proyectos' }
-];
-
 const Navbar = () => {
+	const session = useSession();
 	const [open, setOpen] = useState(false);
 	const handleDrawerToggle = () => setOpen(!open);
-	const [isEditOpen, setEditOpen] = useState(false);
+	const navLinks = [
+		{ text: 'Inicio', href: '/' },
+		{ text: 'Mi portafolio', href: `/portafolio/${session.data?.user?.email}` },
+	];
 
 	// TODO: REFACTOR THIS COMPONENT
 	const drawer = (
@@ -37,19 +29,7 @@ const Navbar = () => {
 						</ListItemButton>
 					</Link>
 				))}
-				<ListItemButton sx={{ textAlign: 'center' }} onClick={() => setEditOpen(!isEditOpen)}>
-					<ListItemText primary={'Editar datos'} />
-				</ListItemButton>
-				{isEditOpen && (
-					editLinks.map(link => (
-						<Link key={link.text} href={link.href}>
-							<ListItemButton sx={{ textAlign: 'center' }} onClick={handleDrawerToggle}>
-								<ListItemText primary={link.text} />
-							</ListItemButton>
-						</Link>
-					))
-				)}
-				<ListItemButton onClick={() => signOut()} sx={{ textAlign: 'center' }}>
+				<ListItemButton onClick={() => signOut({callbackUrl: '/iniciar-sesion'})} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Cerrar sesión'} />
 				</ListItemButton>
 			</List>
