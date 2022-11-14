@@ -3,6 +3,8 @@ import { Portfolio, User } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import PersonalInfo from '../../components/Forms/PersonalInfo';
+import Technologies from '../../components/Forms/Technologies';
+import UserImage from '../../components/Forms/UserImage';
 import Layout from '../../components/Layout';
 import { prisma } from '../../utils/db';
 import { getUserSessionWithContext } from '../../utils/userSession';
@@ -40,7 +42,9 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user }) => {
 					<AlertTitle>Aún no tienes un portafolio :(</AlertTitle>
 					Sigue los siguientes pasos para crear uno.
 				</Alert>
+				<UserImage user={user} />
 				<PersonalInfo user={user} />
+				<Technologies />
 			</Layout>
 		);
 
