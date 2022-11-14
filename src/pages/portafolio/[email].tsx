@@ -1,5 +1,5 @@
 import { Alert, AlertTitle } from '@mui/material';
-import { Portfolio, User } from '@prisma/client';
+import { Portfolio, Technology, User } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import PersonalInfo from '../../components/Forms/PersonalInfo';
@@ -23,15 +23,18 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 	if (session?.user?.email !== user.email && user.portfolio === null)
 		return { notFound: true };
-	return { props: { email, user } };
+
+	const technologies = await prisma.technology.findMany();
+	return { props: { email, user, technologies } };
 };
 
 interface PortfolioProps {
 	email: string;
 	user: User & { portfolio?: Portfolio };
+	technologies: Technology[];
 }
 
-const Portfolio: NextPage<PortfolioProps> = ({ email, user }) => {
+const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 	const { data } = useSession();
 
 	// Eres creador y no tienes portafolio
@@ -44,7 +47,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user }) => {
 				</Alert>
 				<UserImage user={user} />
 				<PersonalInfo user={user} />
-				<Technologies />
+				<Technologies technologies={technologies} />
 			</Layout>
 		);
 
