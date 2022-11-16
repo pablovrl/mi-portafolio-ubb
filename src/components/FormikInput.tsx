@@ -1,22 +1,11 @@
 import { TextField } from '@mui/material';
 import { useFormikContext } from 'formik';
-import { HTMLInputTypeAttribute } from 'react';
 import { CreateUser } from '../types';
+import { TextFieldProps } from '@mui/material';
 
-
-interface FormikInputProps {
-	name: string
-	label: string
-	autoFocus?: boolean
-	type?: HTMLInputTypeAttribute
-	margin?: 'none' | 'normal'
-	multiline?: boolean
-	minRows?: number
-	placeholder?: string
-}
-
-const FormikInput = ({ name, label, autoFocus, type, margin, multiline, minRows, placeholder }: FormikInputProps) => {
+const FormikInput = ({ name, label, autoFocus, type, margin, multiline, minRows, placeholder }: TextFieldProps) => {
 	const context = useFormikContext<CreateUser>();
+	if(!name) throw new Error('FormikInput: name is required');
 	return (
 		<TextField
 			margin={margin}
