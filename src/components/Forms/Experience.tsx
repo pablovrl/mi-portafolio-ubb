@@ -1,8 +1,6 @@
-import { Box, Button, Divider, Grid, TextField } from '@mui/material';
-import FormikInput from '../FormikInput';
+import { Box, Button, Grid, TextField } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
-import { MobileDatePicker } from '@mui/x-date-pickers';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 
 const Experience = () => {
@@ -82,7 +80,7 @@ const Experience = () => {
 												variant='contained'
 												color='error'
 											>
-											Eliminar
+												Eliminar
 											</Button>
 										</Grid>
 										<Grid item xs={6}>
@@ -93,7 +91,7 @@ const Experience = () => {
 												variant='contained'
 												disabled={formik.values.experience.length >= 4}
 											>
-											Agregar
+												Agregar
 											</Button>
 										</Grid>
 									</Grid>
