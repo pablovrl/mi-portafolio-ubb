@@ -99,7 +99,7 @@ const Experience = () => {
 							</Box>
 						) : (
 							<Button
-								variant='contained'
+								variant='outlined'
 								onClick={() => arrayHelpers.push({ company: '', position: '', startDate: '', endDate: '' })}
 							>
 								Agregar experiencia
