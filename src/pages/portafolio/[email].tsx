@@ -49,7 +49,8 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 						lastName: user.lastName,
 						email: user.email,
 						about: '',
-						experience: []
+						experience: [],
+						technologies: [],
 					}}
 					onSubmit={async (values) => console.log(values)}
 				>

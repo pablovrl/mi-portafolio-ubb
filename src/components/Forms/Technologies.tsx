@@ -2,15 +2,16 @@ import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Technology } from '@prisma/client';
 import { Autocomplete, Box, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useFormikContext } from 'formik';
 
 interface Props {
 	technologies: Technology[];
 }
 
 const Technologies = ({ technologies }: Props) => {
-	const [selectedTechnologies, setSelectedTechnologies] = useState<Technology[]>([]);
-
+	const formik = useFormikContext<{
+		technologies: Technology[];
+	}>();
 	return (
 		<Box>
 			<Title text='Tecnologías' />
@@ -19,7 +20,10 @@ const Technologies = ({ technologies }: Props) => {
 			</Helptext>
 			<Autocomplete
 				multiple
-				onChange={(event, value) => setSelectedTechnologies(value)}
+				// add onchange with formik
+				onChange={(e, value) => {
+					formik.setFieldValue('technologies', value);
+				}}
 				sx={{ marginTop: 1 }}
 				options={technologies}
 				getOptionLabel={(option) => option.name}
