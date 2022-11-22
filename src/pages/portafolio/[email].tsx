@@ -3,6 +3,7 @@ import { Portfolio, Technology, User } from '@prisma/client';
 import { Formik } from 'formik';
 import { GetServerSideProps, NextPage } from 'next';
 import { useSession } from 'next-auth/react';
+import Contact from '../../components/Forms/Contact';
 import Experience from '../../components/Forms/Experience';
 import PersonalInfo from '../../components/Forms/PersonalInfo';
 import Technologies from '../../components/Forms/Technologies';
@@ -51,6 +52,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 						about: '',
 						experience: [],
 						technologies: [],
+						contact: []
 					}}
 					onSubmit={async (values) => console.log(values)}
 				>
@@ -64,6 +66,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 							<PersonalInfo user={user} />
 							<Technologies technologies={technologies} />
 							<Experience />
+							<Contact />
 							<Button type='submit' fullWidth variant='contained' sx={{ marginTop: 2 }}> Crear portafolio</Button>
 						</Box>
 					)}
