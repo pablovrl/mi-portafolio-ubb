@@ -10,3 +10,8 @@ export const changeImage = async (image: File) => {
 	formData.append('image', image);
 	return axios.post('/api/user/change-image', formData);
 };	
+
+
+export const createPortfolio = async (data: any) => {
+	return axios.post('/api/user/portfolio', data);
+}
