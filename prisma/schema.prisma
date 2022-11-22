@@ -18,15 +18,8 @@ model User {
   password String
   career Career
   image String?
-  portfolio Portfolio?
-}
-
-model Portfolio {
-  id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
-  userId Int @unique
   about String @db.Text
-  technologies TechnologiesOnPortfolios[]
+  technologies TechnologiesOnUsers[]
   experiences Experience[]
   projects Project[]
   contacts Contact[]
@@ -34,8 +27,8 @@ model Portfolio {
 
 model Experience {
   id Int @id @default(autoincrement())
-  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
-  portfolioId Int
+  user User @relation(fields: [userId], references: [id])
+  userId Int
   company String
   description String
   startedAt DateTime
@@ -51,8 +44,8 @@ model Course {
 
 model Project {
   id Int @id @default(autoincrement())
-  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
-  portfolioId Int
+  user User @relation(fields: [userId], references: [id])
+  userId Int
   course Course @relation(fields: [courseId], references: [id])
   courseId Int
   name String
@@ -68,15 +61,15 @@ model Technology {
   name String
   icon String
   projects TechnologiesOnProjects[]
-  portfolios TechnologiesOnPortfolios[]
+  users TechnologiesOnUsers[]
 }
 
 model Contact {
   id Int @id @default(autoincrement())
   name String
   url String
-  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
-  portfolioId Int
+  user User @relation(fields: [userId], references: [id])
+  userId Int
 }
 
 model TechnologiesOnProjects {
@@ -88,13 +81,13 @@ model TechnologiesOnProjects {
   @@id([projectId, technologyId])
 }
 
-model TechnologiesOnPortfolios {
-  portfolio Portfolio @relation(fields: [portfolioId], references: [id]) 
-  portfolioId Int
+model TechnologiesOnUsers {
+  user User @relation(fields: [userId], references: [id])
+  userId Int
   technology Technology @relation(fields: [technologyId], references: [id])
   technologyId Int
 
-  @@id([portfolioId, technologyId])
+  @@id([userId, technologyId])
 }
 
 enum Career {
