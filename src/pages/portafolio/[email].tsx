@@ -1,8 +1,9 @@
 import { Alert, AlertTitle, Box, Button } from '@mui/material';
-import { Portfolio, Technology, User } from '@prisma/client';
+import { Technology, User } from '@prisma/client';
 import { Formik } from 'formik';
 import { GetServerSideProps, NextPage } from 'next';
 import { useSession } from 'next-auth/react';
+import { createPortfolio } from '../../api/user';
 import Contact from '../../components/Forms/Contact';
 import Experience from '../../components/Forms/Experience';
 import PersonalInfo from '../../components/Forms/PersonalInfo';
@@ -16,7 +17,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const { email } = ctx.query;
 	const user = await prisma.user.findFirst({
 		where: { email: email as string },
-		include: { portfolio: true }
 	});
 
 	if (!user)
@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 interface PortfolioProps {
 	email: string;
-	user: User & { portfolio?: Portfolio };
+	user: User;
 	technologies: Technology[];
 }
 
@@ -41,7 +41,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 	const { data } = useSession();
 
 	// Eres creador y no tienes portafolio
-	if (email === data?.user?.email && user.portfolio === null)
+	if (email === data?.user?.email && user.portfolio === false)
 		return (
 			<Layout>
 				<Formik
@@ -54,7 +54,9 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 						technologies: [],
 						contact: []
 					}}
-					onSubmit={async (values) => console.log(values)}
+					onSubmit={async (values) => {
+						createPortfolio(values);
+					}}
 				>
 					{props => (
 						<Box component='form' onSubmit={props.handleSubmit}>
