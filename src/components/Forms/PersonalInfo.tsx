@@ -39,7 +39,7 @@ const PersonalInfo = ({ user }: PersonalInfoProps) => {
 			</Grid>
 			<Title text='Perfil' />
 			<Helptext>Los reclutadores tienen muy poco tiempo para leer sobre los postulantes, se breve. 
-						Escibre sobre ti y tu experiencia en 3 o 4 oraciones.</Helptext>
+						Escibre sobre ti y tu experiencia.</Helptext>
 			<Grid item xs={12}>
 				<FormikInput
 					name='about'
