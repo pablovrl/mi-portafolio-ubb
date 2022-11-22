@@ -18,7 +18,8 @@ model User {
   password String
   career Career
   image String?
-  about String @db.Text
+  about String? @db.Text
+  portfolio Boolean @default(false)
   technologies TechnologiesOnUsers[]
   experiences Experience[]
   projects Project[]
@@ -30,6 +31,7 @@ model Experience {
   user User @relation(fields: [userId], references: [id])
   userId Int
   company String
+  position String
   description String
   startedAt DateTime
   endedAt DateTime
