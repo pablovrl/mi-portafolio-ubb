@@ -9,7 +9,7 @@ const Experience = () => {
 		lastName: string;
 		email: string;
 		about: string;
-		experience: { company: string, position: string, startDate: Date, endDate: Date }[];
+		experience: { company: string, position: string, description: string, startedAt: Date, endedAt: Date }[];
 	}>();
 	return (
 		<Box>
@@ -32,7 +32,7 @@ const Experience = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField {...field} label='Cargo' />
+													<TextField fullWidth {...field} label='Cargo' />
 												</Grid>
 											)}
 										</Field>
@@ -44,31 +44,42 @@ const Experience = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField {...field} label='Empresa' />
+													<TextField fullWidth {...field} label='Empresa' />
 												</Grid>
 											)}
 										</Field>
 
 										<Field
-											name={`experience.${index}.startDate`}
+											name={`experience.${index}.startedAt`}
 										>
 											{({
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField {...field} type='date' />
+													<TextField fullWidth {...field} type='date' />
 												</Grid>
 											)}
 										</Field>
 
 										<Field
-											name={`experience.${index}.endDate`}
+											name={`experience.${index}.endedAt`}
 										>
 											{({
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField {...field} type='date' />
+													<TextField fullWidth  {...field} type='date' />
+												</Grid>
+											)}
+										</Field>
+										<Field
+											name={`experience.${index}.description`}
+										>
+											{({
+												field, // { name, value, onChange, onBlur }
+											}: FieldProps) => (
+												<Grid item xs={12}>
+													<TextField label='Descripción' fullWidth multiline minRows={3} {...field}  />
 												</Grid>
 											)}
 										</Field>
@@ -86,7 +97,7 @@ const Experience = () => {
 										<Grid item xs={6}>
 											<Button
 												type="button"
-												onClick={() => arrayHelpers.insert(index, { company: '', position: '', startDate: '', endDate: '' })} // insert an empty string at a position
+												onClick={() => arrayHelpers.insert(index, { company: '', position: '', startedAt: '', endedAt: '', description: '' })} // insert an empty string at a position
 												fullWidth
 												variant='contained'
 												disabled={formik.values.experience.length >= 4}
@@ -100,7 +111,7 @@ const Experience = () => {
 						) : (
 							<Button
 								variant='outlined'
-								onClick={() => arrayHelpers.push({ company: '', position: '', startDate: '', endDate: '' })}
+								onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: new Date(), endedAt: new Date(), description: '' })}
 							>
 								Agregar experiencia
 							</Button>
