@@ -15,7 +15,6 @@ const Title = ({ text }: { text: string }) => (
 );
 
 const StudentPortfolio = ({ user }: Props) => {
-	console.log(user);
 	return (
 		<>
 			<Typography fontWeight={'bold'} variant='h4' mb={1}>{user.name} {user.lastName}</Typography>
