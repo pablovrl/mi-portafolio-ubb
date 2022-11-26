@@ -44,7 +44,6 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
     delete el.course;
     return el;
   });
-  console.log(projects);
 
   if (!req.files) {
     return res.status(400).json({ error: 'Please upload a file' });
@@ -99,8 +98,6 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
       projects: true
     }
   })
-
-  console.log(getUser);
 
   res.status(200).json({ 'message': 'good' });
 

@@ -10,10 +10,6 @@ interface PersonalInfoProps {
 }
 
 const PersonalInfo = ({ user }: PersonalInfoProps) => {
-	const handleFormSubmit = () => {
-		console.log();
-	};
-
 	return (
 		<Box>
 			<Title text='Detalles personales' />
@@ -22,18 +18,21 @@ const PersonalInfo = ({ user }: PersonalInfoProps) => {
 					<FormikInput
 						name='name'
 						label='Nombre'
+						disabled
 					/>
 				</Grid>
 				<Grid item xs={6}>
 					<FormikInput
 						name='lastName'
 						label='Apellido'
+						disabled
 					/>
 				</Grid>
 				<Grid item xs={12}>
 					<FormikInput
 						name='email'
 						label='Correo electrónico'
+						disabled
 					/>
 				</Grid>
 			</Grid>

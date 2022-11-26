@@ -54,8 +54,6 @@ apiRoute.post(async (req: NextApiRequest & { file: Express.Multer.File }, res: N
 		data: { image: imageRoute }
 	});
 
-	console.log(user);
-
 	return res.json({ data: 'Image changed successfully!', image: imageRoute });
 });
 
