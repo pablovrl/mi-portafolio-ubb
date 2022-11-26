@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Logo from './Logo';
 import Link from 'next/link';
+import { deletePortfolio } from '../api/user';
 
 const Navbar = () => {
 	const session = useSession();
@@ -29,6 +30,9 @@ const Navbar = () => {
 						</ListItemButton>
 					</Link>
 				))}
+				<ListItemButton onClick={() => deletePortfolio()} sx={{ textAlign: 'center' }}>
+					<ListItemText primary={'Borrar portafolio'} />
+				</ListItemButton>
 				<ListItemButton onClick={() => signOut({callbackUrl: '/iniciar-sesion'})} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Cerrar sesión'} />
 				</ListItemButton>
