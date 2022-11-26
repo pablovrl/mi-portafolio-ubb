@@ -13,5 +13,14 @@ export const changeImage = async (image: File) => {
 
 
 export const createPortfolio = async (data: any) => {
-	return axios.post('/api/user/portfolio', data);
+	const formData = new FormData();
+	formData.append('about', data.about);
+	formData.append('projects', JSON.stringify(data.projects));
+	formData.append('technologies', JSON.stringify(data.technologies));
+	formData.append('experience', JSON.stringify(data.experience));
+	formData.append('contact', JSON.stringify(data.contact));
+	data.projects.forEach((project: {file: File}) => {
+		formData.append('project', project.file);
+	});
+	return axios.post('/api/user/portfolio', formData);
 }
