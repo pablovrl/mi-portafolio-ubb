@@ -1,7 +1,7 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
-import { Field, FieldArray, FieldProps, useFormikContext } from "formik";
-import Helptext from "./common/Helptext";
-import Title from "./common/Title";
+import { Box, Button, Grid, TextField } from '@mui/material';
+import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
+import Helptext from './common/Helptext';
+import Title from './common/Title';
 
 const Contact = () => {
 	const formik = useFormikContext<{ contact: { name: string, url: string }[] }>();
@@ -80,7 +80,7 @@ const Contact = () => {
 				)}
 			/>
 		</Box>
-	)
-}
+	);
+};
 
 export default Contact;

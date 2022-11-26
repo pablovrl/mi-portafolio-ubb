@@ -8,7 +8,7 @@ export const getServerSideProps = requireAuth(async () => {
 });
 
 const Home: NextPage = () => {
-	const { data, status } = useSession();
+	const { status } = useSession();
 	return (
 		<Layout>
 			<h1>{status}</h1>
