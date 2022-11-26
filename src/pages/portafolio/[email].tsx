@@ -11,13 +11,22 @@ import Projects from '../../components/Forms/Projects';
 import Technologies from '../../components/Forms/Technologies';
 import UserImage from '../../components/Forms/UserImage';
 import Layout from '../../components/Layout';
+import StudentPortfolio from '../../components/Portfolio';
+import { UserPortfolio } from '../../types';
 import { prisma } from '../../utils/db';
+import { refreshPage } from '../../utils/refreshPage';
 import { getUserSessionWithContext } from '../../utils/userSession';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const { email } = ctx.query;
 	const user = await prisma.user.findFirst({
 		where: { email: email as string },
+		include: {
+			technologies: {include: {technology: true}},
+			projects: true,
+			experiences: true,
+			contacts: true,
+		},
 	});
 
 	if (!user)
@@ -25,21 +34,22 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 	const session = await getUserSessionWithContext(ctx);
 
-	if (session?.user?.email !== user.email && user.portfolio === null)
+	if (session?.user?.email !== user.email && user.portfolio === false)
 		return { notFound: true };
 
 	const technologies = await prisma.technology.findMany();
-	return { props: { email, user, technologies } };
+	return { props: { email, stringifiedUser: JSON.stringify(user), technologies } };
 };
 
 interface PortfolioProps {
 	email: string;
-	user: User;
+	stringifiedUser: string;
 	technologies: Technology[];
 }
 
-const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
+const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technologies }) => {
 	const { data } = useSession();
+	const user = JSON.parse(stringifiedUser) as UserPortfolio;
 
 	// Eres creador y no tienes portafolio
 	if (email === data?.user?.email && user.portfolio === false)
@@ -58,16 +68,17 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 					}}
 					onSubmit={async (values) => {
 						createPortfolio(values);
+						refreshPage();
 					}}
 				>
 					{props => (
 						<Box component='form' onSubmit={props.handleSubmit}>
 							<Alert severity='info'>
 								<AlertTitle>Aún no tienes un portafolio :(</AlertTitle>
-							Sigue los siguientes pasos para crear uno.
+								Sigue los siguientes pasos para crear uno.
 							</Alert>
 							<UserImage user={user} />
-							{/* <PersonalInfo user={user} /> */}
+							<PersonalInfo />
 							<Technologies technologies={technologies} />
 							<Experience />
 							<Projects />
@@ -81,9 +92,8 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 
 	// Eres el creador y tienes portafolio
 	if (email === data?.user?.email)
-		return (
-			<p>Eres el creador y tienes portafolio</p>
-		);
+		return <StudentPortfolio user={user} />
+
 
 	return (
 		<p>No eres el creador</p>
