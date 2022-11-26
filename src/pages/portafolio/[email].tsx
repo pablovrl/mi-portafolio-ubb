@@ -7,6 +7,7 @@ import { createPortfolio } from '../../api/user';
 import Contact from '../../components/Forms/Contact';
 import Experience from '../../components/Forms/Experience';
 import PersonalInfo from '../../components/Forms/PersonalInfo';
+import Projects from '../../components/Forms/Projects';
 import Technologies from '../../components/Forms/Technologies';
 import UserImage from '../../components/Forms/UserImage';
 import Layout from '../../components/Layout';
@@ -52,7 +53,8 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 						about: '',
 						experience: [],
 						technologies: [],
-						contact: []
+						projects: [],
+						contact: [],
 					}}
 					onSubmit={async (values) => {
 						createPortfolio(values);
@@ -65,9 +67,10 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, user, technologies }) => {
 							Sigue los siguientes pasos para crear uno.
 							</Alert>
 							<UserImage user={user} />
-							<PersonalInfo user={user} />
+							{/* <PersonalInfo user={user} /> */}
 							<Technologies technologies={technologies} />
 							<Experience />
+							<Projects />
 							<Contact />
 							<Button type='submit' fullWidth variant='contained' sx={{ marginTop: 2 }}> Crear portafolio</Button>
 						</Box>
