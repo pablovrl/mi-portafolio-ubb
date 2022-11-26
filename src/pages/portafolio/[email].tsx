@@ -67,7 +67,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technolog
 						contact: [],
 					}}
 					onSubmit={async (values) => {
-						createPortfolio(values);
+						await createPortfolio(values);
 						refreshPage();
 					}}
 				>

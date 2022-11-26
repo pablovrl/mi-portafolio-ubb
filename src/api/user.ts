@@ -2,13 +2,13 @@ import axios from 'axios';
 import { CreateUser } from '../types';
 
 export const register = async (user: CreateUser) => {
-	return axios.post('/api/auth/register', user);
+	return await axios.post('/api/auth/register', user);
 };
 
 export const changeImage = async (image: File) => {
 	const formData = new FormData();
 	formData.append('image', image);
-	return axios.post('/api/user/change-image', formData);
+	return await axios.post('/api/user/change-image', formData);
 };	
 
 
@@ -22,9 +22,9 @@ export const createPortfolio = async (data: any) => {
 	data.projects.forEach((project: {file: File}) => {
 		formData.append('project', project.file);
 	});
-	return axios.post('/api/user/portfolio', formData);
+	return await axios.post('/api/user/portfolio', formData);
 };
 
 export const deletePortfolio = async () => {
-	return axios.delete('/api/user/portfolio');
+	return await axios.delete('/api/user/portfolio');
 };
