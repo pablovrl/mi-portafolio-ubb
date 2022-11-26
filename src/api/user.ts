@@ -23,4 +23,8 @@ export const createPortfolio = async (data: any) => {
 		formData.append('project', project.file);
 	});
 	return axios.post('/api/user/portfolio', formData);
-}
+};
+
+export const deletePortfolio = async () => {
+	return axios.delete('/api/user/portfolio');
+};
