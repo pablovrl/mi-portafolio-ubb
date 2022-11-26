@@ -2,6 +2,7 @@ import { Box, Button, Grid, TextField } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
+import { todayDate } from '../../utils/todayDate';
 
 const Experience = () => {
 	const formik = useFormikContext<{
@@ -11,6 +12,7 @@ const Experience = () => {
 		about: string;
 		experience: { company: string, position: string, description: string, startedAt: Date, endedAt: Date }[];
 	}>();
+	const today = todayDate();
 	return (
 		<Box>
 			<Title text='Experiencia laboral' />
@@ -97,7 +99,7 @@ const Experience = () => {
 										<Grid item xs={6}>
 											<Button
 												type="button"
-												onClick={() => arrayHelpers.insert(index, { company: '', position: '', startedAt: '', endedAt: '', description: '' })} // insert an empty string at a position
+												onClick={() => arrayHelpers.insert(index, { company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
 												fullWidth
 												variant='contained'
 												disabled={formik.values.experience.length >= 4}
@@ -111,7 +113,7 @@ const Experience = () => {
 						) : (
 							<Button
 								variant='outlined'
-								onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: new Date(), endedAt: new Date(), description: '' })}
+								onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' })}
 							>
 								Agregar experiencia
 							</Button>
