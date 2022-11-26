@@ -1,4 +1,4 @@
-import { Contact, Experience, Project, Technology, User } from "@prisma/client"
+import { Contact, Experience, Project, Technology, User } from '@prisma/client';
 
 export interface CreateUser {
 	[name: string]: string,
@@ -10,7 +10,7 @@ export interface CreateUser {
 
 export interface UserPortfolio extends User {
 	technologies: {technology: Technology}[];
-	experience: Experience[];
-	contact: Contact[];
+	experiences: Experience[];
+	contacts: Contact[];
 	projects: Project[];
 }
