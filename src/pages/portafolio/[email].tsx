@@ -1,5 +1,5 @@
 import { Alert, AlertTitle, Box, Button } from '@mui/material';
-import { Technology, User } from '@prisma/client';
+import { Technology } from '@prisma/client';
 import { Formik } from 'formik';
 import { GetServerSideProps, NextPage } from 'next';
 import { useSession } from 'next-auth/react';
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const user = await prisma.user.findFirst({
 		where: { email: email as string },
 		include: {
-			technologies: {include: {technology: true}},
+			technologies: { include: { technology: true } },
 			projects: true,
 			experiences: true,
 			contacts: true,
@@ -92,11 +92,15 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technolog
 
 	// Eres el creador y tienes portafolio
 	if (email === data?.user?.email)
-		return <StudentPortfolio user={user} />
+		return <Layout>
+			<StudentPortfolio user={user} />
+		</Layout>;
 
 
 	return (
-		<p>No eres el creador</p>
+		<Layout noNavbar>
+			<StudentPortfolio user={user} />
+		</Layout>
 	);
 };
 
