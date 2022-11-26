@@ -1,51 +1,25 @@
 import { Grid, Box } from '@mui/material';
-import { User } from '@prisma/client';
-import { Formik } from 'formik';
+import { Field, useFormikContext } from 'formik';
 import FormikInput from '../FormikInput';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 
-interface PersonalInfoProps {
-	user: User;
-}
-
-const PersonalInfo = ({ user }: PersonalInfoProps) => {
+const PersonalInfo = () => {
+	const formik = useFormikContext<{ about: string }>();
 	return (
 		<Box>
-			<Title text='Detalles personales' />
-			<Grid container spacing={2} mt={1}>
-				<Grid item xs={6}>
-					<FormikInput
-						name='name'
-						label='Nombre'
-						disabled
-					/>
-				</Grid>
-				<Grid item xs={6}>
-					<FormikInput
-						name='lastName'
-						label='Apellido'
-						disabled
-					/>
-				</Grid>
-				<Grid item xs={12}>
-					<FormikInput
-						name='email'
-						label='Correo electrónico'
-						disabled
-					/>
-				</Grid>
-			</Grid>
 			<Title text='Perfil' />
-			<Helptext>Los reclutadores tienen muy poco tiempo para leer sobre los postulantes, se breve. 
-						Escibre sobre ti y tu experiencia.</Helptext>
+			<Helptext>Los reclutadores tienen muy poco tiempo para leer sobre los postulantes, se breve.
+				Escibre sobre ti y tu experiencia.</Helptext>
 			<Grid item xs={12}>
 				<FormikInput
 					name='about'
 					label='Sobre mi'
 					multiline
+					onChange={(e) => {
+						formik.setFieldValue('about', e.target.value);
+					}}
 					minRows={3}
-					placeholder="Ingresa una breve descripción sobre ti."
 				/>
 			</Grid>
 		</Box>
