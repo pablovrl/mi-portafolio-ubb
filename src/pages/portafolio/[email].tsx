@@ -11,7 +11,7 @@ import Projects from '../../components/Forms/Projects';
 import Technologies from '../../components/Forms/Technologies';
 import UserImage from '../../components/Forms/UserImage';
 import Layout from '../../components/Layout';
-import StudentPortfolio from '../../components/Portfolio';
+import StudentPortfolio from '../../components/StudentPortfolio';
 import { UserPortfolio } from '../../types';
 import { prisma } from '../../utils/db';
 import { refreshPage } from '../../utils/refreshPage';
