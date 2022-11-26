@@ -14,8 +14,8 @@ const Experience = () => {
 	return (
 		<Box>
 			<Title text='Experiencia laboral' />
-			<Helptext>Agrega aquí tu experiencia laboral más importante.
-				(También puedes incluir prácticas profesionales).
+			<Helptext>Agrega aquí tu experiencia laboral más importante
+				(también puedes incluir prácticas profesionales).
 			</Helptext>
 			<FieldArray
 				name='experience'
