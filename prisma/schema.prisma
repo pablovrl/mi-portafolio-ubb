@@ -32,7 +32,7 @@ model Experience {
   userId Int
   company String
   position String
-  description String
+  description String @db.Text
   startedAt DateTime
   endedAt DateTime
 }
@@ -51,10 +51,10 @@ model Project {
   course Course @relation(fields: [courseId], references: [id])
   courseId Int
   name String
-  description String
+  description String @db.Text
   file String
   image String?
-  deploy String?
+  deploy String? @db.Text
   technologies TechnologiesOnProjects[]
 }
 
