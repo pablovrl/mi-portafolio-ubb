@@ -37,7 +37,10 @@ const Technologies = ({ technologies }: Props) => {
 					</Box>
 				)}
 				renderInput={(params) => (
-					<TextField {...params} label="Tecnologías" placeholder="Tecnologías" />
+					<TextField {...params} label="Tecnologías" placeholder="Tecnologías"
+						error={formik.touched.technologies && Boolean(formik.errors.technologies)}
+						helperText={formik.touched.technologies && <p>{formik.errors.technologies?.toString()}</p>}
+					/>
 				)}
 			/>
 		</Box>

@@ -16,6 +16,7 @@ import { UserPortfolio } from '../../types';
 import { prisma } from '../../utils/db';
 import { refreshPage } from '../../utils/refreshPage';
 import { getUserSessionWithContext } from '../../utils/userSession';
+import * as yup from 'yup';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const { email } = ctx.query;
@@ -47,6 +48,24 @@ interface PortfolioProps {
 	technologies: Technology[];
 }
 
+const validationSchema = yup.object({
+	about: yup.string().required('Este campo es requerido'),	
+	// validate array has at least one element
+	technologies: yup.array().of(yup.object().shape({
+		id: yup.number().required('Este campo es requerido'),
+		name: yup.string().required('Este campo es requerido'),
+		icon: yup.string().required('Este campo es requerido'),
+	})).min(1, 'Debes agregar al menos una tecnología'),
+	experience: yup.array().of(yup.object({
+		company: yup.string().required('Este campo es requerido'),
+		position: yup.string().required('Este campo es requerido'),
+		description: yup.string().required('Este campo es requerido'),
+		startedAt: yup.date().required('Este campo es requerido'),
+		endedAt: yup.date().required('Este campo es requerido'),
+	})),
+});
+
+
 const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technologies }) => {
 	const { data } = useSession();
 	const user = JSON.parse(stringifiedUser) as UserPortfolio;
@@ -56,6 +75,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technolog
 		return (
 			<Layout>
 				<Formik
+					validationSchema={validationSchema}
 					initialValues={{
 						name: user.name,
 						lastName: user.lastName,
@@ -84,6 +104,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technolog
 							<Projects />
 							<Contact />
 							<Button type='submit' fullWidth variant='contained' sx={{ marginTop: 2 }}> Crear portafolio</Button>
+							<button onClick={() => console.log(props.values)}>log</button>
 						</Box>
 					)}
 				</Formik>
