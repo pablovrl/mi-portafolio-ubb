@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CreateUser } from '../types';
+import { CreateUser, UserPortfolio } from '../types';
 
 export const register = async (user: CreateUser) => {
 	return await axios.post('/api/auth/register', user);
@@ -12,14 +12,15 @@ export const changeImage = async (image: File) => {
 };	
 
 
-export const createPortfolio = async (data: any) => {
+export const createPortfolio = async (data: UserPortfolio) => {
+	console.log(data);
 	const formData = new FormData();
-	formData.append('about', data.about);
+	formData.append('about', data.about || '');
 	formData.append('projects', JSON.stringify(data.projects));
 	formData.append('technologies', JSON.stringify(data.technologies));
-	formData.append('experience', JSON.stringify(data.experience));
-	formData.append('contact', JSON.stringify(data.contact));
-	data.projects.forEach((project: {file: File}) => {
+	formData.append('experience', JSON.stringify(data.experiences));
+	formData.append('contact', JSON.stringify(data.contacts));
+	data.projects.forEach(project => {
 		formData.append('project', project.file);
 	});
 	return await axios.post('/api/user/portfolio', formData);
