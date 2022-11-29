@@ -77,14 +77,11 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technolog
 				<Formik
 					validationSchema={validationSchema}
 					initialValues={{
-						name: user.name,
-						lastName: user.lastName,
-						email: user.email,
-						about: '',
-						experience: [],
-						technologies: [],
-						projects: [],
-						contact: [],
+						about: user.about,
+						experience: user.experiences,
+						technologies: user.technologies, 
+						projects: user.projects,
+						contact: user.contacts
 					}}
 					onSubmit={async (values) => {
 						await createPortfolio(values);
