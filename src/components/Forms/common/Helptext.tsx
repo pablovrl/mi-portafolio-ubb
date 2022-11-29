@@ -1,12 +1,13 @@
 import { Typography } from '@mui/material';
 
 interface Props {
-  children: React.ReactNode;
+	children: React.ReactNode;
+	error?: boolean;
 }
 
-const Helptext = ({ children }: Props) => {
+const Helptext = ({ error, children }: Props) => {
 	return (
-		<Typography mb={1} color='gray'>
+		<Typography color={error ? 'error' : 'gray'} mb={1}>
 			{children}
 		</Typography>
 	);
