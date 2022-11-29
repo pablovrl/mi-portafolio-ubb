@@ -3,85 +3,83 @@ import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import { todayDate } from '../../utils/todayDate';
+import { UserPortfolio } from '../../types';
 
 const Experience = () => {
-	const formik = useFormikContext<{
-		name: string;
-		lastName: string;
-		email: string;
-		about: string;
-		experience: { company: string, position: string, description: string, startedAt: Date, endedAt: Date }[];
-	}>();
+	const formik = useFormikContext<UserPortfolio>();
 	const today = todayDate();
+	const error = formik.touched.experiences && Boolean(formik.errors.experiences);
+
 	return (
 		<Box>
-			<Title text='Experiencia laboral' />
+			<Title error={error} text='Experiencia laboral' />
+			{error && <Helptext error={error}>Por favor completa todos los campos.</Helptext>}
 			<Helptext>Agrega aquí tu experiencia laboral más importante
 				(también puedes incluir prácticas profesionales).
 			</Helptext>
 			<FieldArray
-				name='experience'
+				name='experiences'
 				render={arrayHelpers => (
 					<Box>
-						{formik.values.experience && formik.values.experience.length > 0 ? (
+						{formik.values.experiences && formik.values.experiences.length > 0 ? (
 							<Box>
-								{formik.values.experience.map((experience, index) => (
+								{formik.values.experiences.map((experience, index) => (
 									<Grid container spacing={2} key={index} mb={2}>
 										<Field
-											name={`experience.${index}.position`}
+											name={`experiences.${index}.position`}
 										>
 											{({
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField fullWidth {...field} label='Cargo' />
+													<TextField fullWidth {...field} label='Cargo' error={error} />
 												</Grid>
 											)}
 										</Field>
 
 										<Field
-											name={`experience.${index}.company`}
+											name={`experiences.${index}.company`}
 										>
 											{({
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField fullWidth {...field} label='Empresa' />
+													<TextField fullWidth {...field} label='Empresa' error={error} />
 												</Grid>
 											)}
 										</Field>
 
 										<Field
-											name={`experience.${index}.startedAt`}
+											name={`experiences.${index}.startedAt`}
 										>
 											{({
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField fullWidth {...field} type='date' />
+													<TextField fullWidth {...field} type='date' error={error} />
 												</Grid>
 											)}
 										</Field>
 
 										<Field
-											name={`experience.${index}.endedAt`}
+											name={`experiences.${index}.endedAt`}
 										>
 											{({
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField fullWidth  {...field} type='date' />
+													<TextField fullWidth  {...field} type='date' error={error} />
 												</Grid>
 											)}
 										</Field>
 										<Field
-											name={`experience.${index}.description`}
+											name={`experiences.${index}.description`}
 										>
 											{({
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={12}>
-													<TextField label='Descripción' fullWidth multiline minRows={3} {...field}  />
+													<TextField error={error} label='Descripción' fullWidth multiline minRows={3} {...field} />
 												</Grid>
 											)}
 										</Field>
@@ -102,7 +100,7 @@ const Experience = () => {
 												onClick={() => arrayHelpers.insert(index, { company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
 												fullWidth
 												variant='contained'
-												disabled={formik.values.experience.length >= 4}
+												disabled={formik.values.experiences.length >= 4}
 											>
 												Agregar
 											</Button>
