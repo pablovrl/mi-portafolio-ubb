@@ -56,7 +56,7 @@ const validationSchema = yup.object({
 		name: yup.string().required('Este campo es requerido'),
 		icon: yup.string().required('Este campo es requerido'),
 	})).min(1, 'Debes agregar al menos una tecnología'),
-	experience: yup.array().of(yup.object({
+	experiences: yup.array().of(yup.object().shape({
 		company: yup.string().required('Este campo es requerido'),
 		position: yup.string().required('Este campo es requerido'),
 		description: yup.string().required('Este campo es requerido'),
@@ -77,13 +77,21 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technolog
 				<Formik
 					validationSchema={validationSchema}
 					initialValues={{
-						about: user.about,
-						experience: user.experiences,
+						id: user.id,
+						name: user.name,
+						lastName: user.lastName,
+						career: user.career,
+						email: user.email,
+						image: user.image,
+						password: '',
+						portfolio: user.portfolio,
+						about: '',
+						experiences: user.experiences,
 						technologies: user.technologies, 
 						projects: user.projects,
-						contact: user.contacts
+						contacts: user.contacts,
 					}}
-					onSubmit={async (values) => {
+					onSubmit={async (values: UserPortfolio) => {
 						await createPortfolio(values);
 						refreshPage();
 					}}
