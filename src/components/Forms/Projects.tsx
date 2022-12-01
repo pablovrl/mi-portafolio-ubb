@@ -1,19 +1,16 @@
-import { Box, Button, Grid, TextField } from '@mui/material';
+import { Alert, Box, Button, Grid, TextField } from '@mui/material';
 import { Field, FieldArray, useFormikContext } from 'formik';
-import { useEffect } from 'react';
+import { UserPortfolio } from '../../types';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 
 const Projects = () => {
-	const formik = useFormikContext<{ projects: { name: string, description: string, deploy: string, file: File | null }[] }>();
-
-	// useEffect(() => {
-	//   console.log(formik.values.projects);
-	// }, [formik.values.projects]);
-
+	const formik = useFormikContext<UserPortfolio>();
+	const error = formik.touched.projects && Boolean(formik.errors.projects);
 	return (
 		<Box>
-			<Title text="Proyectos" />
+			<Title text="Proyectos" error={error}/>
+			{error && <Alert severity='error' >Por favor completa todos los campos.</Alert>}
 			<Helptext>Añade tus proyectos desarrollados a lo largo de la carrera (también pueden ser personales).</Helptext>
 			<FieldArray
 				name="projects"
@@ -29,7 +26,7 @@ const Projects = () => {
 											>
 												{({ field }: any) => (
 													<Grid item xs={6}>
-														<TextField fullWidth {...field} label="Nombre" />
+														<TextField fullWidth error={error} {...field} label="Nombre" />
 													</Grid>
 												)}
 											</Field>
@@ -38,7 +35,7 @@ const Projects = () => {
 											>
 												{({ field }: any) => (
 													<Grid item xs={6}>
-														<TextField fullWidth {...field} label="URL" />
+														<TextField fullWidth error={error} {...field} label="URL" />
 													</Grid>
 												)}
 											</Field>
@@ -47,7 +44,7 @@ const Projects = () => {
 											>
 												{({ field }: any) => (
 													<Grid item xs={12}>
-														<TextField fullWidth {...field} label="Asignatura" />
+														<TextField fullWidth error={error} {...field} label="Asignatura" />
 													</Grid>
 												)}
 											</Field>
@@ -56,7 +53,7 @@ const Projects = () => {
 											>
 												{({ field }: any) => (
 													<Grid item xs={12}>
-														<TextField fullWidth {...field} label="Descripción" multiline minRows={3} />
+														<TextField error={error} fullWidth {...field} label="Descripción" multiline minRows={3} />
 													</Grid>
 												)}
 											</Field>

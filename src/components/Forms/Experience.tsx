@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from '@mui/material';
+import { Alert, Box, Button, Grid, TextField } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
@@ -13,7 +13,7 @@ const Experience = () => {
 	return (
 		<Box>
 			<Title error={error} text='Experiencia laboral' />
-			{error && <Helptext error={error}>Por favor completa todos los campos.</Helptext>}
+			{error && <Alert severity='error' >Por favor completa todos los campos.</Alert>}
 			<Helptext>Agrega aquí tu experiencia laboral más importante
 				(también puedes incluir prácticas profesionales).
 			</Helptext>
@@ -86,23 +86,23 @@ const Experience = () => {
 										<Grid item xs={6}>
 											<Button
 												type="button"
-												onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+												onClick={() => arrayHelpers.insert(index, { company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
 												fullWidth
-												variant='contained'
-												color='error'
+												variant='outlined'
+												disabled={formik.values.experiences.length >= 4}
 											>
-												Eliminar
+												Agregar
 											</Button>
 										</Grid>
 										<Grid item xs={6}>
 											<Button
 												type="button"
-												onClick={() => arrayHelpers.insert(index, { company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
+												onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
 												fullWidth
-												variant='contained'
-												disabled={formik.values.experiences.length >= 4}
+												variant='outlined'
+												color='error'
 											>
-												Agregar
+												Eliminar
 											</Button>
 										</Grid>
 									</Grid>

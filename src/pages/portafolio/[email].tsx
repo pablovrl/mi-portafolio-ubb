@@ -63,6 +63,17 @@ const validationSchema = yup.object({
 		startedAt: yup.date().required('Este campo es requerido'),
 		endedAt: yup.date().required('Este campo es requerido'),
 	})),
+	projects: yup.array().of(yup.object().shape({
+		name: yup.string().required('Este campo es requerido'),
+		description: yup.string().required('Este campo es requerido'),
+		course: yup.string().required('Este campo es requerido'),
+		deploy: yup.string().required('Este campo es requerido'),
+		file: yup.string().required('Este campo es requerido'),
+	})),
+	contacts: yup.array().of(yup.object().shape({
+		name: yup.string().required('Este campo es requerido'),
+		url: yup.string().required('Este campo es requerido'),
+	}))
 });
 
 
@@ -109,7 +120,6 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technolog
 							<Projects />
 							<Contact />
 							<Button type='submit' fullWidth variant='contained' sx={{ marginTop: 2 }}> Crear portafolio</Button>
-							<button onClick={() => console.log(props.values)}>log</button>
 						</Box>
 					)}
 				</Formik>
