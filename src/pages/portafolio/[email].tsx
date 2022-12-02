@@ -68,6 +68,7 @@ const validationSchema = yup.object({
 		description: yup.string().required('Este campo es requerido'),
 		course: yup.string().required('Este campo es requerido'),
 		deploy: yup.string().required('Este campo es requerido'),
+		technology: yup.string().required('Este campo es requerido'),
 		file: yup.string().required('Este campo es requerido'),
 	})),
 	contacts: yup.array().of(yup.object().shape({
