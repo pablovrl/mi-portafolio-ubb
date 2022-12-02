@@ -37,19 +37,11 @@ model Experience {
   endedAt DateTime
 }
 
-model Course {
-  id Int @id @default(autoincrement())
-  name String
-  teacher String?
-  projects Project[]
-}
-
 model Project {
   id Int @id @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
   userId Int
-  course Course @relation(fields: [courseId], references: [id])
-  courseId Int
+  course String
   name String
   description String @db.Text
   file String

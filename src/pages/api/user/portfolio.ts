@@ -54,24 +54,15 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 		return el;
 	});
 	const projects = JSON.parse(req.body.projects).map((el: any, index: number) => {
-		el.courseId = 1;
 		el.file = req.files[index].path.replace('public', '');
-		delete el.course;
 		return el;
 	});
+
+	console.log(projects);
 
 	if (!req.files) {
 		return res.status(400).json({ error: 'Please upload a file' });
 	}
-
-	// req.files.forEach(element => {
-	// 	fs.unlink(element.path, (err) => {
-	// 		if (err) {
-	// 			console.error(err);
-	// 			return;
-	// 		}
-	// 	});
-	// });
 
 	const session = await getUserSession(req, res);
 	if (!session?.user?.email) {
