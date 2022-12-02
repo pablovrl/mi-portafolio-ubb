@@ -50,8 +50,7 @@ const Navbar = () => {
 					keepMounted: true, // Better open performance on mobile.
 				}}
 				sx={{
-					display: { xs: 'block', sm: 'none' },
-					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: '75%' },
+					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: {xs: '75%', md: '25%'} },
 				}}
 			>
 				{drawer}
