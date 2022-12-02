@@ -21,7 +21,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 						<Typography variant='h5'>
 							{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
 						</Typography>
-						<Box display={{xs: 'none', md: 'block'}}>
+						<Box display={{xs: 'none', md: 'flex'}} gap={2} >
 							{user.contacts.map(contact => (
 								<Box key={contact.id}>
 									<MUILink href={contact.url} fontSize={'20px'} target='_blank'>
