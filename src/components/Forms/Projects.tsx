@@ -85,7 +85,7 @@ const Projects = () => {
 												</Grid>
 											)}
 											<Grid item xs={6}>
-												<Button fullWidth variant="outlined" onClick={() => arrayHelpers.insert(index, {name: '', description: '', course: '', deploy: '', file: null})}>Agregar proyecto</Button>
+												<Button fullWidth variant="outlined" onClick={() => arrayHelpers.insert(index, {name: '', description: '', technology: '', course: '', deploy: '', file: null})}>Agregar proyecto</Button>
 											</Grid>
 											<Grid item xs={6}>
 												<Button fullWidth variant="outlined" color="error" onClick={() => arrayHelpers.remove(index)}>Eliminar Proyecto</Button>
