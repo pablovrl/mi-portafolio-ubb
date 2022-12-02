@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Navbar from './Navbar';
 
 interface LayoutProps {
@@ -10,9 +10,11 @@ const Layout = ({ children, noNavbar }: LayoutProps) => {
 	return (
 		<Box pt={noNavbar ? '20px' : ''} >
 			{noNavbar ? null : <Navbar />}
-			<Box overflow="hidden" pb={2} px={2}>
-				{children}
-			</Box>
+			<Container maxWidth='md'>
+				<Box overflow="hidden" pb={2}>
+					{children}
+				</Box>
+			</Container>
 		</Box>
 	);
 };
