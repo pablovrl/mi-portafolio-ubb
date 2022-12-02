@@ -49,6 +49,15 @@ const Projects = () => {
 												)}
 											</Field>
 											<Field
+												name={`projects.${index}.technology`}
+											>
+												{({ field }: any) => (
+													<Grid item xs={12}>
+														<TextField fullWidth error={error} {...field} label="Lenguaje de programación" />
+													</Grid>
+												)}
+											</Field>
+											<Field
 												name={`projects.${index}.description`}
 											>
 												{({ field }: any) => (
