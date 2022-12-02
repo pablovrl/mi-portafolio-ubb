@@ -45,16 +45,15 @@ model Project {
   name String
   description String @db.Text
   file String
+  technology String
   image String?
   deploy String? @db.Text
-  technologies TechnologiesOnProjects[]
 }
 
 model Technology {
   id Int @id @default(autoincrement())
   name String
   icon String
-  projects TechnologiesOnProjects[]
   users TechnologiesOnUsers[]
 }
 
@@ -64,15 +63,6 @@ model Contact {
   url String
   user User @relation(fields: [userId], references: [id])
   userId Int
-}
-
-model TechnologiesOnProjects {
-  project Project @relation(fields: [projectId], references: [id])
-  projectId Int
-  technology Technology @relation(fields: [technologyId], references: [id])
-  technologyId Int
-
-  @@id([projectId, technologyId])
 }
 
 model TechnologiesOnUsers {

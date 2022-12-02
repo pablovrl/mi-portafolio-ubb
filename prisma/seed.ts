@@ -6,11 +6,6 @@ async function main() {
 	data.forEach(async element => {
 		await prisma.technology.create({ data: { name: element.name, icon: element.icon } });
 	});
-
-	await prisma.course.create({data: {
-		name: 'Personal',
-		teacher: 'Personal'
-	}})
 }
 
 main()
