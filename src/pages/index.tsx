@@ -39,14 +39,9 @@ const Home: NextPage<Props> = ({ users }) => {
 		<Layout>
 			<Grid container spacing={2}>
 				{users.map((user) => (
-					<>
-						<Grid key={user.id} item xs={12} md={6}>
-							<UserCard user={user} />
-						</Grid>
-						<Grid key={user.id} item xs={12} md={6}>
-							<UserCard user={user} />
-						</Grid>
-					</>
+					<Grid key={user.id} item xs={12} md={6}>
+						<UserCard user={user} />
+					</Grid>
 				))}
 			</Grid>
 		</Layout>
