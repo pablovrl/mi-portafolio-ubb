@@ -20,13 +20,13 @@ const Technologies = ({ technologies }: Props) => {
 			</Helptext>
 			<Autocomplete
 				multiple
-				// add onchange with formik
 				onChange={(e, value) => {
 					formik.setFieldValue('technologies', value);
 				}}
 				sx={{ marginTop: 1 }}
 				options={technologies}
 				getOptionLabel={(option) => option.name}
+				value={formik.values.technologies}
 				id="multiple-limit-tags"
 				renderOption={(props, option) => (
 					<Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
