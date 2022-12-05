@@ -13,6 +13,7 @@ const Navbar = () => {
 	const navLinks = [
 		{ text: 'Inicio', href: '/' },
 		{ text: 'Mi portafolio', href: `/portafolio/${session.data?.user?.email}` },
+		{ text: 'Editar portafolio', href: '/portafolio/editar' },
 	];
 
 	// TODO: REFACTOR THIS COMPONENT
@@ -33,7 +34,7 @@ const Navbar = () => {
 				<ListItemButton onClick={() => deletePortfolio()} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Borrar portafolio'} />
 				</ListItemButton>
-				<ListItemButton onClick={() => signOut({callbackUrl: '/iniciar-sesion'})} sx={{ textAlign: 'center' }}>
+				<ListItemButton onClick={() => signOut({ callbackUrl: '/iniciar-sesion' })} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Cerrar sesión'} />
 				</ListItemButton>
 			</List>
@@ -50,7 +51,7 @@ const Navbar = () => {
 					keepMounted: true, // Better open performance on mobile.
 				}}
 				sx={{
-					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: {xs: '75%', md: '25%'} },
+					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: { xs: '75%', md: '25%' } },
 				}}
 			>
 				{drawer}
