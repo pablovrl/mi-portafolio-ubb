@@ -39,26 +39,33 @@ apiRoute.delete(async (req: NextApiRequest & { files: Express.Multer.File[] }, r
 	await prisma.project.deleteMany({ where: { user: { email: session.user.email } } });
 	await prisma.user.update({
 		where: { email: session.user.email }, data: {
-			portfolio: false
+			portfolio: false,
+			about: ''
 		}
 	});
 });
 // route to get the current user
 apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res: NextApiResponse) => {
 	const about = req.body.about;
-	const contact = JSON.parse(req.body.contact);
+	const contact = JSON.parse(req.body.contact).map((contact: any) => {
+		delete contact.id;
+		delete contact.userId;
+		return contact;
+	});
 	const technologiesIds = JSON.parse(req.body.technologies).map((el: any) => ({ technologyId: el.id }));
 	const experience = JSON.parse(req.body.experience).map((el: any) => {
+		delete el.id;
+		delete el.userId;
 		el.endedAt = new Date(el.endedAt);
 		el.startedAt = new Date(el.startedAt);
 		return el;
 	});
 	const projects = JSON.parse(req.body.projects).map((el: any, index: number) => {
-		el.file = req.files[index].path.replace('public', '');
+		delete el.id;
+		delete el.userId;
+		if(req.files[index]) el.file = req.files[index].path.replace('public', '');
 		return el;
 	});
-
-	console.log(projects);
 
 	if (!req.files) {
 		return res.status(400).json({ error: 'Please upload a file' });
@@ -68,6 +75,17 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 	if (!session?.user?.email) {
 		return res.status(401).json({ error: 'Unauthorized' });
 	}
+
+	await prisma.experience.deleteMany({ where: { user: { email: session.user.email } } });
+	await prisma.technologiesOnUsers.deleteMany({ where: { user: { email: session.user.email } } });
+	await prisma.contact.deleteMany({ where: { user: { email: session.user.email } } });
+	await prisma.project.deleteMany({ where: { user: { email: session.user.email } } });
+	await prisma.user.update({
+		where: { email: session.user.email }, data: {
+			portfolio: false,
+			about: ''
+		}
+	});
 
 	await prisma.user.update({
 		where: {
