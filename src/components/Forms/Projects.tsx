@@ -25,17 +25,8 @@ const Projects = () => {
 												name={`projects.${index}.name`}
 											>
 												{({ field }: any) => (
-													<Grid item xs={6}>
+													<Grid item xs={12}>
 														<TextField fullWidth error={error} {...field} label="Nombre" />
-													</Grid>
-												)}
-											</Field>
-											<Field
-												name={`projects.${index}.deploy`}
-											>
-												{({ field }: any) => (
-													<Grid item xs={6}>
-														<TextField fullWidth error={error} {...field} label="URL" />
 													</Grid>
 												)}
 											</Field>
@@ -43,7 +34,7 @@ const Projects = () => {
 												name={`projects.${index}.course`}
 											>
 												{({ field }: any) => (
-													<Grid item xs={12}>
+													<Grid item xs={6}>
 														<TextField fullWidth error={error} {...field} label="Asignatura" />
 													</Grid>
 												)}
@@ -52,7 +43,7 @@ const Projects = () => {
 												name={`projects.${index}.technology`}
 											>
 												{({ field }: any) => (
-													<Grid item xs={12}>
+													<Grid item xs={6}>
 														<TextField fullWidth error={error} {...field} label="Lenguaje de programación" />
 													</Grid>
 												)}
