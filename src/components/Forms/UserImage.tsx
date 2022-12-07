@@ -2,7 +2,7 @@ import { Box, Button, Grid } from '@mui/material';
 import { User } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import { changeImage } from '../../api/user';
-import Image from 'next/image';
+import ProfileImage from '../ProfileImage';
 import Title from './common/Title';
 
 interface UserImageProps {
@@ -35,9 +35,7 @@ const UserImage = ({ user }: UserImageProps) => {
 			<Title text='Actualiza tu imagen' />
 			<Grid container spacing={2}>
 				<Grid item xs={12} display='flex' justifyContent='center'>
-					<Box position='relative' height='200px' width='200px' display={'flex'}>
-						<Image src={currentImage} layout='fill' style={{ borderRadius: '50%' }} objectFit='cover' />
-					</Box>
+					<ProfileImage src={currentImage} size={'180px'} />
 				</Grid>
 				<Grid item xs={12}>
 					<Button fullWidth variant='outlined' component='label'>
