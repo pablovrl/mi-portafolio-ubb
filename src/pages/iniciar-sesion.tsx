@@ -71,7 +71,6 @@ export default function SignIn() {
 								margin="normal"
 							/>
 							<FormikInput
-								autoFocus
 								name='password'
 								label='Contraseña'
 								type={'password'}
