@@ -1,11 +1,9 @@
-import { Box, Button, Grid, Typography, Link as MUILink } from '@mui/material';
+import { Box, Grid, Typography, Link as MUILink } from '@mui/material';
 import { UserPortfolio } from '../types';
-import Image from 'next/image';
 import Project from './Project';
 import React from 'react';
 import Experience from './Experience';
-
-const IMAGE_SIZE = '120px';
+import ProfileImage from './ProfileImage';
 
 const Title = ({children}: {children: React.ReactNode}) => (
 	<Typography fontWeight={'bold'} variant='h5' fontFamily={'monospace'}>{children}</Typography>
@@ -31,8 +29,8 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 							))}
 						</Box>
 					</Box>
-					<Box position='relative' height={'180px'} width={'180px'} display={{xs: 'none', md: 'flex'}}>
-						<Image src={user.image || ''} layout='fill' style={{ borderRadius: '50%' }} objectFit='cover' />
+					<Box display={{xs: 'none', md: 'flex'}}>
+						<ProfileImage src={user.image!} size='180px' />
 					</Box>
 				</Box>
 				<Box display={'flex'} flexDirection='column' gap={2} mt={{xs: 2, md: 0}}>
@@ -43,9 +41,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 						</Typography>
 					</Box>
 					<Box display={{xs: 'flex', md: 'none'}} gap={2} alignItems='center' flexDirection={'row'}>
-						<Box position='relative' height={IMAGE_SIZE} width={IMAGE_SIZE} display={'flex'}>
-							<Image src={user.image || ''} layout='fill' style={{ borderRadius: '50%' }} objectFit='cover' />
-						</Box>
+						<ProfileImage src={user.image!} size='120px' />
 						{user.contacts.map(contact => (
 							<Box key={contact.id}>
 								<MUILink href={contact.url} fontSize={'20px'} target='_blank'>
@@ -60,7 +56,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 							{user.technologies.map(technology => (
 								<Grid 
 									item
-									xs={4}
+									xs={6}
 									md={2}
 									key={technology.technology.id} 
 								>
@@ -79,38 +75,42 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 							))}
 						</Grid>
 					</Box>
-					<Box display={'flex'} flexDirection='column' gap={2}>
-						<Title>PROYECTOS</Title>
-						<Grid container spacing={2}>
-							{user.projects.map(project => (
-								<Grid key={project.id} item xs={12} md={6}> 
-									<Project 
-										name={project.name} 
-										description={project.description} 
-										link={project.file}
-										technology={project.technology}
-										course={project.course}
-									/>
-								</Grid>
-							))}
-						</Grid>
-					</Box>
-					<Box display={'flex'} flexDirection='column' gap={2}>
-						<Title>EXPERIENCIA</Title>
-						<Grid container spacing={2}>
-							{user.experiences.map(exp => (
-								<Grid item key={exp.id} xs={12} md={6}>
-									<Experience
-										company={exp.company}
-										position={exp.position}
-										startedAt={exp.startedAt}
-										endedAt={exp.endedAt}
-										description={exp.description}
-									/>
-								</Grid>
-							))}
-						</Grid>
-					</Box>
+					{user.projects.length > 0 && (
+						<Box display={'flex'} flexDirection='column' gap={2}>
+							<Title>PROYECTOS</Title>
+							<Grid container spacing={2}>
+								{user.projects.map(project => (
+									<Grid key={project.id} item xs={12} md={6}> 
+										<Project 
+											name={project.name} 
+											description={project.description} 
+											link={project.file}
+											technology={project.technology}
+											course={project.course}
+										/>
+									</Grid>
+								))}
+							</Grid>
+						</Box>
+					)}
+					{user.experiences.length > 0 && (
+						<Box display={'flex'} flexDirection='column' gap={2}>
+							<Title>EXPERIENCIA</Title>
+							<Grid container spacing={2}>
+								{user.experiences.map(exp => (
+									<Grid item key={exp.id} xs={12} md={6}>
+										<Experience
+											company={exp.company}
+											position={exp.position}
+											startedAt={exp.startedAt}
+											endedAt={exp.endedAt}
+											description={exp.description}
+										/>
+									</Grid>
+								))}
+							</Grid>
+						</Box>
+					)}
 				</Box>
 			</Box>
 		</Box>
