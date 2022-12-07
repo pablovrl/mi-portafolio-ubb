@@ -67,7 +67,7 @@ const Projects = () => {
 
 												<Grid item xs={12}>
 													<Button fullWidth variant="contained" component='label'>Añadir archivo (.zip)
-														<input type="file" hidden onChange={(e) => {
+														<input accept='.zip' type="file" hidden onChange={(e) => {
 															if (e.target.files) {
 																formik.setFieldValue(`projects.${index}.file`, e.target.files[0]);
 															}

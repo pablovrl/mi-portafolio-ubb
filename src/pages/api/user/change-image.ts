@@ -6,6 +6,13 @@ import { getUserSession } from '../../../utils/userSession';
 import { prisma } from '../../../utils/db';
 import fs from 'fs';
 
+const whitelist = [
+	'image/png',
+	'image/jpg',
+	'image/jpeg',
+	'image/webp'
+];
+
 const upload = multer({
 	storage: multer.diskStorage({
 		destination: 'public/uploads/images',
@@ -13,7 +20,14 @@ const upload = multer({
 			const extension = file.mimetype.split('/')[1];
 			cb(null, `${uuidv4()}.${extension}`);
 		}
-	})
+	}),
+	fileFilter: (req, file, cb) => {
+		if (whitelist.includes(file.mimetype)) {
+			return cb(null, true);
+		} else {
+			return cb(null, false);
+		}
+	}
 });
 
 const apiRoute = nextConnect({

@@ -17,7 +17,9 @@ const UserImage = ({ user }: UserImageProps) => {
 		const uploadImage = async () => {
 			if (image) {
 				const res = await changeImage(image);
-				setCurrentImage(res.data.image);
+				if(res.status === 200)
+					setCurrentImage(res.data.image);
+				else alert('El tipo de archivo no es válido');
 			}
 		};
 		uploadImage();
@@ -40,7 +42,7 @@ const UserImage = ({ user }: UserImageProps) => {
 				<Grid item xs={12}>
 					<Button fullWidth variant='outlined' component='label'>
 							Cambiar imagen
-						<input type='file' hidden onChange={handleImageChange} />
+						<input accept='.jpg, .png, jpeg, .webp' type='file' hidden onChange={handleImageChange} />
 					</Button>
 				</Grid>
 			</Grid>
