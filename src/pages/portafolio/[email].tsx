@@ -48,16 +48,8 @@ const Portfolio: NextPage<PortfolioProps> = ({ email, stringifiedUser, technolog
 			<PortfolioForm user={user} technologies={technologies} />
 		);
 
-	// Eres el creador y tienes portafolio
-	if (email === data?.user?.email)
-		return <Layout>
-			<StudentPortfolio user={user} />
-		</Layout>;
-
 	return (
-		<Layout noNavbar>
-			<StudentPortfolio user={user} />
-		</Layout>
+		<StudentPortfolio user={user} />
 	);
 };
 
