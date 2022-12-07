@@ -4,14 +4,17 @@ import Project from './Project';
 import React from 'react';
 import Experience from './Experience';
 import ProfileImage from './ProfileImage';
+import Layout from './Layout';
+import { useSession } from 'next-auth/react';
 
 const Title = ({children}: {children: React.ReactNode}) => (
 	<Typography fontWeight={'bold'} variant='h5' fontFamily={'monospace'}>{children}</Typography>
 );
 
 const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
+	const session = useSession();
 	return (
-		<Box>
+		<Layout noNavbar={session.status === 'unauthenticated' ? true : false}>
 			<Box>
 				<Box display={'flex'} justifyContent='space-between' flexDirection='row' gap={3} alignItems='center'>
 					<Box display='flex' flexDirection={'column'} gap={2}>
@@ -113,7 +116,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 					)}
 				</Box>
 			</Box>
-		</Box>
+		</Layout>
 	);
 };
 
