@@ -1,5 +1,6 @@
 import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { Field, FieldArray, useFormikContext } from 'formik';
+import { toast, Toaster } from 'react-hot-toast';
 import { UserPortfolio } from '../../types';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
@@ -16,6 +17,7 @@ const Projects = () => {
 				name="projects"
 				render={arrayHelpers => (
 					<Box>
+						<Toaster />
 						{formik.values.projects && formik.values.projects.length > 0 ?
 							(
 								<Box>
@@ -73,6 +75,11 @@ const Projects = () => {
 													<Button fullWidth variant="contained" component='label'>Añadir archivo (.zip)
 														<input accept='.zip' type="file" hidden onChange={(e) => {
 															if (e.target.files) {
+																const fileSize = e.target.files[0].size / 1024 / 1024;
+																if(fileSize > 10) {
+																	toast.error('El archivo no puede pesar más de 10MB');
+																	return;
+																}
 																formik.setFieldValue(`projects.${index}.file`, e.target.files[0]);
 															}
 														}} />
