@@ -14,9 +14,9 @@ const Technologies = ({ technologies }: Props) => {
 	}>();
 	return (
 		<Box>
-			<Title text='Tecnologías' />
+			<Title text='Tecnologías *' />
 			<Helptext>
-				A continuación ingresa las tecnologías que más domines.
+				A continuación ingresa las tecnologías que más domines. (Ingresa al menos 1).
 			</Helptext>
 			<Autocomplete
 				multiple
