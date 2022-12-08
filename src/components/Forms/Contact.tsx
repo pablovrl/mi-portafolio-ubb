@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Alert } from '@mui/material';
+import { Box, Button, Grid, TextField, Alert, Typography } from '@mui/material';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import { UserPortfolio } from '../../types';
 import Helptext from './common/Helptext';
@@ -20,8 +20,21 @@ const Contact = () => {
 					<Box>
 						{formik.values.contacts && formik.values.contacts.length > 0 ? (
 							<Box>
+								<Grid item xs={6}>
+									<Button
+										type="button"
+										onClick={() => arrayHelpers.push({ name: '', url: '' })} // insert an empty string at a position
+										variant='outlined'
+										disabled={formik.values.contacts.length >= 3}
+									>
+										Agregar nueva red de contacto
+									</Button>
+								</Grid>
 								{formik.values.contacts.map((contact, index) => (
 									<Grid container spacing={2} key={index} mb={2}>
+										<Grid item xs={12}>
+											<Typography variant='h6' mt={1}>Contacto {index + 1}</Typography>
+										</Grid>
 										<Field
 											name={`contacts.${index}.name`}
 										>
@@ -55,19 +68,6 @@ const Contact = () => {
 												Eliminar
 											</Button>
 										</Grid>
-										{index === formik.values.contacts.length - 1 &&
-											<Grid item xs={6}>
-												<Button
-													type="button"
-													onClick={() => arrayHelpers.insert(index, { name: '', url: '' })} // insert an empty string at a position
-													fullWidth
-													variant='contained'
-													disabled={formik.values.contacts.length >= 3}
-												>
-													Agregar
-												</Button>
-											</Grid>
-										}
 									</Grid>
 								))}
 							</Box>
