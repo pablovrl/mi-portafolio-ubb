@@ -73,7 +73,7 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 		delete el.id;
 		delete el.userId;
 		if (typeof el.file !== 'string') {
-			el.file = req.files[0].path.replace('public', '');
+			el.file = req.files[cont].path.replace('public', '');
 			cont++;
 		}
 		return el;
