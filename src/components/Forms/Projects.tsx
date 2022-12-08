@@ -17,7 +17,6 @@ const Projects = () => {
 				name="projects"
 				render={arrayHelpers => (
 					<Box>
-						<Toaster />
 						{formik.values.projects && formik.values.projects.length > 0 ?
 							(
 								<Box>
