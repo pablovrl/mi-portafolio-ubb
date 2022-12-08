@@ -50,6 +50,11 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 	const contact = JSON.parse(req.body.contact).map((contact: any) => {
 		delete contact.id;
 		delete contact.userId;
+		// if contact.url doesn't start with http:// or https://, add it
+		if (!contact.url.startsWith('http://') && !contact.url
+			.startsWith('https://')) {
+			contact.url = `http://${contact.url}`;
+		}
 		return contact;
 	});
 	const technologiesIds = JSON.parse(req.body.technologies).map((el: any) => ({ technologyId: el.id }));
