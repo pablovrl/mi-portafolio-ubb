@@ -12,13 +12,14 @@ export const password = yup
 
 export const name = yup
 	.string()
-	.matches(/^[a-zA-Z]+$/, 'El nombre solo puede contener letras')
+	// el nombre solo puede contener letras y tilde
+	.matches(/^[a-zA-ZáéíóúÁÉÍÓÚ]+$/, 'El nombre solo puede contener letras')
 	.min(3, 'El nombre debe tener un mínimo de 3 caracteres')
 	.required('Debe ingresar un nombre');
 
 export const lastName = yup
 	.string()
-	.matches(/^[a-zA-Z]+$/, 'El apellido solo puede contener letras')
+	.matches(/^[a-zA-ZáéíóúÁÉÍÓÚ]+$/, 'El apellido solo puede contener letras')
 	.min(3, 'El apellido debe tener un mínimo de 3 caracteres')
 	.required('Debe ingresar un apellido');
 
