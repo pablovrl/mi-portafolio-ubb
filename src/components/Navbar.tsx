@@ -58,9 +58,15 @@ const Navbar = () => {
 			</Drawer>
 			<AppBar position='static'>
 				<Toolbar>
-					<IconButton onClick={handleDrawerToggle} color='inherit'>
-						<MenuIcon />
-					</IconButton>
+					<Box display='flex' justifyContent={'space-between'} width='100%'>
+						<IconButton onClick={handleDrawerToggle} color='inherit'>
+							<MenuIcon />
+						</IconButton>
+						<Box>
+							<img src='/ubb.png' width={'100px'} />
+						</Box>
+						<Box height={'40px'} width='40px'/>
+					</Box>
 				</Toolbar>
 			</AppBar>
 		</Box>
