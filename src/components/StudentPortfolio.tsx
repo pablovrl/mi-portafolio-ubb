@@ -14,7 +14,7 @@ const Title = ({children}: {children: React.ReactNode}) => (
 const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 	const session = useSession();
 	return (
-		<Layout noNavbar={session.status === 'unauthenticated' ? true : false}>
+		<Layout noNavbar={session.status === 'unauthenticated' || session.status === 'loading' ? true : false}>
 			<Box>
 				<Box display={'flex'} justifyContent='space-between' flexDirection='row' gap={3} alignItems='center'>
 					<Box display='flex' flexDirection={'column'} gap={2}>
