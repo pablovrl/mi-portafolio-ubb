@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Grid, TextField } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { Field, FieldArray, useFormikContext } from 'formik';
 import { UserPortfolio } from '../../types';
 import Helptext from './common/Helptext';
@@ -9,7 +9,7 @@ const Projects = () => {
 	const error = formik.touched.projects && Boolean(formik.errors.projects);
 	return (
 		<Box>
-			<Title text="Proyectos" error={error}/>
+			<Title text="Proyectos" error={error} />
 			{error && <Alert severity='error' >Por favor completa todos los campos.</Alert>}
 			<Helptext>Añade tus proyectos desarrollados a lo largo de la carrera (también pueden ser personales).</Helptext>
 			<FieldArray
@@ -19,8 +19,12 @@ const Projects = () => {
 						{formik.values.projects && formik.values.projects.length > 0 ?
 							(
 								<Box>
+									<Button variant="outlined" onClick={() => arrayHelpers.push({ name: '', description: '', technology: '', course: '', deploy: '', file: null })}>Agregar nuevo proyecto</Button>
 									{formik.values.projects.map((experience, index) => (
-										<Grid container spacing={2} key={index} mb={2}>
+										<Grid container spacing={2} key={index} my={2}>
+											<Grid item xs={12}>
+												<Typography variant='h6'>Proyecto {index + 1}</Typography>
+											</Grid>
 											<Field
 												name={`projects.${index}.name`}
 											>
@@ -76,9 +80,6 @@ const Projects = () => {
 												</Grid>
 											)}
 											<Grid item xs={6}>
-												<Button fullWidth variant="outlined" onClick={() => arrayHelpers.insert(index, {name: '', description: '', technology: '', course: '', deploy: '', file: null})}>Agregar proyecto</Button>
-											</Grid>
-											<Grid item xs={6}>
 												<Button fullWidth variant="outlined" color="error" onClick={() => arrayHelpers.remove(index)}>Eliminar Proyecto</Button>
 											</Grid>
 										</Grid>
@@ -90,7 +91,7 @@ const Projects = () => {
 										variant="outlined"
 										onClick={() => arrayHelpers.push({ name: '', description: '', course: '', deploy: '', file: null })}
 									>
-                    Agregar proyecto
+										Agregar proyecto
 									</Button>
 								</Box>
 							)}
