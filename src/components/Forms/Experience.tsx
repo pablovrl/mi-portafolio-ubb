@@ -27,11 +27,10 @@ const Experience = () => {
 									type="button"
 									onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
 									variant='outlined'
-									disabled={formik.values.experiences.length >= 4}
 								>
 												Agregar nueva experiencia laboral
 								</Button>
-								{formik.values.experiences.reverse().map((experience, index) => (
+								{formik.values.experiences.map((experience, index) => (
 									<Grid container spacing={2} key={index} mb={2}>
 										<Grid item xs={12}>
 											<Typography variant='h6'>Experiencia {index + 1}</Typography>
