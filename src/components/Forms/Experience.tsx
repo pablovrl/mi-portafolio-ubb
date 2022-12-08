@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Grid, TextField } from '@mui/material';
+import { Alert, Box, Button, Grid, TextField, Typography } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
@@ -13,7 +13,7 @@ const Experience = () => {
 	return (
 		<Box>
 			<Title error={error} text='Experiencia laboral' />
-			{error && <Alert severity='error' >Por favor completa todos los campos.</Alert>}
+			{error && <Alert severity='error' >Por favor completa todos los campos correctamente.</Alert>}
 			<Helptext>Agrega aquí tu experiencia laboral más importante
 				(también puedes incluir prácticas profesionales).
 			</Helptext>
@@ -23,8 +23,19 @@ const Experience = () => {
 					<Box>
 						{formik.values.experiences && formik.values.experiences.length > 0 ? (
 							<Box>
-								{formik.values.experiences.map((experience, index) => (
+								<Button
+									type="button"
+									onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
+									variant='outlined'
+									disabled={formik.values.experiences.length >= 4}
+								>
+												Agregar nueva experiencia laboral
+								</Button>
+								{formik.values.experiences.reverse().map((experience, index) => (
 									<Grid container spacing={2} key={index} mb={2}>
+										<Grid item xs={12}>
+											<Typography variant='h6'>Experiencia {index + 1}</Typography>
+										</Grid>
 										<Field
 											name={`experiences.${index}.position`}
 										>
@@ -86,23 +97,12 @@ const Experience = () => {
 										<Grid item xs={6}>
 											<Button
 												type="button"
-												onClick={() => arrayHelpers.insert(index, { company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
-												fullWidth
-												variant='outlined'
-												disabled={formik.values.experiences.length >= 4}
-											>
-												Agregar
-											</Button>
-										</Grid>
-										<Grid item xs={6}>
-											<Button
-												type="button"
 												onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
 												fullWidth
 												variant='outlined'
 												color='error'
 											>
-												Eliminar
+												Eliminar experiencia laboral
 											</Button>
 										</Grid>
 									</Grid>
