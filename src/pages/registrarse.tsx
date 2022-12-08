@@ -23,7 +23,7 @@ import { CreateUser } from '../types';
 import FormikInput from '../components/FormikInput';
 import { register } from '../api/user';
 import { useRouter } from 'next/router';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const validationSchema = yup.object({
 	name,
@@ -43,7 +43,6 @@ export default function SignUp() {
 
 	return (
 		<Container component="main" maxWidth="xs">
-			<Toaster />
 			<CssBaseline />
 			<Box
 				sx={{

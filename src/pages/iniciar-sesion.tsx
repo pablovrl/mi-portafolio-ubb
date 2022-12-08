@@ -16,7 +16,6 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { email, password } from '../utils/yupValidations';
 import FormikInput from '../components/FormikInput';
-import { Toaster } from 'react-hot-toast';
 
 const validationSchema = yup.object({
 	email,
@@ -29,7 +28,6 @@ export default function SignIn() {
 
 	return (
 		<>
-			<Toaster />
 			<Container component="main" maxWidth="xs">
 				<CssBaseline />
 				<Box
