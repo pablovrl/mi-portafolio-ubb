@@ -25,8 +25,9 @@ const validationSchema = yup.object({
 		company: yup.string().required('Este campo es requerido'),
 		position: yup.string().required('Este campo es requerido'),
 		description: yup.string().required('Este campo es requerido'),
-		startedAt: yup.date().required('Este campo es requerido'),
-		endedAt: yup.date().required('Este campo es requerido'),
+		// startedAt must be before endedAt
+		startedAt: yup.date().required('Este campo es requerido').max(yup.ref('endedAt'), 'La fecha de inicio debe ser anterior a la fecha de fin'),
+		endedAt: yup.date().required('Este campo es requerido').min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio'),
 	})),
 	projects: yup.array().of(yup.object().shape({
 		name: yup.string().required('Este campo es requerido'),
