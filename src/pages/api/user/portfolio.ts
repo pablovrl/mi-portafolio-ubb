@@ -65,12 +65,21 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 		el.startedAt = new Date(el.startedAt);
 		return el;
 	});
+
+	// console.log(JSON.parse(req.body.projects));
+	// console.log(req.files);
+	let cont = 0;
 	const projects = JSON.parse(req.body.projects).map((el: any, index: number) => {
 		delete el.id;
 		delete el.userId;
-		if(req.files[index]) el.file = req.files[index].path.replace('public', '');
+		if (typeof el.file !== 'string') {
+			el.file = req.files[0].path.replace('public', '');
+			cont++;
+		}
 		return el;
 	});
+	console.log(projects);
+
 
 	if (!req.files) {
 		return res.status(400).json({ error: 'Please upload a file' });
