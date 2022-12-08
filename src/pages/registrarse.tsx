@@ -22,6 +22,8 @@ import { useMutation } from 'react-query';
 import { CreateUser } from '../types';
 import FormikInput from '../components/FormikInput';
 import { register } from '../api/user';
+import { useRouter } from 'next/router';
+import { toast, Toaster } from 'react-hot-toast';
 
 const validationSchema = yup.object({
 	name,
@@ -33,9 +35,15 @@ const validationSchema = yup.object({
 
 export default function SignUp() {
 	const mutation = useMutation((user: CreateUser) => register(user));
+	const router = useRouter();
+	if(mutation.isSuccess) {
+		toast.success('Usuario registrado con éxito.');
+		router.replace('/iniciar-sesion');
+	}
 
 	return (
 		<Container component="main" maxWidth="xs">
+			<Toaster />
 			<CssBaseline />
 			<Box
 				sx={{
@@ -51,14 +59,9 @@ export default function SignUp() {
 				<Typography component="h1" variant="h5">
 					Registrarse
 				</Typography>
-				{mutation.isError && 
+				{mutation.isError &&
 					<Alert severity="error" sx={{ width: '100%', mt: 2 }}>
 						El correo electrónico ingresado ya está en uso.
-					</Alert>
-				}
-				{mutation.isSuccess && 
-					<Alert severity="success" sx={{ width: '100%', mt: 2 }}>
-						La cuenta ha sido creada con éxito, ahora puedes <Link href={'/iniciar-sesion'}>iniciar sesión.</Link> 
 					</Alert>
 				}
 				<Formik
