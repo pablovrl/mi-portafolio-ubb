@@ -43,6 +43,8 @@ apiRoute.delete(async (req: NextApiRequest & { files: Express.Multer.File[] }, r
 			about: ''
 		}
 	});
+
+	return res.status(200).json({ message: 'Portfolio deleted' });
 });
 // route to get the current user
 apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res: NextApiResponse) => {
