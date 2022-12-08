@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CreateUser, UserPortfolio } from '../types';
+import { CreateUser } from '../types';
 
 export const register = async (user: CreateUser) => {
 	return await axios.post('/api/auth/register', user);
