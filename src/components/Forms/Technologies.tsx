@@ -23,6 +23,7 @@ const Technologies = ({ technologies }: Props) => {
 				onChange={(e, value) => {
 					formik.setFieldValue('technologies', value);
 				}}
+				isOptionEqualToValue={(option, value) => option.id === value.id}
 				sx={{ marginTop: 1 }}
 				options={technologies}
 				getOptionLabel={(option) => option.name}
@@ -39,7 +40,7 @@ const Technologies = ({ technologies }: Props) => {
 				renderInput={(params) => (
 					<TextField {...params} label="Tecnologías" placeholder="Tecnologías"
 						error={formik.touched.technologies && Boolean(formik.errors.technologies)}
-						helperText={formik.touched.technologies && <p>{formik.errors.technologies?.toString()}</p>}
+						helperText={formik.touched.technologies && formik.errors.technologies?.toString()}
 					/>
 				)}
 			/>
