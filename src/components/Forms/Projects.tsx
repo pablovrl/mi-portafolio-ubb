@@ -20,9 +20,11 @@ const Projects = () => {
 						{formik.values.projects && formik.values.projects.length > 0 ?
 							(
 								<Box>
-									<Button variant="outlined" onClick={() => arrayHelpers.push({ name: '', description: '', technology: '', course: '', deploy: '', file: null })}>Agregar nuevo proyecto</Button>
+									<Box mb={2}>
+										<Button variant="outlined" onClick={() => arrayHelpers.push({ name: '', description: '', technology: '', course: '', deploy: '', file: null })}>Agregar nuevo proyecto</Button>
+									</Box>
 									{formik.values.projects.map((experience, index) => (
-										<Grid container spacing={2} key={index} my={2}>
+										<Grid container spacing={2} key={index} mb={2}>
 											<Grid item xs={12}>
 												<Typography variant='h6'>Proyecto {index + 1}</Typography>
 											</Grid>

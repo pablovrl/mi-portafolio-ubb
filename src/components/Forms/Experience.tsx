@@ -23,13 +23,15 @@ const Experience = () => {
 					<Box>
 						{formik.values.experiences && formik.values.experiences.length > 0 ? (
 							<Box>
-								<Button
-									type="button"
-									onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
-									variant='outlined'
-								>
+								<Box mb={2}>
+									<Button
+										type="button"
+										onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
+										variant='outlined'
+									>
 												Agregar nueva experiencia laboral
-								</Button>
+									</Button>
+								</Box>
 								{formik.values.experiences.map((experience, index) => (
 									<Grid container spacing={2} key={index} mb={2}>
 										<Grid item xs={12}>
