@@ -7,6 +7,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Head from 'next/head';
+import { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
 	const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
 					<title>Mi portafolio UBB</title>
 					<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
 				</Head>
+				<Toaster toastOptions={{style: {fontFamily: 'sans-serif'}}} />
 				<Component {...pageProps} />
 			</SessionProvider>
 		</QueryClientProvider>
