@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, FormHelperText, Grid, TextField, Typography } from '@mui/material';
 import { Field, FieldArray, useFormikContext } from 'formik';
 import { toast } from 'react-hot-toast';
 import { UserPortfolio } from '../../types';
@@ -11,7 +11,6 @@ const Projects = () => {
 	return (
 		<Box>
 			<Title text="Proyectos" error={error} />
-			{error && <Alert severity='error' >Por favor completa todos los campos.</Alert>}
 			<Helptext>Añade tus proyectos desarrollados a lo largo de la carrera (también pueden ser personales).</Helptext>
 			<FieldArray
 				name="projects"
@@ -33,7 +32,13 @@ const Projects = () => {
 											>
 												{({ field }: any) => (
 													<Grid item xs={12}>
-														<TextField fullWidth error={error} {...field} label="Nombre" />
+														<TextField 
+															{...field} 
+															fullWidth 
+															label="Nombre" 
+															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].name ? true : false}
+															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].name ? formik.errors.projects[index].name : null}
+														/>
 													</Grid>
 												)}
 											</Field>
@@ -42,7 +47,13 @@ const Projects = () => {
 											>
 												{({ field }: any) => (
 													<Grid item xs={6}>
-														<TextField fullWidth error={error} {...field} label="Asignatura" />
+														<TextField 
+															{...field} 
+															fullWidth 
+															label="Asignatura" 
+															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].course ? true : false}
+															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].course ? formik.errors.projects[index].course : null}
+														/>
 													</Grid>
 												)}
 											</Field>
@@ -51,7 +62,13 @@ const Projects = () => {
 											>
 												{({ field }: any) => (
 													<Grid item xs={6}>
-														<TextField fullWidth error={error} {...field} label="Lenguaje de programación" />
+														<TextField 
+															{...field} 
+															fullWidth 
+															label="Lenguaje de programación" 
+															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].technology ? true : false}
+															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].technology ? formik.errors.projects[index].technology : null}
+														/>
 													</Grid>
 												)}
 											</Field>
@@ -60,7 +77,15 @@ const Projects = () => {
 											>
 												{({ field }: any) => (
 													<Grid item xs={12}>
-														<TextField error={error} fullWidth {...field} label="Descripción" multiline minRows={3} />
+														<TextField 
+															{...field} 
+															fullWidth 
+															label="Descripción" 
+															multiline 
+															minRows={3} 
+															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].description ? true : false}
+															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].description ? formik.errors.projects[index].description : null}
+														/>
 													</Grid>
 												)}
 											</Field>
@@ -85,6 +110,9 @@ const Projects = () => {
 															}
 														}} />
 													</Button>
+													{formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].file ? (
+														<FormHelperText error>{formik.errors.projects[index].file}</FormHelperText>
+													) : null}
 												</Grid>
 											)}
 											<Grid item xs={6}>

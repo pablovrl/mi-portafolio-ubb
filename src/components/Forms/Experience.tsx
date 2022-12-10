@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
@@ -10,10 +10,13 @@ const Experience = () => {
 	const today = todayDate();
 	const error = formik.touched.experiences && Boolean(formik.errors.experiences);
 
+	// const errors: Partial<UserPortfolio> = formik.errors;
+	// if(errors.experiences && errors.experiences[0])
+	// 	console.log(errors.experiences[0].position);
+
 	return (
 		<Box>
 			<Title error={error} text='Experiencia laboral' />
-			{error && <Alert severity='error' >Por favor completa todos los campos correctamente.</Alert>}
 			<Helptext>Agrega aquí tu experiencia laboral más importante
 				(también puedes incluir prácticas profesionales).
 			</Helptext>
@@ -29,7 +32,7 @@ const Experience = () => {
 										onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
 										variant='outlined'
 									>
-												Agregar nueva experiencia laboral
+										Agregar nueva experiencia laboral
 									</Button>
 								</Box>
 								{formik.values.experiences.map((experience, index) => (
@@ -44,11 +47,16 @@ const Experience = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField fullWidth {...field} label='Cargo' error={error} />
+													<TextField
+														{...field}
+														fullWidth
+														label='Cargo'
+														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].position ? true : false}
+														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].position ? formik.errors.experiences[index].position : null}
+													/>
 												</Grid>
 											)}
 										</Field>
-
 										<Field
 											name={`experiences.${index}.company`}
 										>
@@ -56,7 +64,13 @@ const Experience = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField fullWidth {...field} label='Empresa' error={error} />
+													<TextField 
+														{...field} 
+														fullWidth
+														label='Empresa' 
+														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].company ? true : false}
+														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].company ? formik.errors.experiences[index].company : null}
+													/>
 												</Grid>
 											)}
 										</Field>
@@ -68,7 +82,13 @@ const Experience = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField fullWidth {...field} type='date' error={error} />
+													<TextField 
+														{...field} 
+														fullWidth 
+														type='date' 
+														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].startedAt ? true : false}
+														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].startedAt ? formik.errors.experiences[index].startedAt : null}
+													/>
 												</Grid>
 											)}
 										</Field>
@@ -80,7 +100,13 @@ const Experience = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField fullWidth  {...field} type='date' error={error} />
+													<TextField 
+														{...field} 
+														fullWidth 
+														type='date' 
+														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].endedAt ? true : false}
+														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].endedAt ? formik.errors.experiences[index].startedAt : null}
+													/>
 												</Grid>
 											)}
 										</Field>
@@ -91,7 +117,15 @@ const Experience = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={12}>
-													<TextField error={error} label='Descripción' fullWidth multiline minRows={3} {...field} />
+													<TextField 
+														{...field} 
+														label='Descripción' 
+														fullWidth 
+														multiline 
+														minRows={3} 
+														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].description ? true : false}
+														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && formik.errors.experiences[index].description ? formik.errors.experiences[index].description : null}
+													/>
 												</Grid>
 											)}
 										</Field>

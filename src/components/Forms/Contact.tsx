@@ -10,7 +10,6 @@ const Contact = () => {
 	return (
 		<Box>
 			<Title text="Contacto" error={error} />
-			{error && <Alert severity='error' >Por favor completa todos los campos.</Alert>}
 			<Helptext>
 				Agrega tus redes de contacto, como por ejemplo, LinkedIn, Github, Página web personal, etc.
 			</Helptext>
@@ -42,7 +41,13 @@ const Contact = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField {...field} fullWidth label='Nombre' />
+													<TextField 
+														{...field}
+														fullWidth 
+														label='Nombre' 
+														error={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && formik.errors.contacts[index].name ? true : false}
+														helperText={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && formik.errors.contacts[index].name ? formik.errors.contacts[index].name : null}
+													/>
 												</Grid>
 											)}
 										</Field>
@@ -53,7 +58,13 @@ const Contact = () => {
 												field, // { name, value, onChange, onBlur }
 											}: FieldProps) => (
 												<Grid item xs={6}>
-													<TextField {...field} fullWidth label='URL' />
+													<TextField 
+														{...field} 
+														fullWidth 
+														label='URL' 
+														error={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && formik.errors.contacts[index].url ? true : false}
+														helperText={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && formik.errors.contacts[index].url ? formik.errors.contacts[index].url : null}
+													/>
 												</Grid>
 											)}
 										</Field>
