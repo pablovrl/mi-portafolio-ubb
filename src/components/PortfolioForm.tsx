@@ -14,7 +14,7 @@ import * as yup from 'yup';
 import { useRouter } from 'next/router';
 
 const validationSchema = yup.object({
-	about: yup.string().required('Este campo es requerido'),	
+	about: yup.string().required('Este campo es requerido').max(800, 'El texto no debe superar los 700 caracteres'),	
 	// validate array has at least one element
 	technologies: yup.array().of(yup.object().shape({
 		id: yup.number().required('Este campo es requerido'),
@@ -22,22 +22,22 @@ const validationSchema = yup.object({
 		icon: yup.string().required('Este campo es requerido'),
 	})).min(1, 'Debes agregar al menos una tecnología'),
 	experiences: yup.array().of(yup.object().shape({
-		company: yup.string().required('Este campo es requerido'),
-		position: yup.string().required('Este campo es requerido'),
-		description: yup.string().required('Este campo es requerido'),
+		company: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		position: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		description: yup.string().required('Este campo es requerido').max(300, 'El texto no debe superar los 300 caracteres'),
 		startedAt: yup.date().required('Este campo es requerido').max(yup.ref('endedAt'), 'La fecha de inicio debe ser anterior a la fecha de fin'),
 		endedAt: yup.date().required('Este campo es requerido').min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio'),
 	})),
 	projects: yup.array().of(yup.object().shape({
-		name: yup.string().required('Este campo es requerido'),
-		description: yup.string().required('Este campo es requerido'),
-		course: yup.string().required('Este campo es requerido'),
-		technology: yup.string().required('Este campo es requerido'),
+		name: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		description: yup.string().required('Este campo es requerido').max(300, 'El texto no debe superar los 300 caracteres'),
+		course: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		technology: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
 		file: yup.string().required('Este campo es requerido').nullable(),
 	})),
 	contacts: yup.array().of(yup.object().shape({
-		name: yup.string().required('Este campo es requerido'),
-		url: yup.string().required('Este campo es requerido'),
+		name: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		url: yup.string().required('Este campo es requerido').max(200, 'El texto no debe superar los 200 caracteres'),
 	}))
 });
 interface Props {
