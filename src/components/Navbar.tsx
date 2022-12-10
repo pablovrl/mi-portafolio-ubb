@@ -4,20 +4,38 @@ import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Logo from './Logo';
 import Link from 'next/link';
-import { deletePortfolio } from '../api/user';
+import { deletePortfolio, getCurrentUser } from '../api/user';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { useMutation, useQuery } from 'react-query';
+import { User } from '@prisma/client';
 
 const Navbar = () => {
 	const session = useSession();
+	const router = useRouter();
 	const [open, setOpen] = useState(false);
 	const handleDrawerToggle = () => setOpen(!open);
+	const query = useQuery<{ data: User }, Error>('user', getCurrentUser);
 	const navLinks = [
-		{ text: 'Inicio', href: '/' },
-		{ text: 'Mi portafolio', href: `/portafolio/${session.data?.user?.email}` },
-		{ text: 'Editar portafolio', href: '/portafolio/editar' },
+		{ text: 'Inicio', href: '/', disabled: false },
+		{ text: 'Mi portafolio', href: `/portafolio/${session.data?.user?.email}`, disabled: false },
+		{ text: 'Editar portafolio', href: '/portafolio/editar', disabled: !query.data?.data.portfolio },
 	];
 
+	const mutation = useMutation(deletePortfolio, {
+		onSuccess: () => {
+			toast.success('Portafolio eliminado');
+			router.push('/');
+		},
+	});
+
+
+	const handleDeletePortfolio = async () => {
+		mutation.mutate();
+	};
+
 	// TODO: REFACTOR THIS COMPONENT
-	const drawer = (
+	const drawer = query.isSuccess && (
 		<Box sx={{ textAlign: 'center' }}>
 			<Box px={4} py={2}>
 				<Logo />
@@ -26,12 +44,12 @@ const Navbar = () => {
 			<List>
 				{navLinks.map(link => (
 					<Link href={link.href} key={link.text}>
-						<ListItemButton sx={{ textAlign: 'center' }} onClick={handleDrawerToggle}>
+						<ListItemButton disabled={link.disabled} sx={{ textAlign: 'center' }} onClick={handleDrawerToggle}>
 							<ListItemText primary={link.text} />
 						</ListItemButton>
 					</Link>
 				))}
-				<ListItemButton onClick={() => deletePortfolio()} sx={{ textAlign: 'center' }}>
+				<ListItemButton disabled={!query.data.data.portfolio} onClick={handleDeletePortfolio} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Borrar portafolio'} />
 				</ListItemButton>
 				<ListItemButton onClick={() => signOut({ callbackUrl: '/iniciar-sesion' })} sx={{ textAlign: 'center' }}>
@@ -65,7 +83,7 @@ const Navbar = () => {
 						<Box>
 							<img src='/ubb.png' width={'100px'} />
 						</Box>
-						<Box height={'40px'} width='40px'/>
+						<Box height={'40px'} width='40px' />
 					</Box>
 				</Toolbar>
 			</AppBar>
