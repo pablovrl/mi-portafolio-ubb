@@ -54,7 +54,7 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 		delete contact.userId;
 		// if contact.url doesn't start with http:// or https://, add it
 		if (!contact.url.startsWith('http://') && !contact.url
-			.startsWith('https://')) {
+			.startsWith('https://') && !contact.url.startsWith('mailto:')) {
 			contact.url = `http://${contact.url}`;
 		}
 		return contact;
