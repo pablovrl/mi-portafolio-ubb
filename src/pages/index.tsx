@@ -26,7 +26,7 @@ const UserCard = ({ user }: { user: User }) => (
 				<Box>
 					<Typography variant={'h6'} fontWeight={'bold'}>{user.name.toUpperCase()} {user.lastName.toUpperCase()}</Typography>
 				</Box>
-				<ProfileImage src={user.image!} size={'120px'} />
+				<ProfileImage src={user.image || ''} size={'120px'} />
 			</Box>
 			<Typography fontWeight={'bold'} color='grey'>
 				{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({ user, users }) => {
 			{!user.portfolio && (
 				<Alert severity='info'>
 					<AlertTitle>
-						¿Aún no tienes tu portafolio?, haz click aquí para crearlo, <Link href={`/portafolio/${user.email}`}>crear portafolio</Link>.
+						¿Aún no tienes tu portafolio?, crealo haciendo click aquí <Link href={`/portafolio/${user.email}`}>crear portafolio</Link>.
 					</AlertTitle>
 				</Alert>
 			)}
