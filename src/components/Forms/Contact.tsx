@@ -11,10 +11,9 @@ interface ContactErrors {
 
 const Contact = () => {
 	const formik = useFormikContext<UserPortfolio>();
-	const error = formik.touched.contacts && Boolean(formik.errors.contacts);
 	return (
 		<Box>
-			<Title text="Contacto" error={error} />
+			<Title text="Contacto" />
 			<Helptext>
 				Agrega tus redes de contacto, como por ejemplo, LinkedIn, Github, Página web personal, etc.
 			</Helptext>
@@ -49,7 +48,7 @@ const Contact = () => {
 													<TextField 
 														{...field}
 														fullWidth 
-														label='Nombre' 
+														label='Nombre *' 
 														error={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).name ? true : false}
 														helperText={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).name ? (formik.errors.contacts[index] as ContactErrors).name : null}
 													/>
@@ -66,7 +65,7 @@ const Contact = () => {
 													<TextField 
 														{...field} 
 														fullWidth 
-														label='URL' 
+														label='Enlace *' 
 														error={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).url ? true : false}
 														helperText={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).url ? (formik.errors.contacts[index] as ContactErrors).url : null}
 													/>

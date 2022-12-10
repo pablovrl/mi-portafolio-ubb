@@ -14,7 +14,7 @@ const Technologies = ({ technologies }: Props) => {
 	}>();
 	return (
 		<Box>
-			<Title text='Tecnologías *' />
+			<Title text='Tecnologías' />
 			<Helptext>
 				A continuación ingresa las tecnologías que más domines. (Ingresa al menos 1).
 			</Helptext>
@@ -38,7 +38,7 @@ const Technologies = ({ technologies }: Props) => {
 					</Box>
 				)}
 				renderInput={(params) => (
-					<TextField {...params} label="Tecnologías" placeholder="Tecnologías"
+					<TextField {...params} label="Tecnologías *" placeholder="Tecnologías"
 						error={formik.touched.technologies && Boolean(formik.errors.technologies)}
 						helperText={formik.touched.technologies && formik.errors.technologies?.toString()}
 					/>

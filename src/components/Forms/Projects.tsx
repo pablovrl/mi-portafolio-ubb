@@ -16,10 +16,9 @@ interface ProjectErrors {
 
 const Projects = () => {
 	const formik = useFormikContext<UserPortfolio>();
-	const error = formik.touched.projects && Boolean(formik.errors.projects);
 	return (
 		<Box>
-			<Title text="Proyectos" error={error} />
+			<Title text="Proyectos" />
 			<Helptext>Añade tus proyectos desarrollados a lo largo de la carrera (también pueden ser personales).</Helptext>
 			<FieldArray
 				name="projects"
@@ -44,7 +43,7 @@ const Projects = () => {
 														<TextField 
 															{...field} 
 															fullWidth 
-															label="Nombre" 
+															label="Nombre *" 
 															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? true : false}
 															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? (formik.errors.projects[index] as ProjectErrors).name : null}
 														/>
@@ -59,7 +58,7 @@ const Projects = () => {
 														<TextField 
 															{...field} 
 															fullWidth 
-															label="Asignatura" 
+															label="Asignatura *" 
 															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? true : false}
 															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? (formik.errors.projects[index] as ProjectErrors).course : null}
 														/>
@@ -74,7 +73,7 @@ const Projects = () => {
 														<TextField 
 															{...field} 
 															fullWidth 
-															label="Lenguaje de programación" 
+															label="Lenguaje de programación *" 
 															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? true : false}
 															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? (formik.errors.projects[index] as ProjectErrors).technology : null}
 														/>
@@ -89,7 +88,7 @@ const Projects = () => {
 														<TextField 
 															{...field} 
 															fullWidth 
-															label="Descripción" 
+															label="Descripción *" 
 															multiline 
 															minRows={3} 
 															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? true : false}

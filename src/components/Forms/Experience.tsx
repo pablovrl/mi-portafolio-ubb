@@ -16,11 +16,10 @@ interface ExperienceErrors {
 const Experience = () => {
 	const formik = useFormikContext<UserPortfolio>();
 	const today = todayDate();
-	const error = formik.touched.experiences && Boolean(formik.errors.experiences);
 
 	return (
 		<Box>
-			<Title error={error} text='Experiencia laboral' />
+			<Title text='Experiencia laboral' />
 			<Helptext>Agrega aquí tu experiencia laboral más importante
 				(también puedes incluir prácticas profesionales).
 			</Helptext>
@@ -54,7 +53,7 @@ const Experience = () => {
 													<TextField
 														{...field}
 														fullWidth
-														label='Cargo'
+														label='Cargo *'
 														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? true : false}
 														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? (formik.errors.experiences[index] as ExperienceErrors).position : null}
 													/>
@@ -71,7 +70,7 @@ const Experience = () => {
 													<TextField 
 														{...field} 
 														fullWidth
-														label='Empresa' 
+														label='Empresa *' 
 														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? true : false}
 														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
 													/>
@@ -90,6 +89,7 @@ const Experience = () => {
 														{...field} 
 														fullWidth 
 														type='date' 
+														label='Fecha de inicio *'
 														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).startedAt ? true : false}
 														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).startedAt ? (formik.errors.experiences[index] as ExperienceErrors).startedAt : null}
 													/>
@@ -108,6 +108,7 @@ const Experience = () => {
 														{...field} 
 														fullWidth 
 														type='date' 
+														label='Fecha de finalización *'
 														error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? true : false}
 														helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).startedAt : null}
 													/>
@@ -123,7 +124,7 @@ const Experience = () => {
 												<Grid item xs={12}>
 													<TextField 
 														{...field} 
-														label='Descripción' 
+														label='Descripción *' 
 														fullWidth 
 														multiline 
 														minRows={3} 
