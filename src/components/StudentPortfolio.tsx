@@ -27,7 +27,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 							Universidad del Bío-Bío
 							</Typography>	
 						</Box>
-						<Box display={{xs: 'none', md: 'flex'}} gap={2} >
+						<Box display={{xs: 'none', md: 'flex'}} gap={2} mb={2} >
 							{user.contacts.map(contact => (
 								<Box key={contact.id}>
 									<MUILink href={contact.url} fontSize={'20px'} target='_blank'>
@@ -38,7 +38,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 						</Box>
 					</Box>
 					<Box display={{xs: 'none', md: 'flex'}}>
-						<ProfileImage src={user.image!} size='180px' />
+						<ProfileImage src={user.image || ''} size='180px' />
 					</Box>
 				</Box>
 				<Box display={'flex'} flexDirection='column' gap={2} mt={{xs: 2, md: 0}}>
@@ -49,7 +49,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 						</Typography>
 					</Box>
 					<Box display={{xs: 'flex', md: 'none'}} gap={2} alignItems='center' flexDirection={'row'}>
-						<ProfileImage src={user.image!} size='120px' />
+						<ProfileImage src={user.image || ''} size='120px' />
 						{user.contacts.map(contact => (
 							<Box key={contact.id}>
 								<MUILink href={contact.url} fontSize={'20px'} target='_blank'>
