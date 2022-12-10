@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Link as MUILink } from '@mui/material';
+import { Box, Grid, Typography, Link as MUILink, Button } from '@mui/material';
 import { UserPortfolio } from '../types';
 import Project from './Project';
 import React from 'react';
@@ -6,6 +6,7 @@ import Experience from './Experience';
 import ProfileImage from './ProfileImage';
 import Layout from './Layout';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
 
 const Title = ({children}: {children: React.ReactNode}) => (
 	<Typography fontWeight={'bold'} variant='h5' fontFamily={'monospace'}>{children}</Typography>
@@ -13,8 +14,19 @@ const Title = ({children}: {children: React.ReactNode}) => (
 
 const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 	const session = useSession();
+	const handleShare = () => {
+		navigator.clipboard.writeText(window.location.href);
+		toast.success('Enlace copiado en el portapapeles', {
+			duration: 5000,
+		});
+	};
 	return (
 		<Layout noNavbar={session.status === 'unauthenticated' || session.status === 'loading' ? true : false}>
+			{session.data?.user?.email === user.email && (
+				<Box position={'fixed'} right="50px" bottom="50px" zIndex={'1'}>
+					<Button onClick={handleShare} variant='contained'>Compartir</Button>
+				</Box>
+			)}
 			<Box>
 				<Box display={'flex'} justifyContent='space-between' flexDirection='row' gap={3} alignItems='center'>
 					<Box display='flex' flexDirection={'column'} gap={2}>
