@@ -1,9 +1,14 @@
+import { User } from '@prisma/client';
 import axios from 'axios';
 import { CreateUser } from '../types';
 
 export const register = async (user: CreateUser) => {
 	return await axios.post('/api/auth/register', user);
 };
+
+export async function getCurrentUser(): Promise<{data: User}> {
+	return await axios.get('/api/user/me');
+}
 
 export const changeImage = async (image: File) => {
 	const formData = new FormData();
