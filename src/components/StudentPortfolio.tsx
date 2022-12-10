@@ -19,9 +19,14 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 				<Box display={'flex'} justifyContent='space-between' flexDirection='row' gap={3} alignItems='center'>
 					<Box display='flex' flexDirection={'column'} gap={2}>
 						<Typography fontWeight={'bold'} variant='h3' mb={1}>{user.name} {user.lastName}</Typography>
-						<Typography variant='h5'>
-							{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
-						</Typography>
+						<Box>
+							<Typography variant='h5'>
+								{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
+							</Typography>
+							<Typography mt={1} variant='h6' color='gray'>
+							Universidad del Bío-Bío
+							</Typography>	
+						</Box>
 						<Box display={{xs: 'none', md: 'flex'}} gap={2} >
 							{user.contacts.map(contact => (
 								<Box key={contact.id}>
