@@ -1,3 +1,4 @@
+import { FormatLineSpacing } from '@mui/icons-material';
 import { Box, Button, FormHelperText, Grid, TextField } from '@mui/material';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import { toast } from 'react-hot-toast';
@@ -45,8 +46,8 @@ const Projects = () => {
 																{...field}
 																fullWidth
 																label="Nombre *"
-																error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? true : false}
-																helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? (formik.errors.projects[index] as ProjectErrors).name : null}
+																error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].name && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? true : false}
+																helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].name && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? (formik.errors.projects[index] as ProjectErrors).name : null}
 															/>
 														</Grid>
 													)}
@@ -60,8 +61,8 @@ const Projects = () => {
 																{...field}
 																fullWidth
 																label="Asignatura *"
-																error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? true : false}
-																helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? (formik.errors.projects[index] as ProjectErrors).course : null}
+																error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].course && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? true : false}
+																helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].course && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? (formik.errors.projects[index] as ProjectErrors).course : null}
 															/>
 														</Grid>
 													)}
@@ -75,8 +76,8 @@ const Projects = () => {
 																{...field}
 																fullWidth
 																label="Lenguaje de programación *"
-																error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? true : false}
-																helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? (formik.errors.projects[index] as ProjectErrors).technology : null}
+																error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].technology && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? true : false}
+																helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].technology && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? (formik.errors.projects[index] as ProjectErrors).technology : null}
 															/>
 														</Grid>
 													)}
@@ -92,8 +93,8 @@ const Projects = () => {
 																label="Descripción *"
 																multiline
 																minRows={3}
-																error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? true : false}
-																helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? (formik.errors.projects[index] as ProjectErrors).description : null}
+																error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].description && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? true : false}
+																helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].description && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? (formik.errors.projects[index] as ProjectErrors).description : null}
 															/>
 														</Grid>
 													)}
@@ -119,7 +120,7 @@ const Projects = () => {
 																}
 															}} />
 														</Button>
-														{formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).file ? (
+														{formik.touched.projects && formik.touched.projects[index] && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).file ? (
 															<FormHelperText error>{(formik.errors.projects[index] as ProjectErrors).file}</FormHelperText>
 														) : null}
 													</Grid>

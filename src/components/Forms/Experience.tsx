@@ -55,8 +55,8 @@ const Experience = () => {
 															{...field}
 															fullWidth
 															label='Cargo *'
-															error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? true : false}
-															helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? (formik.errors.experiences[index] as ExperienceErrors).position : null}
+															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].position && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? true : false}
+															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].position && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? (formik.errors.experiences[index] as ExperienceErrors).position : null}
 														/>
 													</Grid>
 												)}
@@ -72,8 +72,8 @@ const Experience = () => {
 															{...field}
 															fullWidth
 															label='Empresa *'
-															error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? true : false}
-															helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
+															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].company && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? true : false}
+															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].company && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
 														/>
 													</Grid>
 												)}
@@ -91,8 +91,8 @@ const Experience = () => {
 															fullWidth
 															type='date'
 															label='Fecha de inicio *'
-															error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).startedAt ? true : false}
-															helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).startedAt ? (formik.errors.experiences[index] as ExperienceErrors).startedAt : null}
+															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].startedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).startedAt ? true : false}
+															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].startedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).startedAt ? (formik.errors.experiences[index] as ExperienceErrors).startedAt : null}
 														/>
 													</Grid>
 												)}
@@ -110,8 +110,8 @@ const Experience = () => {
 															fullWidth
 															type='date'
 															label='Fecha de finalización *'
-															error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? true : false}
-															helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).startedAt : null}
+															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? true : false}
+															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).endedAt : null}
 														/>
 													</Grid>
 												)}
@@ -129,8 +129,8 @@ const Experience = () => {
 															fullWidth
 															multiline
 															minRows={3}
-															error={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).description ? true : false}
-															helperText={formik.touched.experiences && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).description ? (formik.errors.experiences[index] as ExperienceErrors).description : null}
+															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].description && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).description ? true : false}
+															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].description && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).description ? (formik.errors.experiences[index] as ExperienceErrors).description : null}
 														/>
 													</Grid>
 												)}

@@ -1,3 +1,4 @@
+import { FormatLineSpacing } from '@mui/icons-material';
 import { Box, Button, Grid, TextField } from '@mui/material';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import { UserPortfolio } from '../../types';
@@ -47,8 +48,8 @@ const Contact = () => {
 															{...field}
 															fullWidth
 															label='Nombre *'
-															error={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).name ? true : false}
-															helperText={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).name ? (formik.errors.contacts[index] as ContactErrors).name : null}
+															error={formik.touched.contacts && formik.touched.contacts[index] && formik.touched.contacts[index].name && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).name ? true : false}
+															helperText={formik.touched.contacts && formik.touched.contacts[index] && formik.touched.contacts[index].name && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).name ? (formik.errors.contacts[index] as ContactErrors).name : null}
 														/>
 													</Grid>
 												)}
@@ -64,8 +65,8 @@ const Contact = () => {
 															{...field}
 															fullWidth
 															label='Enlace *'
-															error={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).url ? true : false}
-															helperText={formik.touched.contacts && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).url ? (formik.errors.contacts[index] as ContactErrors).url : null}
+															error={formik.touched.contacts && formik.touched.contacts[index] && formik.touched.contacts[index].url && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).url ? true : false}
+															helperText={formik.touched.contacts && formik.touched.contacts[index] && formik.touched.contacts[index].url && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).url ? (formik.errors.contacts[index] as ContactErrors).url : null}
 														/>
 													</Grid>
 												)}
