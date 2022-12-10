@@ -12,9 +12,10 @@ import Layout from './Layout';
 import { UserPortfolio } from '../types';
 import * as yup from 'yup';
 import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
 
 const validationSchema = yup.object({
-	about: yup.string().required('Este campo es requerido').max(800, 'El texto no debe superar los 700 caracteres'),	
+	about: yup.string().required('Este campo es requerido').max(800, 'El texto no debe superar los 700 caracteres'),
 	// validate array has at least one element
 	technologies: yup.array().of(yup.object().shape({
 		id: yup.number().required('Este campo es requerido'),
@@ -41,7 +42,7 @@ const validationSchema = yup.object({
 	}))
 });
 interface Props {
-  user: UserPortfolio;
+	user: UserPortfolio;
 	technologies: Technology[];
 }
 
@@ -58,7 +59,7 @@ const PortfolioForm = ({ user, technologies }: Props) => {
 			startedAt: formattedStartDate,
 			endedAt: formattedEndDate,
 		};
-	});	
+	});
 
 	return (
 		<Layout>
@@ -71,14 +72,15 @@ const PortfolioForm = ({ user, technologies }: Props) => {
 				}}
 				onSubmit={async (values) => {
 					await createPortfolio(values);
+					toast.success('Se han guardado los cambios');
 					router.replace(`/portafolio/${user.email}`);
 				}}
 			>
 				{props => (
-					<Box component={'form'} onSubmit={props.handleSubmit}> 
+					<Box component={'form'} onSubmit={props.handleSubmit}>
 						<UserImage user={user} />
 						<PersonalInfo />
-						<Technologies technologies={technologies}/>
+						<Technologies technologies={technologies} />
 						<Experience />
 						<Projects />
 						<Contact />
