@@ -3,10 +3,11 @@ import { requireAuth } from '../utils/requireAuth';
 import Layout from '../components/Layout';
 import { prisma } from '../utils/db';
 import { User } from '@prisma/client';
-import { Alert, AlertTitle, Box, Grid, Typography } from '@mui/material';
+import { Alert, AlertTitle, Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import ProfileImage from '../components/ProfileImage';
 import { getUserSessionWithContext } from '../utils/userSession';
+import { useState } from 'react';
 
 export const getServerSideProps = requireAuth(async (ctx) => {
 	const session = await getUserSessionWithContext(ctx);
@@ -25,19 +26,34 @@ const UserCard = ({ user }: { user: User }) => (
 			<Box display='flex' gap={2} alignItems='center'>
 				<Box>
 					<Typography variant={'h6'} fontWeight={'bold'}>{user.name.toUpperCase()} {user.lastName.toUpperCase()}</Typography>
+					<Typography variant='body2' fontWeight={'bold'} color='grey'>
+						{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
+					</Typography>
 				</Box>
 				<ProfileImage src={user.image || ''} size={'120px'} />
 			</Box>
-			<Typography fontWeight={'bold'} color='grey'>
-				{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
-			</Typography>
 		</Box>
 	</Link>
 );
 
 const Home: NextPage<Props> = ({ user, users }) => {
+	const [search, setSearch] = useState('');
+	const filteredUsers = users.filter((user) =>
+		user.name.toLowerCase().includes(search.toLowerCase()) ||
+		user.lastName.toLowerCase().includes(search.toLowerCase()) ||
+		user.career.toLowerCase().includes(search.toLowerCase()) 
+	);
+
 	return (
 		<Layout>
+			<Box my={2}>
+				<TextField
+					label='Busca portafolios de tus compañeros'
+					value={search}
+					fullWidth
+					onChange={(e) => setSearch(e.target.value)}
+				/>
+			</Box>
 			{!user.portfolio && (
 				<Alert severity='info'>
 					<AlertTitle>
@@ -46,7 +62,7 @@ const Home: NextPage<Props> = ({ user, users }) => {
 				</Alert>
 			)}
 			<Grid container spacing={2} my={2}>
-				{users.map((user) => (
+				{filteredUsers.map((user) => (
 					<Grid key={user.id} item xs={12} md={6}>
 						<UserCard user={user} />
 					</Grid>
