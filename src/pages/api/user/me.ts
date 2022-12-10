@@ -20,7 +20,7 @@ apiRoute.get(async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	const user = await prisma.user.findFirst({ where: { email: session.user.email } });
-	return res.json({ user });
+	return res.json({ ...user });
 });
 
 export default apiRoute;
