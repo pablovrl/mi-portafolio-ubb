@@ -1,4 +1,4 @@
-import { AppBar, Box, Divider, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar } from '@mui/material';
+import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Divider, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
@@ -14,6 +14,7 @@ const Navbar = () => {
 	const session = useSession();
 	const router = useRouter();
 	const [open, setOpen] = useState(false);
+	const [dialogOpen, setDialogOpen] = useState(false);
 	const handleDrawerToggle = () => setOpen(!open);
 	const query = useQuery<{ data: User }, Error>('user', getCurrentUser);
 	const navLinks = [
@@ -21,6 +22,16 @@ const Navbar = () => {
 		{ text: 'Mi portafolio', href: `/portafolio/${session.data?.user?.email}`, disabled: false },
 		{ text: 'Editar portafolio', href: '/portafolio/editar', disabled: !query.data?.data.portfolio },
 	];
+
+	const handleDialogOpen = () => {
+		setDialogOpen(true);
+	};
+
+	const handleDialogClose = () => {
+		setDialogOpen(false);
+	};
+
+
 
 	const mutation = useMutation(deletePortfolio, {
 		onSuccess: () => {
@@ -37,6 +48,13 @@ const Navbar = () => {
 	// TODO: REFACTOR THIS COMPONENT
 	const drawer = query.isSuccess && (
 		<Box sx={{ textAlign: 'center' }}>
+			<Dialog open={dialogOpen} onClose={handleDialogClose}>
+				<DialogTitle>Estás seguro?, no podrás recuperar los datos.</DialogTitle>	
+				<DialogActions>
+					<Button onClick={handleDialogClose}>Volver</Button>
+					<Button onClick={handleDeletePortfolio} color='error'>Eliminar</Button>
+				</DialogActions>
+			</Dialog>
 			<Box px={4} py={2}>
 				<Logo />
 			</Box>
@@ -49,7 +67,7 @@ const Navbar = () => {
 						</ListItemButton>
 					</Link>
 				))}
-				<ListItemButton disabled={!query.data.data.portfolio} onClick={handleDeletePortfolio} sx={{ textAlign: 'center' }}>
+				<ListItemButton disabled={!query.data.data.portfolio} onClick={handleDialogOpen} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Borrar portafolio'} />
 				</ListItemButton>
 				<ListItemButton onClick={() => signOut({ callbackUrl: '/iniciar-sesion' })} sx={{ textAlign: 'center' }}>
