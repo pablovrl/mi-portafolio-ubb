@@ -5,6 +5,15 @@ import { UserPortfolio } from '../../types';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 
+interface ProjectErrors {
+	name: string;
+	description: string;
+	technology: string;
+	course: string;
+	deploy: string;
+	file: string;
+}
+
 const Projects = () => {
 	const formik = useFormikContext<UserPortfolio>();
 	const error = formik.touched.projects && Boolean(formik.errors.projects);
@@ -36,8 +45,8 @@ const Projects = () => {
 															{...field} 
 															fullWidth 
 															label="Nombre" 
-															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].name ? true : false}
-															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].name ? formik.errors.projects[index].name : null}
+															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? true : false}
+															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? (formik.errors.projects[index] as ProjectErrors).name : null}
 														/>
 													</Grid>
 												)}
@@ -51,8 +60,8 @@ const Projects = () => {
 															{...field} 
 															fullWidth 
 															label="Asignatura" 
-															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].course ? true : false}
-															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].course ? formik.errors.projects[index].course : null}
+															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? true : false}
+															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? (formik.errors.projects[index] as ProjectErrors).course : null}
 														/>
 													</Grid>
 												)}
@@ -66,8 +75,8 @@ const Projects = () => {
 															{...field} 
 															fullWidth 
 															label="Lenguaje de programación" 
-															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].technology ? true : false}
-															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].technology ? formik.errors.projects[index].technology : null}
+															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? true : false}
+															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? (formik.errors.projects[index] as ProjectErrors).technology : null}
 														/>
 													</Grid>
 												)}
@@ -83,8 +92,8 @@ const Projects = () => {
 															label="Descripción" 
 															multiline 
 															minRows={3} 
-															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].description ? true : false}
-															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].description ? formik.errors.projects[index].description : null}
+															error={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? true : false}
+															helperText={formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? (formik.errors.projects[index] as ProjectErrors).description : null}
 														/>
 													</Grid>
 												)}
@@ -110,8 +119,8 @@ const Projects = () => {
 															}
 														}} />
 													</Button>
-													{formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && formik.errors.projects[index].file ? (
-														<FormHelperText error>{formik.errors.projects[index].file}</FormHelperText>
+													{formik.touched.projects && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).file ? (
+														<FormHelperText error>{(formik.errors.projects[index] as ProjectErrors).file}</FormHelperText>
 													) : null}
 												</Grid>
 											)}
