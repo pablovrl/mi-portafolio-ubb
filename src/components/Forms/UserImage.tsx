@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { User } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import { changeImage } from '../../api/user';
