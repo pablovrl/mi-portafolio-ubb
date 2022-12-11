@@ -87,6 +87,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 										gap={1}
 										p={4}
 										alignItems='center'
+										overflow={'hidden'}
 									>
 										<i style={{fontSize: '40px'}} className={technology.technology.icon} />
 										<Typography>{technology.technology.name.toUpperCase()}</Typography>
