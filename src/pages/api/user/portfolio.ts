@@ -4,6 +4,7 @@ import { getUserSession } from '../../../utils/userSession';
 import { prisma } from '../../../utils/db';
 import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
+import { Contact, Experience, Project, Technology } from '@prisma/client';
 
 const upload = multer({
 	storage: multer.diskStorage({
@@ -49,29 +50,30 @@ apiRoute.delete(async (req: NextApiRequest & { files: Express.Multer.File[] }, r
 // route to get the current user
 apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res: NextApiResponse) => {
 	const about = req.body.about;
-	const contact = JSON.parse(req.body.contact).map((contact: any) => {
+	const contact = JSON.parse(req.body.contact).map((contact: Partial<Contact>) => {
 		delete contact.id;
 		delete contact.userId;
 		// if contact.url doesn't start with http:// or https://, add it
-		if (!contact.url.startsWith('http://') && !contact.url
-			.startsWith('https://') && !contact.url.startsWith('mailto:')) {
-			contact.url = `http://${contact.url}`;
-		}
+		if (contact.url)
+			if (!contact.url.startsWith('http://') && !contact.url
+				.startsWith('https://') && !contact.url.startsWith('mailto:')) {
+				contact.url = `http://${contact.url}`;
+			}
 		return contact;
 	});
-	const technologiesIds = JSON.parse(req.body.technologies).map((el: any) => ({ technologyId: el.id }));
-	const experience = JSON.parse(req.body.experience).map((el: any) => {
+	const technologiesIds = JSON.parse(req.body.technologies).map((el: Technology) => ({ technologyId: el.id }));
+	const experience = JSON.parse(req.body.experience).map((el: Partial<Experience>) => {
 		delete el.id;
 		delete el.userId;
-		el.endedAt = new Date(el.endedAt);
-		el.startedAt = new Date(el.startedAt);
+		if(el.endedAt) el.endedAt = new Date(el.endedAt);
+		if(el.startedAt) el.startedAt = new Date(el.startedAt);
 		return el;
 	});
 
 	// console.log(JSON.parse(req.body.projects));
 	// console.log(req.files);
 	let cont = 0;
-	const projects = JSON.parse(req.body.projects).map((el: any, index: number) => {
+	const projects = JSON.parse(req.body.projects).map((el: Partial<Project>) => {
 		delete el.id;
 		delete el.userId;
 		if (typeof el.file !== 'string') {

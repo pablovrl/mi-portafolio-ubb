@@ -3,7 +3,7 @@ import { requireAuth } from '../utils/requireAuth';
 import Layout from '../components/Layout';
 import { prisma } from '../utils/db';
 import { User } from '@prisma/client';
-import { Alert, AlertTitle, Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Alert, AlertTitle, Box, Grid, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import ProfileImage from '../components/ProfileImage';
 import { getUserSessionWithContext } from '../utils/userSession';

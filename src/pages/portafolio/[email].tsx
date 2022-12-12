@@ -1,7 +1,6 @@
 import { Technology } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
 import { useSession } from 'next-auth/react';
-import Layout from '../../components/Layout';
 import StudentPortfolio from '../../components/StudentPortfolio';
 import { UserPortfolio } from '../../types';
 import { prisma } from '../../utils/db';

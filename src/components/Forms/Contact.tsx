@@ -1,4 +1,3 @@
-import { FormatLineSpacing } from '@mui/icons-material';
 import { Box, Button, Grid, TextField } from '@mui/material';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import { UserPortfolio } from '../../types';
