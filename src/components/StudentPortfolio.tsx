@@ -27,7 +27,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 					<Button onClick={handleShare} variant='contained'>Compartir</Button>
 				</Box>
 			)}
-			<Box>
+			<Box mt={4}>
 				<Box display={'flex'} justifyContent='space-between' flexDirection='row' gap={3} alignItems='center'>
 					<Box display='flex' flexDirection={'column'} gap={2}>
 						<Typography fontWeight={'bold'} variant='h3' mb={1}>{user.name} {user.lastName}</Typography>
