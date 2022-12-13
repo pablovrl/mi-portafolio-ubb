@@ -100,7 +100,7 @@ const Navbar = () => {
 							<IconButton onClick={handleDrawerToggle} color='inherit'>
 								<MenuIcon />
 							</IconButton>
-							<Box display={'flex'} alignItems='center' gap={1}>
+							<Box sx={{textDecoration: 'none'}} component={'a'} href='/' color={'inherit'} display={'flex'} alignItems='center' gap={1}>
 								<Box>
 									<img src='/ubb.png' width={'20px'} />
 								</Box>
