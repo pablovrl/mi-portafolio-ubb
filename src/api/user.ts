@@ -1,6 +1,6 @@
 import { Project, User } from '@prisma/client';
 import axios from 'axios';
-import { CreateUser, UserPortfolio } from '../types';
+import { CreateUser } from '../types';
 
 export const register = async (user: CreateUser) => {
 	return await axios.post('/api/auth/register', user);
@@ -17,7 +17,7 @@ export const changeImage = async (image: File) => {
 };	
 
 
-export const createPortfolio = async (data: UserPortfolio) => {
+export const createPortfolio = async (data: any) => {
 	const formData = new FormData();
 	formData.append('about', data.about || '');
 	formData.append('projects', JSON.stringify(data.projects));
