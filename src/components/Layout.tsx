@@ -8,7 +8,7 @@ interface LayoutProps {
 
 const Layout = ({ children, noNavbar }: LayoutProps) => {
 	return (
-		<Box pt={noNavbar ? '20px' : ''} >
+		<Box pt={noNavbar ? '20px' : {xs: '35px', md: '50px'}}>
 			{noNavbar ? null : <Navbar />}
 			<Container maxWidth='md'>
 				<Box overflow="hidden" pb={2}>
