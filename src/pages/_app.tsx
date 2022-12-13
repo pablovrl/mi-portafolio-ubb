@@ -8,6 +8,7 @@ import '@fontsource/roboto/700.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Head from 'next/head';
 import { Toaster } from 'react-hot-toast';
+import '../style/styles.css';
 
 function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
 	const queryClient = new QueryClient();
