@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Divider, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar } from '@mui/material';
+import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Divider, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
@@ -31,8 +31,6 @@ const Navbar = () => {
 		setDialogOpen(false);
 	};
 
-
-
 	const mutation = useMutation(deletePortfolio, {
 		onSuccess: () => {
 			toast.success('Portafolio eliminado');
@@ -40,9 +38,12 @@ const Navbar = () => {
 		},
 	});
 
-
 	const handleDeletePortfolio = async () => {
 		mutation.mutate();
+	};
+
+	const handleSignOut = async () => {
+		await	signOut({ callbackUrl: '/iniciar-sesion' });
 	};
 
 	// TODO: REFACTOR THIS COMPONENT
@@ -70,7 +71,7 @@ const Navbar = () => {
 				<ListItemButton disabled={!query.data.data.portfolio} onClick={handleDialogOpen} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Borrar portafolio'} />
 				</ListItemButton>
-				<ListItemButton onClick={() => signOut({ callbackUrl: '/iniciar-sesion' })} sx={{ textAlign: 'center' }}>
+				<ListItemButton onClick={handleSignOut} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Cerrar sesión'} />
 				</ListItemButton>
 			</List>
@@ -92,16 +93,23 @@ const Navbar = () => {
 			>
 				{drawer}
 			</Drawer>
-			<AppBar position='static'>
+			<AppBar position='fixed'>
 				<Toolbar>
-					<Box display='flex' justifyContent={'space-between'} width='100%'>
-						<IconButton onClick={handleDrawerToggle} color='inherit'>
-							<MenuIcon />
-						</IconButton>
-						<Box>
-							<img src='/ubb.png' width={'100px'} />
+					<Box display={'flex'} justifyContent='space-between' width={'100%'}>
+						<Box display={'flex'} gap={2}>
+							<IconButton onClick={handleDrawerToggle} color='inherit'>
+								<MenuIcon />
+							</IconButton>
+							<Box display={'flex'} alignItems='center' gap={1}>
+								<Box>
+									<img src='/ubb.png' width={'20px'} />
+								</Box>
+								<Typography display={{xs: 'none', md: 'block'}} variant='h6'>Mi Portafolio UBB</Typography>
+							</Box>
 						</Box>
-						<Box height={'40px'} width='40px' />
+						<Button variant='text' color='inherit' onClick={handleSignOut}>
+							Cerrar sesión
+						</Button>
 					</Box>
 				</Toolbar>
 			</AppBar>
