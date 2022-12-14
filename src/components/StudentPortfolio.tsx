@@ -1,12 +1,14 @@
 import { Box, Grid, Typography, Link as MUILink, Button } from '@mui/material';
 import { UserPortfolio } from '../types';
 import Project from './Project';
-import React from 'react';
+import React, { useState } from 'react';
 import Experience from './Experience';
 import ProfileImage from './ProfileImage';
 import Layout from './Layout';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import DeletePortfolioDialog from './DeletePortfolioDialog';
 
 const Title = ({children}: {children: React.ReactNode}) => (
 	<Typography fontWeight={'bold'} variant='h5' fontFamily={'monospace'}>{children}</Typography>
@@ -14,17 +16,34 @@ const Title = ({children}: {children: React.ReactNode}) => (
 
 const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 	const session = useSession();
+	const router = useRouter();
+	const [dialogOpen, setDialogOpen] = useState(false);
+
 	const handleShare = () => {
 		navigator.clipboard.writeText(window.location.href);
 		toast.success('Enlace copiado en el portapapeles', {
 			duration: 5000,
 		});
 	};
+
+	const handleDialogOpen = () => {
+		setDialogOpen(true);
+	};
+
+	const handleDialogClose = () => {
+		setDialogOpen(false);
+	};
+
 	return (
 		<Layout noNavbar={session.status === 'unauthenticated' || session.status === 'loading' ? true : false}>
 			{session.data?.user?.email === user.email && (
-				<Box position={'fixed'} right="50px" bottom="50px" zIndex={'1'}>
-					<Button onClick={handleShare} variant='contained'>Compartir</Button>
+				<Box display={{xs: 'none', md: 'block'}} position={'fixed'} right="50px" bottom="50px" zIndex={'1'}>
+					<DeletePortfolioDialog onClose={handleDialogClose} open={dialogOpen} />
+					<Box display={'flex'} flexDirection='column' gap={1}>
+						<Button onClick={handleShare} variant='contained'>Compartir</Button>
+						<Button color='info' onClick={() => router.replace('/portafolio/editar')} variant='contained'>Editar</Button>
+						<Button onClick={handleDialogOpen} color='error' variant='contained'>Eliminar</Button>
+					</Box>
 				</Box>
 			)}
 			<Box mt={4}>
