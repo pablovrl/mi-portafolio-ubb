@@ -26,7 +26,7 @@ const Home: NextPage = () => {
 						<Box display={'flex'} gap={1} my={2} flexDirection='column' width={'fit-content'}>
 							<Button LinkComponent={'a'} href={`/portafolio/${session.data?.user?.email}`} size='large' variant='contained'>Crear portafolio</Button>
 							<Link href={'/portafolios'}>
-								<MUILink>
+								<MUILink sx={{cursor: 'pointer'}}>
 									También puedes buscar portafolios de tus compañeros
 								</MUILink>
 							</Link>
