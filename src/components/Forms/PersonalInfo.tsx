@@ -9,7 +9,7 @@ const PersonalInfo = () => {
 		<Box>
 			<Title text='Perfil' />
 			<Helptext>Los reclutadores tienen muy poco tiempo para leer sobre los postulantes, se breve.
-				Escibre sobre ti y tu experiencia.</Helptext>
+				Escribe sobre ti y tu experiencia.</Helptext>
 			<Grid item xs={12}>
 				<Field name='about'>
 					{({ field }: FieldProps) => (
