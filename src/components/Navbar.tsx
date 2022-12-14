@@ -18,7 +18,7 @@ const Navbar = () => {
 	const handleDrawerToggle = () => setOpen(!open);
 	const query = useQuery<{ data: User }, Error>('user', getCurrentUser);
 	const navLinks = [
-		{ text: 'Inicio', href: '/', disabled: false },
+		{ text: 'Buscar portafolios', href: '/portafolios', disabled: false },
 		{ text: 'Mi portafolio', href: `/portafolio/${session.data?.user?.email}`, disabled: false },
 		{ text: 'Editar portafolio', href: '/portafolio/editar', disabled: !query.data?.data.portfolio },
 	];
@@ -34,7 +34,7 @@ const Navbar = () => {
 	const mutation = useMutation(deletePortfolio, {
 		onSuccess: () => {
 			toast.success('Portafolio eliminado');
-			router.push('/');
+			router.push('/portafolios');
 		},
 	});
 
@@ -100,7 +100,7 @@ const Navbar = () => {
 							<IconButton onClick={handleDrawerToggle} color='inherit'>
 								<MenuIcon />
 							</IconButton>
-							<Box sx={{textDecoration: 'none'}} component={'a'} href='/' color={'inherit'} display={'flex'} alignItems='center' gap={1}>
+							<Box sx={{textDecoration: 'none'}} component={'a'} href='/portafolios' color={'inherit'} display={'flex'} alignItems='center' gap={1}>
 								<Box>
 									<img src='/ubb.png' width={'20px'} />
 								</Box>
