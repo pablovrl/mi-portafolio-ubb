@@ -7,7 +7,7 @@ export default function handler(
 ) {
 	if (req.method === 'DELETE') {
 		const { path } = req.body;
-		const filePath =  `public/${path}`;
+		const filePath =  `public${path}`;
 		// if the file exists, delete it
 		if (existsSync(filePath)) unlinkSync(filePath);
 		console.log(`Deleted file: ${filePath}`);

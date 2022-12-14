@@ -1,6 +1,7 @@
 import { Box, Button, FormHelperText, Grid, TextField } from '@mui/material';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import { toast } from 'react-hot-toast';
+import { deleteFile } from '../../api/file';
 import { UserPortfolio } from '../../types';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
@@ -35,7 +36,8 @@ const Projects = () => {
 									<Grid container spacing={2} mt={1}>
 										{formik.values.projects.map((experience, index) => (
 											<Layout key={index}>
-												<Header title='proyecto' index={index + 1} handleDelete={arrayHelpers.handleRemove(index)} />	
+												<Header title='proyecto' index={index + 1} file={experience.file} handleDelete={arrayHelpers.handleRemove(index)}
+												/>
 												<Field
 													name={`projects.${index}.name`}
 												>
@@ -102,10 +104,10 @@ const Projects = () => {
 													<Grid item xs={12}>
 														<Button variant='outlined' fullWidth color="error" onClick={() => {
 															formik.setFieldValue(`projects.${index}.file`, null);
+															deleteFile(formik.values.projects[index].file);
 														}}>Eliminar archivo</Button>
 													</Grid>
 												) : (
-
 													<Grid item xs={12}>
 														<Button fullWidth variant="contained" component='label'>Añadir archivo (.zip)
 															<input accept='.zip' type="file" hidden onChange={(e) => {
