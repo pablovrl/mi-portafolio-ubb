@@ -1,12 +1,13 @@
 import { Button, Grid } from '@mui/material';
 import { User } from '@prisma/client';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { changeImage } from '../../api/user';
 import ProfileImage from '../ProfileImage';
 import Title from './common/Title';
 
 interface UserImageProps {
-  user: User;
+	user: User;
 }
 
 const UserImage = ({ user }: UserImageProps) => {
@@ -17,9 +18,11 @@ const UserImage = ({ user }: UserImageProps) => {
 		const uploadImage = async () => {
 			if (image) {
 				const res = await changeImage(image);
-				if(res.status === 200)
+				if (res.status === 200) {
+					toast.success('Imagen actualizada');
 					setCurrentImage(res.data.image);
-				else alert('El tipo de archivo no es válido');
+				}
+				else toast.error('El tipo de archivo no es válido');
 			}
 		};
 		uploadImage();
@@ -41,7 +44,7 @@ const UserImage = ({ user }: UserImageProps) => {
 				</Grid>
 				<Grid item xs={12}>
 					<Button fullWidth variant='outlined' component='label'>
-							Cambiar imagen
+						Cambiar imagen
 						<input accept='.jpg, .png, jpeg, .webp' type='file' hidden onChange={handleImageChange} />
 					</Button>
 				</Grid>
