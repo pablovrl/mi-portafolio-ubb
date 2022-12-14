@@ -21,7 +21,7 @@ const Home: NextPage = () => {
 					<Grid item md={8}>
 						<Typography variant='h1' fontSize={{xs: '2.5rem', md: '5rem'}} fontWeight={'bold'} fontFamily='sans-serif'>Mi Portafolio UBB</Typography>
 						<Typography variant='h6' color='grey'>
-							Crea rápidamente tu portafolio para que puedas mostrar tus proyectos a terceros, y así obtener más oportunidades y un factor diferenciador. Revisa los portafolios de tus compañeros y conoce sus proyectos.
+							Crea tu portafolio para mostrar tus proyectos a terceros, obteniendo más oportunidades y un factor diferenciador. Revisa los portafolios de tus compañeros y conoce sus proyectos.
 						</Typography>
 						<Box display={'flex'} gap={1} my={2} flexDirection='column' width={'fit-content'}>
 							<Button LinkComponent={'a'} href={`/portafolio/${session.data?.user?.email}`} size='large' variant='contained'>Crear portafolio</Button>
