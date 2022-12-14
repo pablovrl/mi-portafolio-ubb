@@ -20,7 +20,7 @@ interface HeaderProps {
 	index: number;
 	title: string;
 	handleDelete: () => void;
-	file: string;
+	file?: string;
 }
 
 export const Header = ({ index, title, handleDelete, file }: HeaderProps) => (
