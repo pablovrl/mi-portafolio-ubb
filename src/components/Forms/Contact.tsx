@@ -24,14 +24,18 @@ const Contact = () => {
 					<Box>
 						{formik.values.contacts && formik.values.contacts.length > 0 ? (
 							<Box>
-								<Button
-									type="button"
-									onClick={() => arrayHelpers.push({ name: '', url: '' })} // insert an empty string at a position
-									variant='outlined'
-									disabled={formik.values.contacts.length >= 3}
-								>
-									Agregar nueva red de contacto
-								</Button>
+								<Box display={'flex'} gap={1}>
+									<Button
+										type="button"
+										onClick={() => arrayHelpers.push({ name: '', url: '' })} // insert an empty string at a position
+										variant='outlined'
+										disabled={formik.values.contacts.length >= 3}
+									>
+										Agregar nueva red de contacto
+									</Button>
+									<Button onClick={() => arrayHelpers.push({ name: 'Email', url: `mailto:${formik.values.email}` })} variant='outlined' size='small'>Añadir email</Button>
+								</Box>
+
 								<Grid container spacing={2} mt={1}>
 									{formik.values.contacts.map((contact, index) => (
 										<Layout key={index}>
@@ -76,11 +80,12 @@ const Contact = () => {
 
 							</Box>
 						) : (
-							<Box>
+							<Box display={'flex'} gap={1}>
 								<Button
 									variant="outlined"
 									onClick={() => arrayHelpers.push({ name: '', url: '' })}
 								>Agregar red de contacto</Button>
+								<Button onClick={() => arrayHelpers.push({ name: 'Email', url: `mailto:${formik.values.email}` })} variant='outlined' size='small'>Añadir email</Button>
 							</Box>
 						)}
 					</Box>
