@@ -48,7 +48,7 @@ const Home: NextPage<Props> = ({ user, users }) => {
 		<Layout>
 			<Box my={2}>
 				<TextField
-					label='Busca portafolios de tus compañeros'
+					label='Busca portafolios de tus compañeros por nombre, apellido o carrera (IECI o ICINF)'
 					value={search}
 					fullWidth
 					onChange={(e) => setSearch(e.target.value)}
