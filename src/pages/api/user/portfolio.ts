@@ -27,7 +27,6 @@ const apiRoute = nextConnect({
 
 apiRoute.use(upload.array('project'));
 
-
 apiRoute.delete(async (req: NextApiRequest & { files: Express.Multer.File[] }, res: NextApiResponse) => {
 	const session = await getUserSession(req, res);
 	if (!session?.user?.email) {
@@ -53,7 +52,6 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 	const contact = JSON.parse(req.body.contact).map((contact: Partial<Contact>) => {
 		delete contact.id;
 		delete contact.userId;
-		// if contact.url doesn't start with http:// or https://, add it
 		if (contact.url)
 			if (!contact.url.startsWith('http://') && !contact.url
 				.startsWith('https://') && !contact.url.startsWith('mailto:')) {
@@ -61,6 +59,7 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 			}
 		return contact;
 	});
+
 	const technologiesIds = JSON.parse(req.body.technologies).map((el: Technology) => ({ technologyId: el.id }));
 	const experience = JSON.parse(req.body.experience).map((el: Partial<Experience>) => {
 		delete el.id;
@@ -70,8 +69,6 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 		return el;
 	});
 
-	// console.log(JSON.parse(req.body.projects));
-	// console.log(req.files);
 	let cont = 0;
 	const projects = JSON.parse(req.body.projects).map((el: Partial<Project>) => {
 		delete el.id;
@@ -82,8 +79,6 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 		}
 		return el;
 	});
-	console.log(projects);
-
 
 	if (!req.files) {
 		return res.status(400).json({ error: 'Please upload a file' });

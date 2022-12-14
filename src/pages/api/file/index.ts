@@ -10,7 +10,6 @@ export default function handler(
 		const filePath =  `public${path}`;
 		// if the file exists, delete it
 		if (existsSync(filePath)) unlinkSync(filePath);
-		console.log(`Deleted file: ${filePath}`);
 		return res.status(200).json({ message: 'File deleted' });
 	}
 
