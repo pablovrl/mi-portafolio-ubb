@@ -16,7 +16,6 @@ import { toast } from 'react-hot-toast';
 
 const validationSchema = yup.object({
 	about: yup.string().required('Este campo es requerido').max(800, 'El texto no debe superar los 700 caracteres'),
-	// validate array has at least one element
 	technologies: yup.array().of(yup.object().shape({
 		id: yup.number().required('Este campo es requerido'),
 		name: yup.string().required('Este campo es requerido'),
@@ -24,7 +23,7 @@ const validationSchema = yup.object({
 	})).min(1, 'Debes agregar al menos una tecnología'),
 	experiences: yup.array().of(yup.object().shape({
 		company: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
-		position: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		position: yup.string().required('Este campo es requerido').matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s-]+$/, 'El texto solo puede contener letras, espacios y guiones').max(50, 'El texto no debe superar los 50 caracteres'),
 		description: yup.string().required('Este campo es requerido').max(300, 'El texto no debe superar los 300 caracteres'),
 		startedAt: yup.date().required('Este campo es requerido').max(yup.ref('endedAt'), 'La fecha de inicio debe ser anterior a la fecha de fin'),
 		endedAt: yup.date().required('Este campo es requerido').min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio'),
