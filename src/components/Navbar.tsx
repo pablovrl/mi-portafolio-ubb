@@ -4,15 +4,13 @@ import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Logo from './Logo';
 import Link from 'next/link';
-import { deletePortfolio, getCurrentUser } from '../api/user';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
-import { useMutation, useQuery } from 'react-query';
+import { getCurrentUser } from '../api/user';
+import { useQuery } from 'react-query';
 import { User } from '@prisma/client';
+import DeletePortfolioDialog from './DeletePortfolioDialog';
 
 const Navbar = () => {
 	const session = useSession();
-	const router = useRouter();
 	const [open, setOpen] = useState(false);
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const handleDrawerToggle = () => setOpen(!open);
@@ -32,16 +30,6 @@ const Navbar = () => {
 		setDialogOpen(false);
 	};
 
-	const mutation = useMutation(deletePortfolio, {
-		onSuccess: () => {
-			toast.success('Portafolio eliminado');
-			router.push('/portafolios');
-		},
-	});
-
-	const handleDeletePortfolio = async () => {
-		mutation.mutate();
-	};
 
 	const handleSignOut = async () => {
 		await	signOut({ callbackUrl: '/iniciar-sesion' });
@@ -50,13 +38,7 @@ const Navbar = () => {
 	// TODO: REFACTOR THIS COMPONENT
 	const drawer = query.isSuccess && (
 		<Box sx={{ textAlign: 'center' }}>
-			<Dialog open={dialogOpen} onClose={handleDialogClose}>
-				<DialogTitle>Estás seguro?, no podrás recuperar los datos.</DialogTitle>	
-				<DialogActions>
-					<Button onClick={handleDialogClose}>Volver</Button>
-					<Button onClick={handleDeletePortfolio} color='error'>Eliminar</Button>
-				</DialogActions>
-			</Dialog>
+			<DeletePortfolioDialog onClose={handleDialogClose} open={dialogOpen} />
 			<Box px={4} py={2}>
 				<Logo />
 			</Box>
