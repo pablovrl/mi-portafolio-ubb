@@ -3,7 +3,7 @@ import { requireAuth } from '../utils/requireAuth';
 import Layout from '../components/Layout';
 import { prisma } from '../utils/db';
 import { Project, User } from '@prisma/client';
-import { Box, Button, Grid, Link as MUILink, TextField, Typography } from '@mui/material';
+import { Alert, AlertTitle, Box, Button, Grid, Link as MUILink, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -57,6 +57,11 @@ const Proyectos: NextPage<Props> = ({ projects }) => {
 					onChange={(e) => setSearch(e.target.value)}
 				/>
 			</Box>
+			{filteredProjects.length === 0 && (
+				<Alert severity='info'>
+					<AlertTitle>No se encontraron proyectos.</AlertTitle>
+				</Alert>
+			)}
 			<Grid container spacing={2} my={2}>
 				{filteredProjects.map((project) => (
 					<Grid key={project.id} item xs={12} md={6}>
