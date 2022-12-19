@@ -4,6 +4,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import { useState } from 'react';
 import ChangeCareerDialog from '../components/ChangeCareerDialog';
 import ChangeNameDialog from '../components/ChangeNameDialog';
+import ChangePasswordDialog from '../components/ChangePasswordDialog';
 import Layout from '../components/Layout';
 import { prisma } from '../utils/db';
 import { getUserSessionWithContext } from '../utils/userSession';
@@ -46,15 +47,17 @@ const Perfil: NextPage<PageProps> = ({ stringifiedUser }) => {
 	const user = JSON.parse(stringifiedUser) as User;
 	const [openCareerDialog, setOpenCareerDialog] = useState(false);
 	const [openNameDialog, setOpenNameDialog] = useState(false);
+	const [openPasswordDialog, setOpenPasswordDialog] = useState(false);
 
 	return (
 		<Layout>
 			<ChangeCareerDialog career={user.career} open={openCareerDialog} onClose={() => setOpenCareerDialog(false)} />
 			<ChangeNameDialog name={user.name} lastName={user.lastName} open={openNameDialog} onClose={() => setOpenNameDialog(false)} />
+			<ChangePasswordDialog open={openPasswordDialog} onClose={() => setOpenPasswordDialog(false)} />
 			<Typography variant='h5' my={2}>Actualiza tus datos personales</Typography>
 			<List>
 				<ListItem label='Nombre' value={`${user.name} ${user.lastName}`} onClick={() => setOpenNameDialog(true)} />
-				<ListItem label='Contraseña' value='************' />
+				<ListItem label='Contraseña' value='************' onClick={() => setOpenPasswordDialog(true)}/>
 				<ListItem label='Carrera' value={user.career} onClick={() => setOpenCareerDialog(true)} />
 			</List>
 		</Layout>
