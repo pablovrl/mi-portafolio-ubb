@@ -9,18 +9,19 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import DeletePortfolioDialog from './DeletePortfolioDialog';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-const Title = ({children}: {children: React.ReactNode}) => (
+
+const Title = ({ children }: { children: React.ReactNode }) => (
 	<Typography fontWeight={'bold'} variant='h5' fontFamily={'monospace'}>{children}</Typography>
 );
 
-const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
+const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 	const session = useSession();
 	const router = useRouter();
 	const [dialogOpen, setDialogOpen] = useState(false);
 
-	const handleShare = () => {
-		navigator.clipboard.writeText(window.location.href);
+	const handleCopy = () => {
 		toast.success('Enlace copiado en el portapapeles', {
 			duration: 5000,
 		});
@@ -37,10 +38,12 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 	return (
 		<Layout noNavbar={session.status === 'unauthenticated' || session.status === 'loading' ? true : false}>
 			{session.data?.user?.email === user.email && (
-				<Box display={{xs: 'none', md: 'block'}} position={'fixed'} right="50px" bottom="50px" zIndex={'1'}>
+				<Box display={{ xs: 'none', md: 'block' }} position={'fixed'} right="50px" bottom="50px" zIndex={'1'}>
 					<DeletePortfolioDialog onClose={handleDialogClose} open={dialogOpen} />
 					<Box display={'flex'} flexDirection='column' gap={1}>
-						<Button onClick={handleShare} variant='contained'>Compartir</Button>
+						<CopyToClipboard onCopy={handleCopy} text={window.location.href}>
+							<Button variant='contained'>Compartir</Button>
+						</CopyToClipboard>
 						<Button color='info' onClick={() => router.replace('/portafolio/editar')} variant='contained'>Editar</Button>
 						<Button onClick={handleDialogOpen} color='error' variant='contained'>Eliminar</Button>
 					</Box>
@@ -55,10 +58,10 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 								{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
 							</Typography>
 							<Typography mt={1} variant='h6' color='gray'>
-							Universidad del Bío-Bío
-							</Typography>	
+								Universidad del Bío-Bío
+							</Typography>
 						</Box>
-						<Box display={{xs: 'none', md: 'flex'}} gap={2} mb={2} >
+						<Box display={{ xs: 'none', md: 'flex' }} gap={2} mb={2} >
 							{user.contacts.map(contact => (
 								<Box key={contact.id}>
 									<MUILink href={contact.url} fontSize={'20px'} target='_blank'>
@@ -68,18 +71,18 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 							))}
 						</Box>
 					</Box>
-					<Box display={{xs: 'none', md: 'flex'}}>
+					<Box display={{ xs: 'none', md: 'flex' }}>
 						<ProfileImage src={user.image || ''} size='180px' />
 					</Box>
 				</Box>
-				<Box display={'flex'} flexDirection='column' gap={2} mt={{xs: 2, md: 0}}>
+				<Box display={'flex'} flexDirection='column' gap={2} mt={{ xs: 2, md: 0 }}>
 					<Box display={'flex'} flexDirection='column' gap={2}>
 						<Title>SOBRE MÍ</Title>
 						<Typography textAlign={'justify'}>
 							{user.about}
 						</Typography>
 					</Box>
-					<Box display={{xs: 'flex', md: 'none'}} gap={2} alignItems='center' flexDirection={'row'}>
+					<Box display={{ xs: 'flex', md: 'none' }} gap={2} alignItems='center' flexDirection={'row'}>
 						<ProfileImage src={user.image || ''} size='120px' />
 						{user.contacts.map(contact => (
 							<Box key={contact.id}>
@@ -93,14 +96,14 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 						<Title>TECNOLOGÍAS</Title>
 						<Grid container spacing={2} >
 							{user.technologies.map(technology => (
-								<Grid 
+								<Grid
 									item
 									xs={6}
 									md={2}
-									key={technology.technology.id} 
+									key={technology.technology.id}
 								>
 									<Box
-										bgcolor={'#FAFAFA'} 
+										bgcolor={'#FAFAFA'}
 										display='flex'
 										flexDirection={'column'}
 										gap={1}
@@ -108,7 +111,7 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 										alignItems='center'
 										overflow={'hidden'}
 									>
-										<i style={{fontSize: '40px'}} className={technology.technology.icon} />
+										<i style={{ fontSize: '40px' }} className={technology.technology.icon} />
 										<Typography>{technology.technology.name.toUpperCase()}</Typography>
 									</Box>
 								</Grid>
@@ -120,10 +123,10 @@ const StudentPortfolio = ({ user }: {user: UserPortfolio}) => {
 							<Title>PROYECTOS</Title>
 							<Grid container spacing={2}>
 								{user.projects.map(project => (
-									<Grid key={project.id} item xs={12} md={6}> 
-										<Project 
-											name={project.name} 
-											description={project.description} 
+									<Grid key={project.id} item xs={12} md={6}>
+										<Project
+											name={project.name}
+											description={project.description}
 											link={project.file}
 											technology={project.technology}
 											course={project.course}
