@@ -3,7 +3,7 @@ import { requireAuth } from '../utils/requireAuth';
 import Layout from '../components/Layout';
 import { prisma } from '../utils/db';
 import { User } from '@prisma/client';
-import { Alert, AlertTitle, Box, Grid, TextField, Typography } from '@mui/material';
+import { Alert, AlertTitle, Box, Grid, TextField, Typography, Link as MUILink } from '@mui/material';
 import Link from 'next/link';
 import ProfileImage from '../components/ProfileImage';
 import { getUserSessionWithContext } from '../utils/userSession';
@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({ user, users }) => {
 	const filteredUsers = users.filter((user) =>
 		user.name.toLowerCase().includes(search.toLowerCase()) ||
 		user.lastName.toLowerCase().includes(search.toLowerCase()) ||
-		user.career.toLowerCase().includes(search.toLowerCase()) 
+		user.career.toLowerCase().includes(search.toLowerCase())
 	);
 
 	return (
@@ -55,10 +55,11 @@ const Home: NextPage<Props> = ({ user, users }) => {
 				/>
 			</Box>
 			{!user.portfolio && (
-				<Alert severity='warning' sx={{marginBottom: '15px'}}>
+				<Alert severity='warning' sx={{ marginBottom: '15px' }}>
 					<AlertTitle>
-						¿Aún no tienes tu portafolio?, crealo haciendo click aquí <Link href={`/portafolio/${user.email}`}>crear portafolio</Link>.
+						¿Aún no tienes tu portafolio?
 					</AlertTitle>
+					Crea uno haciendo click aquí <Link href={`/portafolio/${user.email}`}><MUILink sx={{cursor: 'pointer'}}>crear portafolio</MUILink></Link>.
 				</Alert>
 			)}
 			{filteredUsers.length === 0 && (
