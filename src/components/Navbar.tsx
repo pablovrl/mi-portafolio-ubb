@@ -18,6 +18,7 @@ const Navbar = () => {
 	const navLinks = [
 		{ text: 'Buscar portafolios', href: '/portafolios', disabled: false },
 		{ text: 'Buscar proyectos', href: '/proyectos', disabled: false },
+		{ text: 'Perfil', href: '/perfil', disabled: false },
 		{ text: 'Mi portafolio', href: `/portafolio/${session.data?.user?.email}`, disabled: false },
 		{ text: 'Editar portafolio', href: '/portafolio/editar', disabled: !query.data?.data.portfolio },
 	];
