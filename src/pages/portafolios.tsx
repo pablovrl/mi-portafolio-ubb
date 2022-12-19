@@ -55,10 +55,15 @@ const Home: NextPage<Props> = ({ user, users }) => {
 				/>
 			</Box>
 			{!user.portfolio && (
-				<Alert severity='info'>
+				<Alert severity='warning' sx={{marginBottom: '15px'}}>
 					<AlertTitle>
 						¿Aún no tienes tu portafolio?, crealo haciendo click aquí <Link href={`/portafolio/${user.email}`}>crear portafolio</Link>.
 					</AlertTitle>
+				</Alert>
+			)}
+			{filteredUsers.length === 0 && (
+				<Alert severity='info'>
+					<AlertTitle>No se encontraron portafolios.</AlertTitle>
 				</Alert>
 			)}
 			<Grid container spacing={2} my={2}>
