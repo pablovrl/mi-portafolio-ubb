@@ -7,6 +7,7 @@ export const email = yup
 
 export const password = yup
 	.string()
+	.matches(/^[^\s]+$/, 'La contraseña no puede contener espacios')
 	.min(8, 'La contraseña debe tener un mínimo de 8 caracteres')
 	.required('Debe ingresar una contraseña');
 
