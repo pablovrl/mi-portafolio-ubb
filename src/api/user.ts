@@ -6,7 +6,7 @@ export const register = async (user: CreateUser) => {
 	return await axios.post('/api/auth/register', user);
 };
 
-export async function getCurrentUser(): Promise<{data: User}> {
+export async function getCurrentUser(): Promise<{ data: User }> {
 	return await axios.get('/api/user/me');
 }
 
@@ -14,7 +14,7 @@ export const changeImage = async (image: File) => {
 	const formData = new FormData();
 	formData.append('image', image);
 	return await axios.post('/api/user/change-image', formData);
-};	
+};
 
 
 export const createPortfolio = async (data: any) => {
@@ -32,4 +32,8 @@ export const createPortfolio = async (data: any) => {
 
 export const deletePortfolio = async () => {
 	return await axios.delete('/api/user/portfolio');
+};
+
+export const updateUser = async (data: Partial<User>) => {
+	return await axios.put('/api/user/me', data);
 };

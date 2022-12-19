@@ -12,6 +12,23 @@ const apiRoute = nextConnect({
 	}
 });
 
+apiRoute.put(async (req: NextApiRequest, res: NextApiResponse) => {
+	const session = await getUserSession(req, res);
+	if (!session?.user?.email) {
+		return res.status(401).json({ error: 'Unauthorized' });
+	}
+
+	const user = await prisma.user.update({
+		where: { email: session.user.email },
+		data: {
+			...req.body
+		}
+	});
+
+	return res.status(200).json({ ...user });
+
+});
+
 // route to get the current user
 apiRoute.get(async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getUserSession(req, res);
