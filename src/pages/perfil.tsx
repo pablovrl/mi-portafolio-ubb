@@ -24,9 +24,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 interface ListItemProps {
-  label: string;
-  value: string;
-  onClick?: () => void;
+	label: string;
+	value: string;
+	onClick?: () => void;
 }
 
 
@@ -41,23 +41,27 @@ const ListItem = ({ label, value, onClick }: ListItemProps) => {
 };
 
 interface PageProps {
-  stringifiedUser: string;
+	stringifiedUser: string;
 }
 const Perfil: NextPage<PageProps> = ({ stringifiedUser }) => {
-	const user = JSON.parse(stringifiedUser) as User;
+	const [user, setUser] = useState<User>(JSON.parse(stringifiedUser));
 	const [openCareerDialog, setOpenCareerDialog] = useState(false);
 	const [openNameDialog, setOpenNameDialog] = useState(false);
 	const [openPasswordDialog, setOpenPasswordDialog] = useState(false);
 
+	const updateUser = (values: Partial<User>) => {
+		setUser({ ...user, ...values });
+	};
+
 	return (
 		<Layout>
-			<ChangeCareerDialog career={user.career} open={openCareerDialog} onClose={() => setOpenCareerDialog(false)} />
-			<ChangeNameDialog name={user.name} lastName={user.lastName} open={openNameDialog} onClose={() => setOpenNameDialog(false)} />
+			<ChangeCareerDialog updateUserState={updateUser} career={user.career} open={openCareerDialog} onClose={() => setOpenCareerDialog(false)} />
+			<ChangeNameDialog updateUserState={updateUser} name={user.name} lastName={user.lastName} open={openNameDialog} onClose={() => setOpenNameDialog(false)} />
 			<ChangePasswordDialog open={openPasswordDialog} onClose={() => setOpenPasswordDialog(false)} />
 			<Typography variant='h5' my={2}>Actualiza tus datos personales</Typography>
 			<List>
 				<ListItem label='Nombre' value={`${user.name} ${user.lastName}`} onClick={() => setOpenNameDialog(true)} />
-				<ListItem label='Contraseña' value='************' onClick={() => setOpenPasswordDialog(true)}/>
+				<ListItem label='Contraseña' value='************' onClick={() => setOpenPasswordDialog(true)} />
 				<ListItem label='Carrera' value={user.career} onClick={() => setOpenCareerDialog(true)} />
 			</List>
 		</Layout>
