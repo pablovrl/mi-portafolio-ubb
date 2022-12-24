@@ -12,7 +12,8 @@ interface DialogProps {
 
 const validationSchema = yup.object({
 	password: password,
-	newPassword: password
+	newPassword: password,
+	repeatNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], 'Las contraseña no coincide')
 });
 
 const ChangePasswordDialog = ({ open, onClose}: DialogProps) => {
@@ -22,7 +23,7 @@ const ChangePasswordDialog = ({ open, onClose}: DialogProps) => {
 			toast.success('Contraseña cambiada con éxito');
 			onClose();
 		} catch(error) {
-			toast.error('Error al cambiar la contraseña');
+			toast.error('Contraseña incorrecta');
 		}
 	};
 
@@ -32,7 +33,8 @@ const ChangePasswordDialog = ({ open, onClose}: DialogProps) => {
 				validationSchema={validationSchema}
 				initialValues={{
 					password: '',
-					newPassword: ''
+					newPassword: '',
+					repeatNewPassword: ''
 				}}
 				onSubmit={handleSubmit}
 			>
@@ -44,7 +46,7 @@ const ChangePasswordDialog = ({ open, onClose}: DialogProps) => {
 								<FormControl fullWidth >
 									<TextField
 										type={'password'}
-										label='Contraseña'
+										label='Contraseña actual'
 										onChange={props.handleChange}
 										value={props.values.password}
 										name='password'
@@ -62,6 +64,17 @@ const ChangePasswordDialog = ({ open, onClose}: DialogProps) => {
 										name='newPassword'
 										error={props.touched.newPassword && Boolean(props.errors.newPassword)}
 										helperText={props.touched.newPassword && props.errors.newPassword}
+									/>
+								</FormControl>
+								<FormControl fullWidth>
+									<TextField
+										type={'password'}
+										label='Repetir nueva contraseña'
+										onChange={props.handleChange}
+										value={props.values.repeatNewPassword}
+										name='repeatNewPassword'
+										error={props.touched.repeatNewPassword && Boolean(props.errors.repeatNewPassword)}
+										helperText={props.touched.repeatNewPassword && props.errors.repeatNewPassword}
 									/>
 								</FormControl>
 							</Box>
