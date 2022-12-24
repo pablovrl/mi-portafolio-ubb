@@ -26,6 +26,7 @@ model User {
   image String?
   about String? @db.Text
   portfolio Boolean @default(false)
+  resetPasswordToken String?
   technologies TechnologiesOnUsers[]
   experiences Experience[]
   projects Project[]
