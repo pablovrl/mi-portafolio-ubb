@@ -40,3 +40,7 @@ export const updateUser = async (data: Partial<User>) => {
 export const changeUserPassword = async (data: { password: string, newPassword: string }) => {
 	return await axios.post('/api/user/change-password', data);
 };
+
+export const resetUserPassword = async (data: { email: string }) => {
+	return await axios.post('/api/user/forgot-password', data);
+};
