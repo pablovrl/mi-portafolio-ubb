@@ -25,7 +25,7 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
    
 	if (!user) return res.status(404).json({ error: 'User not found' });
 
-	const token = await bcrypt.hash(email, 10);
+	const token = (await (await bcrypt.hash(email, 10))).replace('/', '');
 	// send token to user email
 	await prisma.user.update({
 		where: {
@@ -41,9 +41,9 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
 		to: email,
 		subject: 'Reset Password',
 		html: `
-			<h1>Reset Password</h1>
-			<p>Click the link below to reset your password</p>
-			<a href="${env.NEXT_PUBLIC_DEPLOY}/reset-password/${token}">Reset Password</a>
+			<h1>Recuperar contraseña</h1>
+			<p>Haz click en el enlace para recupear tu contraseña</p>
+			<a href="${env.NEXT_PUBLIC_DEPLOY}/reset-password/${token}">Recuperar contraseña</a>
 			`
 	});
 

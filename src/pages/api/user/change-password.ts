@@ -14,7 +14,23 @@ const apiRoute = nextConnect({
 });
 
 apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { password, newPassword } = req.body;
+	const { password, newPassword, token } = req.body;
+	if(token) {
+		const user = await prisma.user.findFirst({ where: { resetPasswordToken: token } });
+
+		if(!user) {
+			return res.status(404).json({ error: 'User not found' });
+		}
+
+		const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+		await prisma.user.update({
+			where: { id: user.id },
+			data: { password: hashedPassword, resetPasswordToken: null },
+		});
+
+		return res.status(200).json({ message: 'Password changed successfully' });
+	}
 
 	const session = await getUserSession(req, res);
 	if (!session?.user?.email) {

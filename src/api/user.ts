@@ -37,7 +37,7 @@ export const updateUser = async (data: Partial<User>) => {
 	return await axios.put('/api/user/me', data);
 };
 
-export const changeUserPassword = async (data: { password: string, newPassword: string }) => {
+export const changeUserPassword = async (data: { password?: string, newPassword: string, token?: string }) => {
 	return await axios.post('/api/user/change-password', data);
 };
 
