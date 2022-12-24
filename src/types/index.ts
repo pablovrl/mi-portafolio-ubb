@@ -14,3 +14,10 @@ export interface UserPortfolio extends User {
 	contacts: Contact[];
 	projects: Project[];
 }
+
+export type CreatePortfolio = User & {
+	contacts: Contact[];
+	projects: Project[];
+	technologies: Technology[];
+	experiences: Experience[]
+}

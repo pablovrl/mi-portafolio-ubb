@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Dialog, DialogActions, DialogTitle, Divider, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';

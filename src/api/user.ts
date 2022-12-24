@@ -1,6 +1,6 @@
 import { Project, User } from '@prisma/client';
 import axios from 'axios';
-import { CreateUser } from '../types';
+import { CreateUser, CreatePortfolio } from '../types';
 
 export const register = async (user: CreateUser) => {
 	return await axios.post('/api/auth/register', user);
@@ -16,8 +16,7 @@ export const changeImage = async (image: File) => {
 	return await axios.post('/api/user/change-image', formData);
 };
 
-
-export const createPortfolio = async (data: any) => {
+export const createPortfolio = async (data: CreatePortfolio) => {
 	const formData = new FormData();
 	formData.append('about', data.about || '');
 	formData.append('projects', JSON.stringify(data.projects));
@@ -38,6 +37,6 @@ export const updateUser = async (data: Partial<User>) => {
 	return await axios.put('/api/user/me', data);
 };
 
-export const changeUserPassword = async (data: {password: string, newPassword: string}) => {
+export const changeUserPassword = async (data: { password: string, newPassword: string }) => {
 	return await axios.post('/api/user/change-password', data);
 };
