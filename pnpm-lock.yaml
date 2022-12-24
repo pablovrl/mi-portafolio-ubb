@@ -10,6 +10,7 @@ specifiers:
   '@types/bcryptjs': ^2.4.2
   '@types/multer': ^1.4.7
   '@types/node': 18.11.4
+  '@types/nodemailer': ^6.4.7
   '@types/react': 18.0.22
   '@types/react-copy-to-clipboard': ^5.0.4
   '@types/react-dom': 18.0.7
@@ -26,6 +27,7 @@ specifiers:
   next: 12.3.1
   next-auth: ^4.15.0
   next-connect: ^0.13.0
+  nodemailer: ^6.8.0
   prisma: ^4.5.0
   react: 18.2.0
   react-copy-to-clipboard: ^5.1.0
@@ -49,8 +51,9 @@ dependencies:
   formik: 2.2.9_react@18.2.0
   multer: 1.4.5-lts.1
   next: 12.3.1_biqbaboplfbrettd7655fr4n2y
-  next-auth: 4.15.0_azq6kxkn3od7qdylwkyksrwopy
+  next-auth: 4.15.0_pvhs6umhoiyo7cgwjp6cvqsra4
   next-connect: 0.13.0
+  nodemailer: 6.8.0
   prisma: 4.5.0
   react: 18.2.0
   react-copy-to-clipboard: 5.1.0_react@18.2.0
@@ -64,6 +67,7 @@ devDependencies:
   '@types/bcryptjs': 2.4.2
   '@types/multer': 1.4.7
   '@types/node': 18.11.4
+  '@types/nodemailer': 6.4.7
   '@types/react': 18.0.22
   '@types/react-copy-to-clipboard': 5.0.4
   '@types/react-dom': 18.0.7
@@ -775,6 +779,12 @@ packages:
 
   /@types/node/18.11.4:
     resolution: {integrity: sha512-BxcJpBu8D3kv/GZkx/gSMz6VnTJREBj/4lbzYOQueUOELkt8WrO6zAcSPmp9uRPEW/d+lUO8QK0W2xnS1hEU0A==}
+    dev: true
+
+  /@types/nodemailer/6.4.7:
+    resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
+    dependencies:
+      '@types/node': 18.11.4
     dev: true
 
   /@types/parse-json/4.0.0:
@@ -2334,7 +2344,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-auth/4.15.0_azq6kxkn3od7qdylwkyksrwopy:
+  /next-auth/4.15.0_pvhs6umhoiyo7cgwjp6cvqsra4:
     resolution: {integrity: sha512-IasNzGLM2VlmyioDdZaRwBBBm8b5xo+zbbqVWHFh0bY6iQUZ3vuudrsdHNdxkXV3LSHdKNaoWEpYr4BydB7mCw==}
     engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0}
     peerDependencies:
@@ -2351,6 +2361,7 @@ packages:
       cookie: 0.5.0
       jose: 4.10.4
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      nodemailer: 6.8.0
       oauth: 0.9.15
       openid-client: 5.2.1
       preact: 10.11.2
@@ -2409,6 +2420,11 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /nodemailer/6.8.0:
+    resolution: {integrity: sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ==}
+    engines: {node: '>=6.0.0'}
     dev: false
 
   /oauth/0.9.15:
