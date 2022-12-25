@@ -25,7 +25,7 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
    
 	if (!user) return res.status(404).json({ error: 'User not found' });
 
-	const token = (await (await bcrypt.hash(email, 10))).replace('/', '');
+	const token = ((await bcrypt.hash(email, 10))).replace('/', '');
 	// send token to user email
 	await prisma.user.update({
 		where: {
