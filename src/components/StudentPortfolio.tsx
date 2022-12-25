@@ -44,7 +44,7 @@ const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 					<DeletePortfolioDialog onClose={handleDialogClose} open={dialogOpen} />
 					<SpeedDial
 						ariaLabel='tools'
-						sx={{position: 'fixed', bottom: 50, right: 50, zIndex: '1'}}
+						sx={{position: 'fixed', bottom: {xs: 20, md: 50}, right: {xs: 20, md: 50}, zIndex: '1'}}
 						icon={<SpeedDialIcon />}
 					>
 						<SpeedDialAction
