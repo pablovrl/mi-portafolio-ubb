@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Link as MUILink, Button, SpeedDial, SpeedDialIcon, SpeedDialAction } from '@mui/material';
+import { Box, Grid, Typography, Link as MUILink, SpeedDial, SpeedDialIcon, SpeedDialAction } from '@mui/material';
 import { UserPortfolio } from '../types';
 import Project from './Project';
 import React, { useState } from 'react';
