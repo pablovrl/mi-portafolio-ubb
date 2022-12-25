@@ -1,12 +1,14 @@
 import { Box, Button, Container, CssBaseline, FormControl, TextField, Typography } from '@mui/material';
 import { Formik } from 'formik';
 import { NextPage } from 'next';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import { changeUserPassword } from '../../api/user';
 import Logo from '../../components/Logo';
 import { password } from '../../utils/yupValidations';
 import * as yup from 'yup';
+import { useMutation } from 'react-query';
+import { ChangeUserPassword } from '../../types';
 
 const validationSchema = yup.object({
 	password: password,
@@ -19,6 +21,16 @@ const validationSchema = yup.object({
 const RecuperarContraseña: NextPage = () => {
 	const { token } = useRouter().query;
 	const router = useRouter();
+	const mutation = useMutation((data: ChangeUserPassword) => changeUserPassword(data), {
+		onSuccess: () => {
+			toast.success('Contraseña cambiada');
+			router.push('/iniciar-sesion');
+		},
+		onError: () => {
+			toast.error('Error al cambiar la contraseña');
+		}
+	});
+
 	return (
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
@@ -43,13 +55,7 @@ const RecuperarContraseña: NextPage = () => {
 						confirmPassword: '',
 					}}
 					onSubmit={async (values) => {
-						try {
-							await changeUserPassword({ token: token as string, newPassword: values.password });
-							toast.success('Contraseña cambiada');
-							router.push('/iniciar-sesion');
-						} catch (e) {
-							toast.error('Error al cambiar la contraseña');
-						}
+						mutation.mutate({ token: token as string, newPassword: values.password });
 					}}
 				>
 					{props => (

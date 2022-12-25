@@ -20,6 +20,8 @@ import FormikInput from '../components/FormikInput';
 import { useState } from 'react';
 import { resetUserPassword } from '../api/user';
 import { toast } from 'react-hot-toast';
+import { useMutation } from 'react-query';
+import Loading from '../components/Loading';
 
 const validationSchema = yup.object({
 	email,
@@ -28,8 +30,18 @@ const validationSchema = yup.object({
 
 // create dialog mui component
 const PasswordRecoveryDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+	const mutation = useMutation((data: { email: string }) => resetUserPassword(data), {
+		onSuccess: () => {
+			toast.success('Correo enviado');
+			onClose();
+		},
+		onError: () => {
+			toast.error('Error al enviar el correo');
+		}
+	});
 	return (
 		<Dialog open={isOpen} onClose={onClose}>
+			<Loading open={mutation.isLoading} />
 			<Box p={2}>
 				<Typography variant="h6" component="h2">
 					Recuperar contraseña
@@ -43,17 +55,8 @@ const PasswordRecoveryDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose:
 						email: email
 					})}
 					initialValues={{ email: '' }}
-					onSubmit={async values => {
-						try {
-							await resetUserPassword(values);
-							toast.success(
-								'Se ha enviado un correo de recuperación de contraseña',
-								{ duration: 5000 }
-							);
-							onClose();
-						} catch (e) {
-							toast.error('No se pudo enviar el correo de recuperación de contraseña');
-						}
+					onSubmit={async (values) => {
+						mutation.mutate(values);
 					}}
 				>
 					{props => (
