@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Link as MUILink, Button } from '@mui/material';
+import { Box, Grid, Typography, Link as MUILink, Button, SpeedDial, SpeedDialIcon, SpeedDialAction } from '@mui/material';
 import { UserPortfolio } from '../types';
 import Project from './Project';
 import React, { useState } from 'react';
@@ -10,7 +10,9 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import DeletePortfolioDialog from './DeletePortfolioDialog';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
+import ShareIcon from '@mui/icons-material/Share'; 
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
 	<Typography fontWeight={'bold'} variant='h5' fontFamily={'monospace'}>{children}</Typography>
@@ -38,16 +40,31 @@ const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 	return (
 		<Layout noNavbar={session.status === 'unauthenticated' || session.status === 'loading' ? true : false}>
 			{session.data?.user?.email === user.email && (
-				<Box display={{ xs: 'none', md: 'block' }} position={'fixed'} right="50px" bottom="50px" zIndex={'1'}>
+				<>
 					<DeletePortfolioDialog onClose={handleDialogClose} open={dialogOpen} />
-					<Box display={'flex'} flexDirection='column' gap={1}>
+					<SpeedDial
+						ariaLabel='tools'
+						sx={{position: 'fixed', bottom: 50, right: 50, zIndex: '1'}}
+						icon={<SpeedDialIcon />}
+					>
+						<SpeedDialAction
+							tooltipTitle='Eliminar'
+							icon={<DeleteIcon />}
+							onClick={handleDialogOpen}
+						/>
+						<SpeedDialAction
+							tooltipTitle='Editar'
+							icon={<EditIcon />}
+							onClick={() => router.replace('/portafolio/editar')}
+						/>
 						<CopyToClipboard onCopy={handleCopy} text={window.location.href}>
-							<Button variant='contained'>Compartir</Button>
+							<SpeedDialAction
+								tooltipTitle='Compartir'
+								icon={<ShareIcon />}
+							/>
 						</CopyToClipboard>
-						<Button color='info' onClick={() => router.replace('/portafolio/editar')} variant='contained'>Editar</Button>
-						<Button onClick={handleDialogOpen} color='error' variant='contained'>Eliminar</Button>
-					</Box>
-				</Box>
+					</SpeedDial>
+				</>
 			)}
 			<Box mt={4}>
 				<Box display={'flex'} justifyContent='space-between' flexDirection='row' gap={3} alignItems='center'>
