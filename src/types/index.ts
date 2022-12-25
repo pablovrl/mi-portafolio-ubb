@@ -19,7 +19,15 @@ export type CreatePortfolio = User & {
 	contacts: Contact[];
 	projects: Project[];
 	technologies: Technology[];
-	experiences: Experience[]
+	experiences: {
+		id: number;
+		userId: number;
+		company: string;
+		position: string;
+		description: string;
+		startedAt: string;
+		endedAt: string;
+	}[]
 }
 
 export type ChangeUserPassword = {
