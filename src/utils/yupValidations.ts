@@ -3,7 +3,9 @@ import * as yup from 'yup';
 export const email = yup
 	.string()
 	.email('Ingrese un correo electrónico válido')
-	.required('Debe ingresar un correo electrónico');
+	.required('Debe ingresar un correo electrónico')
+	.matches(/@(ubiobio\.cl|alumnos\.ubiobio\.cl)$/, 'Debes ingresar un correo institucional');
+
 
 export const password = yup
 	.string()
