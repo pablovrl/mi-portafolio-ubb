@@ -1,6 +1,6 @@
 import { Project, User } from '@prisma/client';
 import axios from 'axios';
-import { CreateUser, CreatePortfolio } from '../types';
+import { CreateUser, CreatePortfolio, ChangeUserPassword } from '../types';
 
 export const register = async (user: CreateUser) => {
 	return await axios.post('/api/auth/register', user);
@@ -37,7 +37,7 @@ export const updateUser = async (data: Partial<User>) => {
 	return await axios.put('/api/user/me', data);
 };
 
-export const changeUserPassword = async (data: { password?: string, newPassword: string, token?: string }) => {
+export const changeUserPassword = async (data: ChangeUserPassword) => {
 	return await axios.post('/api/user/change-password', data);
 };
 

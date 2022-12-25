@@ -9,7 +9,7 @@ export interface CreateUser {
 }
 
 export interface UserPortfolio extends User {
-	technologies: {technology: Technology}[];
+	technologies: { technology: Technology }[];
 	experiences: Experience[];
 	contacts: Contact[];
 	projects: Project[];
@@ -20,4 +20,10 @@ export type CreatePortfolio = User & {
 	projects: Project[];
 	technologies: Technology[];
 	experiences: Experience[]
+}
+
+export type ChangeUserPassword = {
+	password?: string,
+	newPassword: string,
+	token?: string
 }
