@@ -37,12 +37,12 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	});
 
 	await transporter.sendMail({
-		from: 'pablo.villarroel1901@alumnos.ubiobio.cl',
+		from: 'Mi Portafolio UBB',
 		to: email,
-		subject: 'Reset Password',
+		subject: 'Mi Portafolio UBB - Recuperar contraseña',
 		html: `
 			<h1>Recuperar contraseña</h1>
-			<p>Haz click en el enlace para recupear tu contraseña</p>
+			<p>Haz click en el enlace para recuperar tu contraseña</p>
 			<a href="${env.NEXT_PUBLIC_DEPLOY}/reset-password/${token}">Recuperar contraseña</a>
 			`
 	});
