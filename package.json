@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prod": "pnpm build ; pm2 delete 0 ; pm2 start pnpm -- start -p 80"
+    "prod": "git pull; pnpm i; pnpm build; pm2 delete 0; pm2 start pnpm -- start -p 80"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
