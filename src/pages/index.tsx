@@ -19,7 +19,8 @@ const Home: NextPage = () => {
 			<Container>
 				<Grid container mt={{ xs: '70px' }} display={'flex'} alignItems='center' flexDirection={{ xs: 'column', md: 'row' }}>
 					<Grid item md={8}>
-						<Typography variant='h1' fontSize={{xs: '2.5rem', md: '5rem'}} fontWeight={'bold'} fontFamily='sans-serif'>Mi Portafolio UBB</Typography>
+						<Typography variant='h1' fontSize={{ xs: '2.5rem', md: '5rem' }} fontWeight={'bold'} fontFamily='sans-serif'>Bienvenid@ a</Typography>
+						<Typography variant='h1' fontSize={{ xs: '2.5rem', md: '5rem' }} fontWeight={'bold'} fontFamily='sans-serif'>Mi Portafolio UBB</Typography>
 						<Typography variant='h6' color='grey'>
 							Crea un portafolio para mostrar tus proyectos a terceros.
 							Revisa los portafolios de tus compañeros y conoce sus trabajos.
@@ -27,7 +28,7 @@ const Home: NextPage = () => {
 						<Box display={'flex'} gap={1} my={2} flexDirection='column' width={'fit-content'}>
 							<Button LinkComponent={'a'} href={`/portafolio/${session.data?.user?.email}`} size='large' variant='contained'>Crear portafolio</Button>
 							<Link href={'/portafolios'}>
-								<MUILink sx={{cursor: 'pointer'}}>
+								<MUILink sx={{ cursor: 'pointer' }}>
 									También puedes buscar portafolios de tus compañeros
 								</MUILink>
 							</Link>
