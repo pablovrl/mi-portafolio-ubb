@@ -40,8 +40,8 @@ model Experience {
   company String
   position String
   description String @db.Text
-  startedAt String
-  endedAt String
+  startedAt DateTime
+  endedAt DateTime
 }
 
 model Project {
