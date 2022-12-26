@@ -41,7 +41,7 @@ model Experience {
   position String
   description String @db.Text
   startedAt DateTime
-  endedAt DateTime
+  endedAt DateTime?
 }
 
 model Project {
