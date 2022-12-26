@@ -1,7 +1,7 @@
-import { Box, Button, Grid, TextField } from '@mui/material';
+import { Box, Button, FormControlLabel, Checkbox, Grid, TextField } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
-import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
+import { Field, FieldArray, FieldArrayRenderProps, FieldProps, useFormikContext } from 'formik';
 import { todayDate } from '../../utils/todayDate';
 import { UserPortfolio } from '../../types';
 import { Header, Layout } from './Layout';
@@ -14,9 +14,36 @@ interface ExperienceErrors {
 	endedAt: string;
 }
 
-const Experience = () => {
+interface Props {
+	checked: boolean[];
+	setChecked: React.Dispatch<React.SetStateAction<boolean[]>>;
+}
+const Experience = ({checked, setChecked}: Props) => {
 	const formik = useFormikContext<UserPortfolio>();
 	const today = todayDate();
+
+
+	const handleCheckChange = (index: number) => {
+		const newChecked = [...checked];
+		newChecked[index] = !newChecked[index];
+		setChecked(newChecked);
+		if (!checked[index]) {
+			formik.setFieldValue(`experiences.${index}.endedAt`, null);
+		} else {
+			formik.setFieldValue(`experiences.${index}.endedAt`, today);
+		}
+	};
+
+	const createExperience = (arrayHelpers: FieldArrayRenderProps) => {
+		arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' });
+		checked.push(false);
+	};
+
+	const deleteChecked = (index: number) => {
+		const newChecked = [...checked];
+		newChecked.splice(index - 1, 1);
+		setChecked(newChecked);
+	};
 
 	return (
 		<Box>
@@ -33,7 +60,7 @@ const Experience = () => {
 								<Box mb={2}>
 									<Button
 										type="button"
-										onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' })} // insert an empty string at a position
+										onClick={() => createExperience(arrayHelpers)}
 										variant='outlined'
 									>
 										Agregar nueva experiencia laboral
@@ -43,7 +70,10 @@ const Experience = () => {
 
 									{formik.values.experiences.map((experience, index) => (
 										<Layout key={index}>
-											<Header title='experiencia' index={index + 1} handleDelete={arrayHelpers.handleRemove(index)} />
+											<Header deleteChecked={deleteChecked} title='experiencia' index={index + 1} handleDelete={arrayHelpers.handleRemove(index)} />
+											<Grid item xs={12}>
+												<FormControlLabel control={<Checkbox checked={checked[index]} onChange={() => handleCheckChange(index)} />} label="Actualmente tengo este cargo" />
+											</Grid>
 											<Field
 												name={`experiences.${index}.position`}
 											>
@@ -97,25 +127,35 @@ const Experience = () => {
 													</Grid>
 												)}
 											</Field>
-
-											<Field
-												name={`experiences.${index}.endedAt`}
-											>
-												{({
-													field, // { name, value, onChange, onBlur }
-												}: FieldProps) => (
-													<Grid item xs={6}>
-														<TextField
-															{...field}
-															fullWidth
-															type='date'
-															label='Fecha de finalización *'
-															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? true : false}
-															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).endedAt : null}
-														/>
-													</Grid>
-												)}
-											</Field>
+											{formik.values.experiences[index].endedAt === null ? (
+												<Grid item xs={6}>
+													<TextField 
+														fullWidth 
+														type={'date'}
+														disabled={true}
+														error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? true : false}
+														helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).endedAt : null}
+													/>
+												</Grid>) : (
+												<Field
+													name={`experiences.${index}.endedAt`}
+												>
+													{({
+														field, // { name, value, onChange, onBlur }
+													}: FieldProps) => (
+														<Grid item xs={6}>
+															<TextField
+																{...field}
+																fullWidth
+																type='date'
+																label='Fecha de finalización *'
+																error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? true : false}
+																helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).endedAt : null}
+															/>
+														</Grid>
+													)}
+												</Field>
+											)}
 											<Field
 												name={`experiences.${index}.description`}
 											>
@@ -142,7 +182,7 @@ const Experience = () => {
 						) : (
 							<Button
 								variant='outlined'
-								onClick={() => arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' })}
+								onClick={() => createExperience(arrayHelpers)}
 							>
 								Agregar experiencia
 							</Button>

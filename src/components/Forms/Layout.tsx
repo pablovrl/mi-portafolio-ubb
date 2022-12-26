@@ -21,15 +21,24 @@ interface HeaderProps {
 	title: string;
 	handleDelete: () => void;
 	file?: string;
+	deleteChecked?: (index: number) => void;
 }
 
-export const Header = ({ index, title, handleDelete, file }: HeaderProps) => (
-	<Grid item xs={12}>
-		<Box display={'flex'} alignItems='center' justifyContent={'space-between'}>
-			<Typography variant='h5' fontWeight={'bold'}>{title.toUpperCase()} {index}</Typography>
-			<IconButton onClick={() => { handleDelete(); if(file) deleteFile(file); }}>
-				<HighlightOffIcon color="error" />
-			</IconButton>
-		</Box>
-	</Grid>
-);
+export const Header = ({ index, title, handleDelete, file, deleteChecked }: HeaderProps) => {
+	const handleClick = () => {
+		handleDelete();
+		if(file) deleteFile(file);
+		if(deleteChecked) deleteChecked(index);
+	};
+
+	return (
+		<Grid item xs={12}>
+			<Box display={'flex'} alignItems='center' justifyContent={'space-between'}>
+				<Typography variant='h5' fontWeight={'bold'}>{title.toUpperCase()} {index}</Typography>
+				<IconButton onClick={handleClick}>
+					<HighlightOffIcon color="error" />
+				</IconButton>
+			</Box>
+		</Grid>
+	);
+};

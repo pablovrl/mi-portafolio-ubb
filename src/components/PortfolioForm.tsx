@@ -13,6 +13,7 @@ import { UserPortfolio } from '../types';
 import * as yup from 'yup';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
+import { useState } from 'react';
 
 const validationSchema = yup.object({
 	about: yup.string().required('Este campo es requerido').max(800, 'El texto no debe superar los 700 caracteres'),
@@ -25,8 +26,8 @@ const validationSchema = yup.object({
 		company: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
 		position: yup.string().required('Este campo es requerido').matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s-]+$/, 'El texto solo puede contener letras, espacios y guiones').max(50, 'El texto no debe superar los 50 caracteres'),
 		description: yup.string().required('Este campo es requerido').max(300, 'El texto no debe superar los 300 caracteres'),
-		startedAt: yup.date().required('Este campo es requerido').max(yup.ref('endedAt'), 'La fecha de inicio debe ser anterior a la fecha de fin'),
-		endedAt: yup.date().required('Este campo es requerido').min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio'),
+		startedAt: yup.date().required('Este campo es requerido'),
+		endedAt: yup.date().nullable().min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio')
 	})),
 	projects: yup.array().of(yup.object().shape({
 		name: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
@@ -49,16 +50,25 @@ const PortfolioForm = ({ user, technologies }: Props) => {
 	const router = useRouter();
 	const userTechnologies = user.technologies.map((t) => t.technology);
 	const userExperiences = user.experiences.map((e) => {
-		const startDate = new Date(e.startedAt);
-		const endDate = new Date(e.endedAt);
+		const startDate = new Date(e.startedAt.split('T')[0].replace('-', '/'));
+		let endDate = null;
+		if(e.endedAt !== null) endDate = new Date(e.endedAt.split('T')[0].replace('-', '/'));
 		const formattedStartDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1 < 10 ? '0' : ''}${startDate.getMonth() + 1}-${startDate.getDate() < 10 ? '0' : ''}${startDate.getDate()}`;
-		const formattedEndDate = `${endDate.getFullYear()}-${endDate.getMonth() + 1 < 10 ? '0' : ''}${endDate.getMonth() + 1}-${endDate.getDate() < 10 ? '0' : ''}${endDate.getDate()}`;
+		let formattedEndDate = null;
+		if(endDate !== null) formattedEndDate = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
 		return {
 			...e,
 			startedAt: formattedStartDate,
 			endedAt: formattedEndDate,
 		};
 	});
+
+	const [checked, setChecked] = useState<boolean[]>(userExperiences.map((el) => {
+		if (el.endedAt === null) {
+			return true;
+		}
+		return false;
+	}));
 
 	return (
 		<Layout>
@@ -80,7 +90,7 @@ const PortfolioForm = ({ user, technologies }: Props) => {
 						<UserImage user={user} />
 						<PersonalInfo />
 						<Technologies technologies={technologies} />
-						<Experience />
+						<Experience checked={checked} setChecked={setChecked} />
 						<Projects />
 						<Contact />
 						<Button type='submit' fullWidth variant='contained' sx={{ marginTop: 2 }}>Guardar cambios</Button>
