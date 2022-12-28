@@ -45,6 +45,13 @@ const Navbar = () => {
 			</Box>
 			<Divider />
 			<List>
+				{query.data.data.role === 'ADMIN' && (
+					<Link href='/admin'>
+						<ListItemButton sx={{ textAlign: 'center' }} onClick={handleDrawerToggle}>
+							<ListItemText primary={'Administración'} />
+						</ListItemButton>
+					</Link>
+				)}
 				{navLinks.map(link => (
 					<Link href={link.href} key={link.text}>
 						<ListItemButton disabled={link.disabled} sx={{ textAlign: 'center' }} onClick={handleDrawerToggle}>
