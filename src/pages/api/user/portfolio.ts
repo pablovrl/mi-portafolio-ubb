@@ -33,12 +33,16 @@ apiRoute.delete(async (req: NextApiRequest & { files: Express.Multer.File[] }, r
 		return res.status(401).json({ error: 'Unauthorized' });
 	}
 
-	await prisma.experience.deleteMany({ where: { user: { email: session.user.email } } });
-	await prisma.technologiesOnUsers.deleteMany({ where: { user: { email: session.user.email } } });
-	await prisma.contact.deleteMany({ where: { user: { email: session.user.email } } });
-	await prisma.project.deleteMany({ where: { user: { email: session.user.email } } });
+	const email = req.query.email as string || session.user.email;
+
+	console.log(email);
+
+	await prisma.experience.deleteMany({ where: { user: { email } } });
+	await prisma.technologiesOnUsers.deleteMany({ where: { user: { email } } });
+	await prisma.contact.deleteMany({ where: { user: { email } } });
+	await prisma.project.deleteMany({ where: { user: { email } } });
 	await prisma.user.update({
-		where: { email: session.user.email }, data: {
+		where: { email }, data: {
 			portfolio: false,
 			about: ''
 		}
@@ -64,8 +68,8 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 	const experience = JSON.parse(req.body.experience).map((el: Partial<Experience>) => {
 		delete el.id;
 		delete el.userId;
-		if(el.endedAt) el.endedAt = new Date(el.endedAt);
-		if(el.startedAt) el.startedAt = new Date(el.startedAt);
+		if (el.endedAt) el.endedAt = new Date(el.endedAt);
+		if (el.startedAt) el.startedAt = new Date(el.startedAt);
 		return el;
 	});
 
