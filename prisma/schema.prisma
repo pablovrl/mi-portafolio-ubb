@@ -10,19 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin {
-  id Int @id @default(autoincrement())
-  email String @unique
-  password String
-}
-
 model User {
   id Int @id @default(autoincrement())
-  name String
-  lastName String
+  name String?
+  lastName String?
   email String @unique
   password String
-  career Career
+  career Career?
   image String?
   about String? @db.Text
   portfolio Boolean @default(false)
@@ -54,6 +48,7 @@ model Project {
   file String
   technology String
   image String?
+  role Role @default(USER)
   deploy String? @db.Text
 }
 
@@ -84,4 +79,9 @@ model TechnologiesOnUsers {
 enum Career {
   IECI
   ICINF
+}
+
+enum Role {
+  ADMIN
+  USER
 }
