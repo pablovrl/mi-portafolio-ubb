@@ -45,23 +45,26 @@ const Navbar = () => {
 			</Box>
 			<Divider />
 			<List>
-				{query.data.data.role === 'ADMIN' && (
+				{query.data.data.role === 'ADMIN' ? (
 					<Link href='/admin'>
 						<ListItemButton sx={{ textAlign: 'center' }} onClick={handleDrawerToggle}>
 							<ListItemText primary={'Administración'} />
 						</ListItemButton>
 					</Link>
-				)}
-				{navLinks.map(link => (
-					<Link href={link.href} key={link.text}>
-						<ListItemButton disabled={link.disabled} sx={{ textAlign: 'center' }} onClick={handleDrawerToggle}>
-							<ListItemText primary={link.text} />
+				): (
+					<Box>
+						{navLinks.map(link => (
+							<Link href={link.href} key={link.text}>
+								<ListItemButton disabled={link.disabled} sx={{ textAlign: 'center' }} onClick={handleDrawerToggle}>
+									<ListItemText primary={link.text} />
+								</ListItemButton>
+							</Link>
+						))}
+						<ListItemButton disabled={!query.data.data.portfolio} onClick={handleDialogOpen} sx={{ textAlign: 'center' }}>
+							<ListItemText primary={'Borrar portafolio'} />
 						</ListItemButton>
-					</Link>
-				))}
-				<ListItemButton disabled={!query.data.data.portfolio} onClick={handleDialogOpen} sx={{ textAlign: 'center' }}>
-					<ListItemText primary={'Borrar portafolio'} />
-				</ListItemButton>
+					</Box>
+				)}
 				<ListItemButton onClick={handleSignOut} sx={{ textAlign: 'center' }}>
 					<ListItemText primary={'Cerrar sesión'} />
 				</ListItemButton>
