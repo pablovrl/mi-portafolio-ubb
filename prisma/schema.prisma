@@ -21,6 +21,7 @@ model User {
   about String? @db.Text
   portfolio Boolean @default(false)
   resetPasswordToken String?
+  role Role @default(USER)
   technologies TechnologiesOnUsers[]
   experiences Experience[]
   projects Project[]
