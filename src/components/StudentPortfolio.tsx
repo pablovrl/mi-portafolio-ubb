@@ -163,7 +163,7 @@ const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 											company={exp.company}
 											position={exp.position}
 											startedAt={exp.startedAt}
-											endedAt={exp.endedAt}
+											endedAt={exp.endedAt || null}
 											description={exp.description}
 										/>
 									</Grid>

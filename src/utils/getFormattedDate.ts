@@ -14,7 +14,7 @@ const months = [
 	'Dic',
 ];
 
-export function getFormattedDate(date: Date): string {
+export function getFormattedDate(date: string): string {
 	const splittedDate = date.toString().split('-');
 	return `${months[parseInt(splittedDate[1]) - 1]} ${splittedDate[0]}`;
 }

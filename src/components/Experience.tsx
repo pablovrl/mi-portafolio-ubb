@@ -4,8 +4,8 @@ import { getFormattedDate } from '../utils/getFormattedDate';
 interface ExperienceProps {
 	company: string;
 	position: string;
-	startedAt: Date;
-	endedAt: Date;
+	startedAt: string;
+	endedAt: string | null;
 	description: string;
 }
 
