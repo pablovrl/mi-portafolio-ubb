@@ -33,6 +33,10 @@ export const deletePortfolio = async () => {
 	return await axios.delete('/api/user/portfolio');
 };
 
+export const deletePortfolioAsAdmin = async (email: string) => {
+	return await axios.delete('/api/user/portfolio/?email=' + email);
+};
+
 export const updateUser = async (data: Partial<User>) => {
 	return await axios.put('/api/user/me', data);
 };
