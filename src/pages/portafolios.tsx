@@ -12,7 +12,7 @@ import { useState } from 'react';
 export const getServerSideProps = requireAuth(async (ctx) => {
 	const session = await getUserSessionWithContext(ctx);
 	const user = await prisma.user.findUnique({ where: { email: session?.user?.email as string } });
-	const users = await prisma.user.findMany({ where: { portfolio: true } });
+	const users = await prisma.user.findMany({ where: { portfolio: true, role: 'USER' } });
 	return { props: { user, users } };
 });
 
@@ -25,7 +25,7 @@ const UserCard = ({ user }: { user: User }) => (
 		<Box bgcolor={'#FAFAFA'} p={5} display='flex' gap={2} flexDirection='column' sx={{ transition: 'transform .2s', '&:hover': { transform: 'scale(1.05)' }, cursor: 'pointer' }}>
 			<Box display='flex' gap={2} alignItems='center'>
 				<Box>
-					<Typography variant={'h6'} fontWeight={'bold'}>{user.name.toUpperCase()} {user.lastName.toUpperCase()}</Typography>
+					<Typography variant={'h6'} fontWeight={'bold'}>{user.name?.toUpperCase()} {user.lastName?.toUpperCase()}</Typography>
 					<Typography variant='body2' fontWeight={'bold'} color='grey'>
 						{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
 					</Typography>
@@ -39,9 +39,9 @@ const UserCard = ({ user }: { user: User }) => (
 const Home: NextPage<Props> = ({ user, users }) => {
 	const [search, setSearch] = useState('');
 	const filteredUsers = users.filter((user) =>
-		user.name.toLowerCase().includes(search.toLowerCase()) ||
-		user.lastName.toLowerCase().includes(search.toLowerCase()) ||
-		user.career.toLowerCase().includes(search.toLowerCase())
+		user.name?.toLowerCase().includes(search.toLowerCase()) ||
+		user.lastName?.toLowerCase().includes(search.toLowerCase()) ||
+		user.career?.toLowerCase().includes(search.toLowerCase())
 	);
 
 	return (
