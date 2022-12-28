@@ -35,8 +35,6 @@ apiRoute.delete(async (req: NextApiRequest & { files: Express.Multer.File[] }, r
 
 	const email = req.query.email as string || session.user.email;
 
-	console.log(email);
-
 	await prisma.experience.deleteMany({ where: { user: { email } } });
 	await prisma.technologiesOnUsers.deleteMany({ where: { user: { email } } });
 	await prisma.contact.deleteMany({ where: { user: { email } } });
