@@ -3,6 +3,7 @@ import Title from './common/Title';
 import { Technology } from '@prisma/client';
 import { Autocomplete, Box, TextField, Typography } from '@mui/material';
 import { useFormikContext } from 'formik';
+import { getImage } from '../../utils/getImage';
 
 interface Props {
 	technologies: Technology[];
@@ -31,7 +32,14 @@ const Technologies = ({ technologies }: Props) => {
 				id="multiple-limit-tags"
 				renderOption={(props, option) => (
 					<Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-						<i className={option.icon} />
+						{option.icon.includes('uploads/images') ? (
+							<img
+								src={getImage(option.icon)}
+								style={{ width: '30px', height: '30px' }}
+							/>
+						): (
+							<i style={{ fontSize: '30px' }} className={option.icon} />
+						)}
 						<Typography ml={2}>
 							{option.name}
 						</Typography>

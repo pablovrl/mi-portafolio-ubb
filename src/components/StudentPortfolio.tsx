@@ -10,9 +10,10 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import DeletePortfolioDialog from './DeletePortfolioDialog';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import ShareIcon from '@mui/icons-material/Share'; 
+import ShareIcon from '@mui/icons-material/Share';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { getImage } from '../utils/getImage';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
 	<Typography fontWeight={'bold'} variant='h5' fontFamily={'monospace'}>{children}</Typography>
@@ -44,7 +45,7 @@ const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 					<DeletePortfolioDialog onClose={handleDialogClose} open={dialogOpen} />
 					<SpeedDial
 						ariaLabel='tools'
-						sx={{position: 'fixed', bottom: {xs: 20, md: 50}, right: {xs: 20, md: 50}, zIndex: '1'}}
+						sx={{ position: 'fixed', bottom: { xs: 20, md: 50 }, right: { xs: 20, md: 50 }, zIndex: '1' }}
 						icon={<SpeedDialIcon />}
 					>
 						<SpeedDialAction
@@ -128,7 +129,15 @@ const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 										alignItems='center'
 										overflow={'hidden'}
 									>
-										<i style={{ fontSize: '40px' }} className={technology.technology.icon} />
+										{technology.technology.icon.includes('uploads/images') ? (
+											<img
+												src={getImage(technology.technology.icon)}
+												alt={technology.technology.name}
+												style={{ width: '50px', height: '50px' }}
+											/>
+										): (
+											<i style={{ fontSize: '50px' }} className={technology.technology.icon} />
+										)}
 										<Typography>{technology.technology.name.toUpperCase()}</Typography>
 									</Box>
 								</Grid>
