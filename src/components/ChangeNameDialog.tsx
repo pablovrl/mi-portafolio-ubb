@@ -54,7 +54,6 @@ const ChangeNameDialog = ({ open, onClose, name, lastName, updateUserState }: Di
 										name='name'
 										error={props.touched.name && Boolean(props.errors.name)}
 										helperText={props.touched.name && props.errors.name}
-
 									/>
 								</FormControl>
 								<FormControl fullWidth>

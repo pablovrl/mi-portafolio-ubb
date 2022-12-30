@@ -35,7 +35,6 @@ const UserImage = ({ user }: UserImageProps) => {
 	};
 
 	return (
-
 		<>
 			<Title text='Actualiza tu imagen' />
 			<Grid container spacing={2}>
