@@ -3,7 +3,7 @@ import { Technology } from '@prisma/client';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from 'react';
 import { Formik } from 'formik';
-import { createTechnology } from '../api/technology';
+import { createTechnology, deleteTechnology } from '../api/technology';
 import * as yup from 'yup';
 import { toast } from 'react-hot-toast';
 
@@ -82,7 +82,6 @@ const CreateTechnology = ({ open, data, setData, handleClose }: CreateTechnology
 	);
 };
 
-
 const ROWS = 5;
 
 const Technologies = ({ technologies }: Props) => {
@@ -99,6 +98,16 @@ const Technologies = ({ technologies }: Props) => {
 	const currentPageData = filteredData.slice((page - 1) * ROWS, page * ROWS);
 	const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
 		setPage(value);
+	};
+
+	const handleDelete = async (id: number) => {
+		try {
+			await deleteTechnology(id);
+			toast.success('Tecnología eliminada');
+			setData(data.filter((technology) => technology.id !== id));
+		} catch (error) {
+			toast.error('Error al eliminar la tecnología');
+		}
 	};
 
 	return (
@@ -130,7 +139,7 @@ const Technologies = ({ technologies }: Props) => {
 									<TableCell><i className={technology.icon} /></TableCell>
 								)}
 								<TableCell>
-									<IconButton color='error'>
+									<IconButton onClick={() => handleDelete(technology.id)} color='error'>
 										<DeleteForeverIcon />
 									</IconButton>
 								</TableCell>
