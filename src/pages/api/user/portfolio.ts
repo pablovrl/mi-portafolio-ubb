@@ -5,6 +5,7 @@ import { prisma } from '../../../utils/db';
 import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import { Contact, Experience, Project, Technology } from '@prisma/client';
+import { unlinkSync } from 'fs';
 
 const upload = multer({
 	storage: multer.diskStorage({
@@ -34,6 +35,17 @@ apiRoute.delete(async (req: NextApiRequest & { files: Express.Multer.File[] }, r
 	}
 
 	const email = req.query.email as string || session.user.email;
+	const projects = await prisma.project.findMany({
+		where: {
+			user: { email }
+		}
+	});
+
+	projects.forEach(async (project) => {
+		if (project.file) {
+			unlinkSync(`public${project.file}`);
+		}
+	});
 
 	await prisma.experience.deleteMany({ where: { user: { email } } });
 	await prisma.technologiesOnUsers.deleteMany({ where: { user: { email } } });
