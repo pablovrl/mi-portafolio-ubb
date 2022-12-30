@@ -1,4 +1,4 @@
-import { Box, Button, FormHelperText, IconButton, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { Box, Button, Dialog, FormHelperText, IconButton, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import { Technology } from '@prisma/client';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from 'react';
@@ -16,12 +16,80 @@ const validationSchema = yup.object({
 	icon: yup.string().required('El ícono es requerido'),
 });
 
+interface CreateTechnologyProps {
+	open: boolean;
+	data: Technology[];
+	setData: (data: Technology[]) => void;
+	handleClose: () => void;
+}
+
+const CreateTechnology = ({ open, data, setData, handleClose }: CreateTechnologyProps) => {
+	return (
+		<Dialog open={open} onClose={handleClose}>
+			<Box p={4}>
+				<Formik
+					validationSchema={validationSchema}
+					initialValues={{ name: '', icon: undefined }}
+					onSubmit={async (values) => {
+						try {
+							const res = await createTechnology(values);
+							toast.success('Tecnología creada');
+							setData([...data, res.data]);
+							handleClose();
+						} catch (error) {
+							toast.error('Error al crear la tecnología');
+						}
+					}}
+				>
+					{props => (
+						<Box display={'flex'} flexDirection='column' gap={1} component={'form'} onSubmit={props.handleSubmit}>
+							<TextField
+								name='name'
+								label='Nombre de la tecnología'
+								fullWidth
+								onChange={props.handleChange}
+								value={props.values.name}
+								error={props.touched.name && Boolean(props.errors.name)}
+								helperText={props.touched.name && props.errors.name}
+							/>
+							{props.values.icon ? (
+								<Button onClick={() => props.setFieldValue('icon', undefined)}>Eliminar imagen</Button>
+							) : (
+								<Box>
+									<Button fullWidth variant='outlined' component='label'>
+										Agregar imagen
+										<input
+											accept='.jpg, .png, jpeg, .webp'
+											type='file'
+											hidden
+											name='icon'
+											onChange={(e) => {
+												if (e.target.files) {
+													props.setFieldValue('icon', e.target.files[0]);
+												}
+											}}
+										/>
+									</Button>
+									<FormHelperText error>{props.errors.icon}</FormHelperText>
+								</Box>
+							)}
+							<Button type='submit' variant='contained' fullWidth>Agregar</Button>
+						</Box>
+					)}
+				</Formik>
+			</Box>
+		</Dialog>
+	);
+};
+
+
 const ROWS = 5;
 
 const Technologies = ({ technologies }: Props) => {
 	const [filter, setFilter] = useState('');
 	const [page, setPage] = useState(1);
 	const [data, setData] = useState(technologies);
+	const [open, setOpen] = useState(false);
 
 	const filteredData = data.filter((technology) =>
 		technology.name.toLowerCase().includes(filter.toLowerCase())
@@ -35,6 +103,7 @@ const Technologies = ({ technologies }: Props) => {
 
 	return (
 		<Box>
+			<CreateTechnology open={open} data={data} setData={setData} handleClose={() => setOpen(false)} />
 			<Box mb={2}>
 				<TextField label="Busca tecnologías por su nombre" fullWidth onChange={(e) => { setFilter(e.target.value); setPage(1); }} />
 			</Box>
@@ -72,57 +141,7 @@ const Technologies = ({ technologies }: Props) => {
 			</TableContainer>
 			<Box display='flex' my={2} alignItems='center' justifyContent={'center'} flexDirection='column' gap={2}>
 				<Pagination size='small' page={page} onChange={handleChange} count={totalPages} />
-				<Box>
-					<Formik
-						validationSchema={validationSchema}
-						initialValues={{ name: '', icon: undefined }}
-						onSubmit={async (values) => {
-							try {
-								const res = await createTechnology(values);
-								toast.success('Tecnología creada');
-								setData([...data, res.data]);
-							} catch (error) {
-								toast.error('Error al crear la tecnología');
-							}
-						}}
-					>
-						{props => (
-							<Box component={'form'} onSubmit={props.handleSubmit}>
-								<TextField
-									name='name'
-									label='Nombre de la tecnología'
-									fullWidth
-									onChange={props.handleChange}
-									value={props.values.name}
-									error={props.touched.name && Boolean(props.errors.name)}
-									helperText={props.touched.name && props.errors.name}
-								/>
-								{props.values.icon ? (
-									<Button onClick={() => props.setFieldValue('icon', undefined)}>Eliminar imagen</Button>
-								) : (
-									<Box>
-										<Button fullWidth variant='outlined' component='label'>
-											Agregar imagen
-											<input
-												accept='.jpg, .png, jpeg, .webp'
-												type='file'
-												hidden
-												name='icon'
-												onChange={(e) => {
-													if (e.target.files) {
-														props.setFieldValue('icon', e.target.files[0]);
-													}
-												}}
-											/>
-										</Button>
-										<FormHelperText error>{props.errors.icon}</FormHelperText>
-									</Box>
-								)}
-								<Button type='submit' variant='outlined' fullWidth>Agregar nueva tecnología</Button>
-							</Box>
-						)}
-					</Formik>
-				</Box>
+				<Button variant='outlined' onClick={() => setOpen(true)}>Agregar nueva tecnología</Button>
 			</Box>
 		</Box >
 	);
