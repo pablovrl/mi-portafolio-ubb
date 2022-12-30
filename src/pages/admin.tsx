@@ -84,7 +84,7 @@ const Admin: NextPage<Props> = ({ users, technologies }) => {
 
 	return (
 		<Layout>
-			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+			<Box sx={{ borderBottom: 1, borderColor: 'divider', mt: {xs: '30px', md: '10px'} }}>
 				<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
 					<Tab label="Portafolios de alumnos" {...a11yProps(0)} />
 					<Tab label="Tecnologías" {...a11yProps(1)} />
