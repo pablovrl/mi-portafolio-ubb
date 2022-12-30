@@ -11,7 +11,7 @@ import { prisma } from '../utils/db';
 import { Technology, User } from '@prisma/client';
 import { useState } from 'react';
 import UsersTable from '../components/UsersTable';
-import Technologies from '../components/Technologies';
+import Technologies from '../components/TechnologiesTable';
 
 export const getServerSideProps = requireAuth(async (ctx) => {
 	const session = await getUserSessionWithContext(ctx);
