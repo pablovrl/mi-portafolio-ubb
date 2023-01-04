@@ -55,14 +55,14 @@ const Perfil: NextPage<PageProps> = ({ stringifiedUser }) => {
 
 	return (
 		<Layout>
-			<ChangeCareerDialog updateUserState={updateUser} career={user.career} open={openCareerDialog} onClose={() => setOpenCareerDialog(false)} />
-			<ChangeNameDialog updateUserState={updateUser} name={user.name} lastName={user.lastName} open={openNameDialog} onClose={() => setOpenNameDialog(false)} />
+			<ChangeCareerDialog updateUserState={updateUser} career={user.career || ''} open={openCareerDialog} onClose={() => setOpenCareerDialog(false)} />
+			<ChangeNameDialog updateUserState={updateUser} name={user.name || ''} lastName={user.lastName || ''} open={openNameDialog} onClose={() => setOpenNameDialog(false)} />
 			<ChangePasswordDialog open={openPasswordDialog} onClose={() => setOpenPasswordDialog(false)} />
 			<Typography variant='h5' my={2}>Actualiza tus datos personales</Typography>
 			<List>
 				<ListItem label='Nombre' value={`${user.name} ${user.lastName}`} onClick={() => setOpenNameDialog(true)} />
 				<ListItem label='Contraseña' value='************' onClick={() => setOpenPasswordDialog(true)} />
-				<ListItem label='Carrera' value={user.career} onClick={() => setOpenCareerDialog(true)} />
+				<ListItem label='Carrera' value={user.career || ''} onClick={() => setOpenCareerDialog(true)} />
 			</List>
 		</Layout>
 	);
