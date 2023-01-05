@@ -55,7 +55,7 @@ const PortfolioForm = ({ user, technologies }: Props) => {
 		if(e.endedAt !== null) endDate = new Date(e.endedAt.split('T')[0].replace('-', '/'));
 		const formattedStartDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1 < 10 ? '0' : ''}${startDate.getMonth() + 1}-${startDate.getDate() < 10 ? '0' : ''}${startDate.getDate()}`;
 		let formattedEndDate = null;
-		if(endDate !== null) formattedEndDate = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
+		if(endDate !== null) formattedEndDate = `${endDate.getFullYear()}-${endDate.getMonth() + 1 < 10 ? '0' : ''}${endDate.getMonth() + 1}-${endDate.getDate() < 10 ? '0' : ''}${endDate.getDate()}`;
 		return {
 			...e,
 			startedAt: formattedStartDate,
