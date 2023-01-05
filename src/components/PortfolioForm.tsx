@@ -76,6 +76,7 @@ const PortfolioForm = ({ user, technologies }: Props) => {
 				validationSchema={validationSchema}
 				initialValues={{
 					...user,
+					about: user.about || '',
 					experiences: userExperiences,
 					technologies: userTechnologies,
 				}}
