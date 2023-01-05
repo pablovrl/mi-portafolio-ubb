@@ -27,6 +27,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	if (session?.user?.email !== user.email && user.portfolio === false)
 		return { notFound: true };
 
+
+	if (session?.user?.email === user.email && user.role === 'ADMIN')
+		return {
+			redirect: { destination: '/admin', permanent: false }
+		};
+
 	const technologies = await prisma.technology.findMany();
 	return { props: { email, stringifiedUser: JSON.stringify(user), technologies } };
 };
