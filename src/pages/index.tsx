@@ -4,8 +4,20 @@ import { Box, Typography, Container, Button, Link as MUILink, Grid } from '@mui/
 import Navbar from '../components/Navbar';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { getUserSessionWithContext } from '../utils/userSession';
 
-export const getServerSideProps = requireAuth(async () => {
+export const getServerSideProps = requireAuth(async (ctx) => {
+	const session = await getUserSessionWithContext(ctx);
+	console.log(session);
+	if(session?.user?.role === 'ADMIN') {
+		return {
+			redirect: {
+				destination: '/admin',
+				permanent: false
+			}
+		};
+	}
+
 	return {
 		props: {}
 	};
