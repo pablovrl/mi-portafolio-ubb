@@ -15,7 +15,5 @@ export const createTechnology = async (data: TechnologyCreateInput) => {
 };
 
 export const deleteTechnology = async (id: number) => {
-	const endpoint = `/api/technology/${id}`;
-	console.log(endpoint);
 	return await axios.delete(`/api/technology/${id}`);
 };

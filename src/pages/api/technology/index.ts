@@ -42,7 +42,6 @@ apiRoute.use(upload.single('image'));
 
 apiRoute.post(async (req: NextApiRequest & { file: Express.Multer.File }, res: NextApiResponse) => {
 	const { name } = req.body;
-	console.log(name, req.file);
 	if (!name) return res.status(400).json({ error: 'Please provide a name' });
 
 	const session = await getUserSession(req, res);
@@ -62,8 +61,6 @@ apiRoute.post(async (req: NextApiRequest & { file: Express.Multer.File }, res: N
 			icon: imageRoute
 		}
 	});
-
-	console.log(technology);
 
 	return res.status(200).json(technology);
 });

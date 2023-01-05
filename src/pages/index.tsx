@@ -8,7 +8,6 @@ import { getUserSessionWithContext } from '../utils/userSession';
 
 export const getServerSideProps = requireAuth(async (ctx) => {
 	const session = await getUserSessionWithContext(ctx);
-	console.log(session);
 	if(session?.user?.role === 'ADMIN') {
 		return {
 			redirect: {
