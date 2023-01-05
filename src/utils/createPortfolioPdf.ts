@@ -110,17 +110,17 @@ export const createPdf = async (user: UserPortfolio) => {
 					}
 				]
 			},
-			user.projects.length > 0 && {
+			user.projects.length > 0 ? {
 				text: 'Proyectos',
 				style: 'subheader',
 				margin: [0, 10]
-			},
+			} : '',
 			...pr,
-			user.experiences.length > 0 && {
+			user.experiences.length > 0 ? {
 				text: 'Experiencia Profesional',
 				style: 'subheader',
 				margin: [0, 5]
-			},
+			} : '',
 			...ex
 		],
 		styles: {
