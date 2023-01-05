@@ -1,19 +1,12 @@
-import { Box, Grid, Typography, Link as MUILink, SpeedDial, SpeedDialIcon, SpeedDialAction } from '@mui/material';
+import { Box, Grid, Typography, Link as MUILink } from '@mui/material';
 import { UserPortfolio } from '../types';
 import Project from './Project';
-import React, { useState } from 'react';
 import Experience from './Experience';
 import ProfileImage from './ProfileImage';
 import Layout from './Layout';
 import { useSession } from 'next-auth/react';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
-import DeletePortfolioDialog from './DeletePortfolioDialog';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import ShareIcon from '@mui/icons-material/Share';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { getImage } from '../utils/getImage';
+import PortfolioSpeedDial from './PortfolioSpeedDial';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
 	<Typography fontWeight={'bold'} variant='h5' fontFamily={'monospace'}>{children}</Typography>
@@ -21,52 +14,9 @@ const Title = ({ children }: { children: React.ReactNode }) => (
 
 const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 	const session = useSession();
-	const router = useRouter();
-	const [dialogOpen, setDialogOpen] = useState(false);
-
-	const handleCopy = () => {
-		toast.success('Enlace copiado en el portapapeles', {
-			duration: 5000,
-		});
-	};
-
-	const handleDialogOpen = () => {
-		setDialogOpen(true);
-	};
-
-	const handleDialogClose = () => {
-		setDialogOpen(false);
-	};
-
 	return (
 		<Layout noNavbar={session.status === 'unauthenticated' || session.status === 'loading' ? true : false}>
-			{session.data?.user?.email === user.email && (
-				<>
-					<DeletePortfolioDialog onClose={handleDialogClose} open={dialogOpen} />
-					<SpeedDial
-						ariaLabel='tools'
-						sx={{ position: 'fixed', bottom: { xs: 20, md: 50 }, right: { xs: 20, md: 50 }, zIndex: '1' }}
-						icon={<SpeedDialIcon />}
-					>
-						<SpeedDialAction
-							tooltipTitle='Eliminar'
-							icon={<DeleteIcon />}
-							onClick={handleDialogOpen}
-						/>
-						<SpeedDialAction
-							tooltipTitle='Editar'
-							icon={<EditIcon />}
-							onClick={() => router.replace('/portafolio/editar')}
-						/>
-						<CopyToClipboard onCopy={handleCopy} text={window.location.href}>
-							<SpeedDialAction
-								tooltipTitle='Compartir'
-								icon={<ShareIcon />}
-							/>
-						</CopyToClipboard>
-					</SpeedDial>
-				</>
-			)}
+			<PortfolioSpeedDial user={user} />
 			<Box mt={4}>
 				<Box display={'flex'} justifyContent='space-between' flexDirection='row' gap={3} alignItems='center'>
 					<Box display='flex' flexDirection={'column'} gap={2}>
@@ -135,7 +85,7 @@ const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 												alt={technology.technology.name}
 												style={{ width: '50px', height: '50px' }}
 											/>
-										): (
+										) : (
 											<i style={{ fontSize: '50px' }} className={technology.technology.icon} />
 										)}
 										<Typography>{technology.technology.name.toUpperCase()}</Typography>
@@ -182,7 +132,7 @@ const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 					)}
 				</Box>
 			</Box>
-		</Layout>
+		</Layout >
 	);
 };
 
