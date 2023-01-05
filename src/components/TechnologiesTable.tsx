@@ -26,7 +26,7 @@ interface CreateTechnologyProps {
 const CreateTechnology = ({ open, data, setData, handleClose }: CreateTechnologyProps) => {
 	return (
 		<Dialog open={open} onClose={handleClose}>
-			<Box p={4}>
+			<Box p={4} width={{xs: 'auto', md: '300px'}}>
 				<Formik
 					validationSchema={validationSchema}
 					initialValues={{ name: '', icon: undefined }}
@@ -136,7 +136,7 @@ const Technologies = ({ technologies }: Props) => {
 										<img src={technology.icon.replace('/public', '')} alt={technology.name} width={30} />
 									</TableCell>
 								) : (
-									<TableCell><i className={technology.icon} /></TableCell>
+									<TableCell><i style={{ fontSize: '30px' }} className={technology.icon} /></TableCell>
 								)}
 								<TableCell>
 									<IconButton onClick={() => handleDelete(technology.id)} color='error'>
