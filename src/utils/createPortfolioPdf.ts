@@ -65,6 +65,7 @@ export const createPdf = async (user: UserPortfolio) => {
 	const tecLength = tec.length;
 
 	const dd = {
+		pageSize: 'letter',
 		content: [
 			{
 				columns: [
