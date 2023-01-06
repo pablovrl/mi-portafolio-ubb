@@ -37,6 +37,7 @@ model Experience {
   description String @db.Text
   startedAt DateTime
   endedAt DateTime?
+  type ExperienceType
 }
 
 model Project {
@@ -48,9 +49,7 @@ model Project {
   description String @db.Text
   file String
   technology String
-  image String?
   role Role @default(USER)
-  deploy String? @db.Text
 }
 
 model Technology {
@@ -73,8 +72,12 @@ model TechnologiesOnUsers {
   userId Int
   technology Technology @relation(fields: [technologyId], references: [id])
   technologyId Int
-
   @@id([userId, technologyId])
+}
+
+enum ExperienceType {
+  WORK
+  UNIVERSITY
 }
 
 enum Career {
