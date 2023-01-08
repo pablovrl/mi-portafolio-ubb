@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import Layout from '../components/Layout';
 import { prisma } from '../utils/db';
 import { Technology, User } from '@prisma/client';
-import { Alert, AlertTitle, Box, Grid, TextField, Typography, Link as MUILink } from '@mui/material';
+import { Alert, AlertTitle, Box, Grid, TextField, Typography, Link as MUILink, Pagination } from '@mui/material';
 import Link from 'next/link';
 import ProfileImage from '../components/ProfileImage';
 import { getUserSessionWithContext } from '../utils/userSession';
@@ -58,8 +58,10 @@ const UserCard = ({ user }: { user: User }) => (
 );
 
 const ListUsers = ({ users }: { users: UserWithTechnologies[] }) => {
-	console.log(users);
 	const [search, setSearch] = useState('');
+	const [page, setPage] = useState(1);
+	const ROWS = 4;
+
 	const filteredUsers = users.filter((user) =>
 		user.name?.toLowerCase().includes(search.toLowerCase()) ||
 		user.lastName?.toLowerCase().includes(search.toLowerCase()) ||
@@ -67,15 +69,22 @@ const ListUsers = ({ users }: { users: UserWithTechnologies[] }) => {
 		user.technologies.some((tech) => tech.technology.name.toLowerCase().includes(search.toLowerCase()))
 	);
 
+	const totalPages = Math.ceil(filteredUsers.length / ROWS);
+	const currentPageData = filteredUsers.slice((page - 1) * ROWS, page * ROWS);
+
+	const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+		setPage(value);
+	};
+
 	return (
-		<>
+		<Box>
 			<Box my={2}>
 				<TextField
 					label='Buscar portafolios de estudiantes'
 					placeholder='Puedes buscar por nombre, apellido, carrera (IECI, ICINF) o tecnología (typescript, java, etc...).'
 					value={search}
 					fullWidth
-					onChange={(e) => setSearch(e.target.value)}
+					onChange={(e) => { setSearch(e.target.value); setPage(1); }}
 				/>
 			</Box>
 			{filteredUsers.length === 0 && (
@@ -84,13 +93,16 @@ const ListUsers = ({ users }: { users: UserWithTechnologies[] }) => {
 				</Alert>
 			)}
 			<Grid container spacing={2} my={2}>
-				{filteredUsers.map((user) => (
+				{currentPageData.map((user) => (
 					<Grid key={user.id} item xs={12} md={6}>
 						<UserCard user={user} />
 					</Grid>
 				))}
 			</Grid>
-		</>
+			<Box display='flex' my={2} alignItems='center' justifyContent={'center'} flexDirection='column' gap={2}>
+				<Pagination page={page} onChange={handlePageChange} count={totalPages} />
+			</Box>
+		</Box>
 	);
 };
 

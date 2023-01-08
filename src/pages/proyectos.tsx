@@ -3,7 +3,7 @@ import { requireAuth } from '../utils/requireAuth';
 import Layout from '../components/Layout';
 import { prisma } from '../utils/db';
 import { Project, User } from '@prisma/client';
-import { Alert, AlertTitle, Box, Button, Grid, Link as MUILink, TextField, Typography } from '@mui/material';
+import { Alert, AlertTitle, Box, Button, Grid, Link as MUILink, Pagination, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -13,11 +13,11 @@ export const getServerSideProps = requireAuth(async () => {
 });
 
 interface ProjectWithUser extends Project {
-  user: User;
+	user: User;
 }
 
 interface Props {
-  projects: ProjectWithUser[];
+	projects: ProjectWithUser[];
 }
 
 const ProjectCard = ({ project }: { project: ProjectWithUser }) => (
@@ -39,6 +39,10 @@ const ProjectCard = ({ project }: { project: ProjectWithUser }) => (
 
 const Proyectos: NextPage<Props> = ({ projects }) => {
 	const [search, setSearch] = useState('');
+	const [page, setPage] = useState(1);
+
+	const ROWS = 4;
+
 	const filteredProjects = projects.filter((project) => {
 		const name = project.name.toLowerCase();
 		const technology = project.technology.toLowerCase();
@@ -47,6 +51,13 @@ const Proyectos: NextPage<Props> = ({ projects }) => {
 		return name.includes(searchLower) || technology.includes(searchLower) || course.includes(searchLower);
 	});
 
+	const totalPages = Math.ceil(filteredProjects.length / ROWS);
+	const currentPageData = filteredProjects.slice((page - 1) * ROWS, page * ROWS);
+
+	const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+		setPage(value);
+	};
+
 	return (
 		<Layout>
 			<Box my={2}>
@@ -54,7 +65,7 @@ const Proyectos: NextPage<Props> = ({ projects }) => {
 					label='Busca proyectos de tus compañeros por nombre, tecnología o curso'
 					value={search}
 					fullWidth
-					onChange={(e) => setSearch(e.target.value)}
+					onChange={(e) => { setSearch(e.target.value); setPage(1); }}
 				/>
 			</Box>
 			{filteredProjects.length === 0 && (
@@ -63,12 +74,15 @@ const Proyectos: NextPage<Props> = ({ projects }) => {
 				</Alert>
 			)}
 			<Grid container spacing={2} my={2}>
-				{filteredProjects.map((project) => (
+				{currentPageData.map((project) => (
 					<Grid key={project.id} item xs={12} md={6}>
 						<ProjectCard project={project} />
 					</Grid>
 				))}
 			</Grid>
+			<Box display='flex' my={2} alignItems='center' justifyContent={'center'} flexDirection='column' gap={2}>
+				<Pagination page={page} onChange={handlePageChange} count={totalPages} />
+			</Box>
 		</Layout>
 	);
 };
