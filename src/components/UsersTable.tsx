@@ -13,9 +13,8 @@ interface Props {
 const UsersTable = ({ users }: Props) => {
 	const [filter, setFilter] = useState('');
 	const [page, setPage] = useState(1);
-	const [data, setData] = useState(users);
 
-	const filteredData = data.filter((user) =>
+	const filteredData = users.filter((user) =>
 		user.name?.toLowerCase().includes(filter.toLowerCase()) ||
 		user.lastName?.toLowerCase().includes(filter.toLowerCase()) ||
 		user.email?.toLowerCase().includes(filter.toLowerCase())
