@@ -78,7 +78,6 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 	const experience = JSON.parse(req.body.experience).map((el: Partial<Experience>) => {
 		delete el.id;
 		delete el.userId;
-		el.type = 'UNIVERSITY';
 		if (el.endedAt) el.endedAt = new Date(el.endedAt);
 		if (el.startedAt) el.startedAt = new Date(el.startedAt);
 		return el;
