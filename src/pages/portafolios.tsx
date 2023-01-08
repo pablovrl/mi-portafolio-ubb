@@ -52,7 +52,7 @@ const ListUsers = ({ users }: { users: User[] }) => {
 		<>
 			<Box my={2}>
 				<TextField
-					label='Busca portafolios de tus compañeros por nombre, apellido o carrera (IECI o ICINF)'
+					label='Busca portafolios por nombre, apellido o carrera (IECI o ICINF)'
 					value={search}
 					fullWidth
 					onChange={(e) => setSearch(e.target.value)}
@@ -78,7 +78,6 @@ const Home: NextPage<Props> = ({ user, users }) => {
 
 	if(!user) return (
 		<Layout noNavbar>
-			<h1>no session</h1>
 			<ListUsers users={users} />
 		</Layout>
 	);
