@@ -49,7 +49,6 @@ model Project {
   description String @db.Text
   file String
   technology String
-  role Role @default(USER)
 }
 
 model Technology {
