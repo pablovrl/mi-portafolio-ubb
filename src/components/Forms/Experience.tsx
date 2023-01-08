@@ -1,4 +1,4 @@
-import { Box, Button, FormControlLabel, Checkbox, Grid, TextField } from '@mui/material';
+import { Box, Button, FormControlLabel, Checkbox, Grid, TextField, FormControl, FormLabel, RadioGroup, Radio } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Field, FieldArray, FieldArrayRenderProps, FieldProps, useFormikContext } from 'formik';
@@ -18,7 +18,8 @@ interface Props {
 	checked: boolean[];
 	setChecked: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
-const Experience = ({checked, setChecked}: Props) => {
+
+const Experience = ({ checked, setChecked }: Props) => {
 	const formik = useFormikContext<UserPortfolio>();
 	const today = todayDate();
 
@@ -35,7 +36,7 @@ const Experience = ({checked, setChecked}: Props) => {
 	};
 
 	const createExperience = (arrayHelpers: FieldArrayRenderProps) => {
-		arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '' });
+		arrayHelpers.push({ company: '', position: '', startedAt: today, endedAt: today, description: '', type: 'UNIVERSITY' });
 		checked.push(false);
 	};
 
@@ -71,7 +72,25 @@ const Experience = ({checked, setChecked}: Props) => {
 									{formik.values.experiences.map((experience, index) => (
 										<Layout key={index}>
 											<Header deleteChecked={deleteChecked} title='experiencia' index={index + 1} handleDelete={arrayHelpers.handleRemove(index)} />
-											<Grid item xs={12}>
+											<Grid item xs={6}>
+												<FormControl >
+													<FormLabel id="demo-radio-buttons-group-label">Tipo</FormLabel>
+													<RadioGroup
+														aria-labelledby="demo-radio-buttons-group-label"
+														name="radio-buttons-group"
+														defaultValue={experience.type}
+														onChange={(e) => {
+															formik.setFieldValue(`experiences.${index}.type`, e.target.value);
+															formik.setFieldValue(`experiences.${index}.company`, '');
+															formik.setFieldValue(`experiences.${index}.position`, '');
+														}}
+													>
+														<FormControlLabel value="UNIVERSITY" control={<Radio />} label="Universidad" />
+														<FormControlLabel value="WORK" control={<Radio />} label="Externo" />
+													</RadioGroup>
+												</FormControl>
+											</Grid>
+											<Grid item xs={6}>
 												<FormControlLabel control={<Checkbox checked={checked[index]} onChange={() => handleCheckChange(index)} />} label="Actualmente tengo este cargo" />
 											</Grid>
 											<Field
@@ -84,7 +103,7 @@ const Experience = ({checked, setChecked}: Props) => {
 														<TextField
 															{...field}
 															fullWidth
-															label='Cargo *'
+															label={experience.type === 'WORK' ? 'Cargo *' : 'Nombre del proyecto *'}
 															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].position && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? true : false}
 															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].position && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? (formik.errors.experiences[index] as ExperienceErrors).position : null}
 														/>
@@ -101,7 +120,7 @@ const Experience = ({checked, setChecked}: Props) => {
 														<TextField
 															{...field}
 															fullWidth
-															label='Empresa *'
+															label={experience.type === 'WORK' ? 'Empresa *' : 'Ramo *'}
 															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].company && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? true : false}
 															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].company && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
 														/>
@@ -129,8 +148,8 @@ const Experience = ({checked, setChecked}: Props) => {
 											</Field>
 											{formik.values.experiences[index].endedAt === null ? (
 												<Grid item xs={6}>
-													<TextField 
-														fullWidth 
+													<TextField
+														fullWidth
 														type={'date'}
 														disabled={true}
 														error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? true : false}
