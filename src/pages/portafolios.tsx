@@ -1,17 +1,27 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import Layout from '../components/Layout';
 import { prisma } from '../utils/db';
-import { User } from '@prisma/client';
+import { Technology, User } from '@prisma/client';
 import { Alert, AlertTitle, Box, Grid, TextField, Typography, Link as MUILink } from '@mui/material';
 import Link from 'next/link';
 import ProfileImage from '../components/ProfileImage';
 import { getUserSessionWithContext } from '../utils/userSession';
 import { useState } from 'react';
+import Logo from '../components/Logo';
 
 export const getServerSideProps: GetServerSideProps = (async (ctx) => {
-	const users = await prisma.user.findMany({ where: { portfolio: true, role: 'USER' } });
+	const users = await prisma.user.findMany({
+		where: {
+			portfolio: true,
+			role: 'USER'
+		},
+		include: {
+			technologies: { include: { technology: true } },
+		}
+	});
+
 	const session = await getUserSessionWithContext(ctx);
-	if(session){
+	if (session) {
 		const user = await prisma.user.findUnique({ where: { email: session?.user?.email as string } });
 		return { props: { user, users } };
 	}
@@ -19,9 +29,16 @@ export const getServerSideProps: GetServerSideProps = (async (ctx) => {
 	return { props: { users } };
 });
 
+interface UserWithTechnologies extends User {
+	technologies: {
+		userId: number;
+		technologyId: number;
+		technology: Technology;
+	}[];
+}
 interface Props {
 	user?: User;
-	users: User[];
+	users: UserWithTechnologies[];
 }
 
 const UserCard = ({ user }: { user: User }) => (
@@ -40,19 +57,22 @@ const UserCard = ({ user }: { user: User }) => (
 	</Link>
 );
 
-const ListUsers = ({ users }: { users: User[] }) => {
+const ListUsers = ({ users }: { users: UserWithTechnologies[] }) => {
+	console.log(users);
 	const [search, setSearch] = useState('');
 	const filteredUsers = users.filter((user) =>
 		user.name?.toLowerCase().includes(search.toLowerCase()) ||
 		user.lastName?.toLowerCase().includes(search.toLowerCase()) ||
-		user.career?.toLowerCase().includes(search.toLowerCase())
+		user.career?.toLowerCase().includes(search.toLowerCase()) ||
+		user.technologies.some((tech) => tech.technology.name.toLowerCase().includes(search.toLowerCase()))
 	);
 
 	return (
 		<>
 			<Box my={2}>
 				<TextField
-					label='Busca portafolios por nombre, apellido o carrera (IECI o ICINF)'
+					label='Buscar portafolios de estudiantes'
+					placeholder='Puedes buscar por nombre, apellido, carrera (IECI, ICINF) o tecnología (typescript, java, etc...).'
 					value={search}
 					fullWidth
 					onChange={(e) => setSearch(e.target.value)}
@@ -76,12 +96,16 @@ const ListUsers = ({ users }: { users: User[] }) => {
 
 const Home: NextPage<Props> = ({ user, users }) => {
 
-	if(!user) return (
+	if (!user) return (
 		<Layout noNavbar>
+			<Box width={'100%'} display='flex' justifyContent={'center'}>
+				<Box mx={20} width={'300px'}>
+					<Logo />
+				</Box>
+			</Box>
 			<ListUsers users={users} />
 		</Layout>
 	);
-	
 
 	return (
 		<Layout>
@@ -90,7 +114,7 @@ const Home: NextPage<Props> = ({ user, users }) => {
 					<AlertTitle>
 						¿Aún no tienes tu portafolio?
 					</AlertTitle>
-					Crea uno haciendo click aquí <Link href={`/portafolio/${user.email}`}><MUILink sx={{cursor: 'pointer'}}>crear portafolio</MUILink></Link>.
+					Crea uno haciendo click aquí <Link href={`/portafolio/${user.email}`}><MUILink sx={{ cursor: 'pointer' }}>crear portafolio</MUILink></Link>.
 				</Alert>
 			)}
 			<ListUsers users={users} />
