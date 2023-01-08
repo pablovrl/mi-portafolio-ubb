@@ -1,10 +1,11 @@
-import { Box, Button, FormControlLabel, Checkbox, Grid, TextField, FormControl, FormLabel, RadioGroup, Radio } from '@mui/material';
+import { Box, Button, FormControlLabel, Checkbox, Grid, TextField, FormControl, FormLabel, RadioGroup, Radio, TextFieldProps, StandardTextFieldProps } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Field, FieldArray, FieldArrayRenderProps, FieldProps, useFormikContext } from 'formik';
 import { todayDate } from '../../utils/todayDate';
 import { UserPortfolio } from '../../types';
 import { Header, Layout } from './Layout';
+import { Experience } from '@prisma/client';
 
 interface ExperienceErrors {
 	company: string;
@@ -19,20 +20,45 @@ interface Props {
 	setChecked: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
+interface DataInputProps extends StandardTextFieldProps {
+	gridSize?: number;
+	index: number;
+}
+
 const Experience = ({ checked, setChecked }: Props) => {
 	const formik = useFormikContext<UserPortfolio>();
 	const today = todayDate();
 
+	const DataInput = ({ name, index, label, gridSize, type, multiline, rows }: DataInputProps) => (
+		<Field
+			name={`experiences.${index}.${name}`}
+		>
+			{({
+				field,
+			}: FieldProps) => (
+				<Grid item xs={gridSize || 6}>
+					<TextField
+						{...field}
+						fullWidth
+						type={type || 'text'}
+						label={label}
+						multiline={multiline}
+						rows={rows}
+						error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? true : false}
+						helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
+					/>
+				</Grid>
+			)}
+		</Field>
+	)
 
 	const handleCheckChange = (index: number) => {
 		const newChecked = [...checked];
 		newChecked[index] = !newChecked[index];
 		setChecked(newChecked);
-		if (!checked[index]) {
+		checked[index] ?
+			formik.setFieldValue(`experiences.${index}.endedAt`, today) :
 			formik.setFieldValue(`experiences.${index}.endedAt`, null);
-		} else {
-			formik.setFieldValue(`experiences.${index}.endedAt`, today);
-		}
 	};
 
 	const createExperience = (arrayHelpers: FieldArrayRenderProps) => {
@@ -93,59 +119,22 @@ const Experience = ({ checked, setChecked }: Props) => {
 											<Grid item xs={6}>
 												<FormControlLabel control={<Checkbox checked={checked[index]} onChange={() => handleCheckChange(index)} />} label="Actualmente tengo este cargo" />
 											</Grid>
-											<Field
-												name={`experiences.${index}.position`}
-											>
-												{({
-													field, // { name, value, onChange, onBlur }
-												}: FieldProps) => (
-													<Grid item xs={6}>
-														<TextField
-															{...field}
-															fullWidth
-															label={experience.type === 'WORK' ? 'Cargo *' : 'Nombre del proyecto *'}
-															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].position && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? true : false}
-															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].position && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).position ? (formik.errors.experiences[index] as ExperienceErrors).position : null}
-														/>
-													</Grid>
-												)}
-											</Field>
-											<Field
-												name={`experiences.${index}.company`}
-											>
-												{({
-													field, // { name, value, onChange, onBlur }
-												}: FieldProps) => (
-													<Grid item xs={6}>
-														<TextField
-															{...field}
-															fullWidth
-															label={experience.type === 'WORK' ? 'Empresa *' : 'Ramo *'}
-															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].company && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? true : false}
-															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].company && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).company ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
-														/>
-													</Grid>
-												)}
-											</Field>
-
-											<Field
-												name={`experiences.${index}.startedAt`}
-											>
-												{({
-													field, // { name, value, onChange, onBlur }
-												}: FieldProps) => (
-													<Grid item xs={6}>
-														<TextField
-															{...field}
-															fullWidth
-															type='date'
-															label='Fecha de inicio *'
-															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].startedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).startedAt ? true : false}
-															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].startedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).startedAt ? (formik.errors.experiences[index] as ExperienceErrors).startedAt : null}
-														/>
-													</Grid>
-												)}
-											</Field>
+											<DataInput
+												index={index}
+												name={'position'}
+												label={experience.type === 'WORK' ? 'Cargo *' : 'Nombre del proyecto *'}
+											/>
+											<DataInput
+												index={index}
+												name={'company'}
+												label={experience.type === 'WORK' ? 'Empresa *' : 'Ramo *'}
+											/>
+											<DataInput
+												index={index}
+												name='startedAt'
+												type='date'
+												label='Fecha de inicio *'
+											/>
 											{formik.values.experiences[index].endedAt === null ? (
 												<Grid item xs={6}>
 													<TextField
@@ -156,44 +145,20 @@ const Experience = ({ checked, setChecked }: Props) => {
 														helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).endedAt : null}
 													/>
 												</Grid>) : (
-												<Field
-													name={`experiences.${index}.endedAt`}
-												>
-													{({
-														field, // { name, value, onChange, onBlur }
-													}: FieldProps) => (
-														<Grid item xs={6}>
-															<TextField
-																{...field}
-																fullWidth
-																type='date'
-																label='Fecha de finalización *'
-																error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? true : false}
-																helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).endedAt : null}
-															/>
-														</Grid>
-													)}
-												</Field>
+													<DataInput
+														index={index}
+														name='endedAt'
+														type='date'
+														label='Fecha de finalización *'
+													/>
 											)}
-											<Field
-												name={`experiences.${index}.description`}
-											>
-												{({
-													field, // { name, value, onChange, onBlur }
-												}: FieldProps) => (
-													<Grid item xs={12}>
-														<TextField
-															{...field}
-															label='Descripción *'
-															fullWidth
-															multiline
-															minRows={3}
-															error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].description && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).description ? true : false}
-															helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].description && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).description ? (formik.errors.experiences[index] as ExperienceErrors).description : null}
-														/>
-													</Grid>
-												)}
-											</Field>
+											<DataInput 
+												index={index}
+												name='description'
+												multiline
+												minRows={3}
+												gridSize={12}
+											/>
 										</Layout>
 									))}
 								</Grid>

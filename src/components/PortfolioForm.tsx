@@ -20,6 +20,10 @@ interface Props {
 	technologies: Technology[];
 }
 
+const formatDate = (date: Date) => {
+	return `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? '0' : ''}${date.getMonth() + 1}-${date.getDate() < 10 ? '0' : ''}${date.getDate()}`;
+}
+
 const PortfolioForm = ({ user, technologies }: Props) => {
 	const router = useRouter();
 	const userTechnologies = user.technologies.map((t) => t.technology);
@@ -27,9 +31,9 @@ const PortfolioForm = ({ user, technologies }: Props) => {
 		const startDate = new Date(e.startedAt.split('T')[0].replace('-', '/'));
 		let endDate = null;
 		if(e.endedAt !== null) endDate = new Date(e.endedAt.split('T')[0].replace('-', '/'));
-		const formattedStartDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1 < 10 ? '0' : ''}${startDate.getMonth() + 1}-${startDate.getDate() < 10 ? '0' : ''}${startDate.getDate()}`;
+		const formattedStartDate = formatDate(startDate);
 		let formattedEndDate = null;
-		if(endDate !== null) formattedEndDate = `${endDate.getFullYear()}-${endDate.getMonth() + 1 < 10 ? '0' : ''}${endDate.getMonth() + 1}-${endDate.getDate() < 10 ? '0' : ''}${endDate.getDate()}`;
+		if(endDate !== null) formattedEndDate = formatDate(endDate);
 		return {
 			...e,
 			startedAt: formattedStartDate,
