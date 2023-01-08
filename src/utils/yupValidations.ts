@@ -1,11 +1,38 @@
 import * as yup from 'yup';
 
+
+export const createPortfolioSchema = yup.object({
+	about: yup.string().required('Este campo es requerido').max(800, 'El texto no debe superar los 700 caracteres'),
+	technologies: yup.array().of(yup.object().shape({
+		id: yup.number().required('Este campo es requerido'),
+		name: yup.string().required('Este campo es requerido'),
+		icon: yup.string().required('Este campo es requerido'),
+	})).min(1, 'Debes agregar al menos una tecnología'),
+	experiences: yup.array().of(yup.object().shape({
+		company: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		position: yup.string().required('Este campo es requerido').matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s-]+$/, 'El texto solo puede contener letras, espacios y guiones').max(50, 'El texto no debe superar los 50 caracteres'),
+		description: yup.string().required('Este campo es requerido').max(600, 'El texto no debe superar los 600 caracteres'),
+		startedAt: yup.date().required('Este campo es requerido').max(new Date(), 'La fecha de fin no puede ser posterior a la fecha actual'),
+		endedAt: yup.date().nullable().min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio').max(new Date(), 'La fecha de fin no puede ser posterior a la fecha actual'),
+	})),
+	projects: yup.array().of(yup.object().shape({
+		name: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		description: yup.string().required('Este campo es requerido').max(600, 'El texto no debe superar los 600 caracteres'),
+		course: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		technology: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		file: yup.string().required('Este campo es requerido').nullable(),
+	})),
+	contacts: yup.array().of(yup.object().shape({
+		name: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
+		url: yup.string().required('Este campo es requerido').max(200, 'El texto no debe superar los 200 caracteres'),
+	}))
+});
+
 export const email = yup
 	.string()
 	.email('Ingrese un correo electrónico válido')
 	.required('Debe ingresar un correo electrónico')
 	.matches(/@(ubiobio\.cl|alumnos\.ubiobio\.cl)$/, 'Debes ingresar un correo institucional');
-
 
 export const password = yup
 	.string()
