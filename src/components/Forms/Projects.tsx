@@ -13,7 +13,6 @@ interface ProjectErrors {
 	description: string;
 	technology: string;
 	course: string;
-	deploy: string;
 	file: string;
 }
 
@@ -31,7 +30,7 @@ const Projects = () => {
 							(
 								<Box>
 									<Box>
-										<Button variant="outlined" onClick={() => arrayHelpers.push({ name: '', description: '', technology: '', course: '', deploy: '', file: null })}>Agregar nuevo proyecto</Button>
+										<Button variant="outlined" onClick={() => arrayHelpers.push({ name: '', description: '', technology: '', course: '', file: null })}>Agregar nuevo proyecto</Button>
 									</Box>
 									<Grid container spacing={2} mt={1}>
 										{formik.values.projects.map((experience, index) => (
@@ -135,7 +134,7 @@ const Projects = () => {
 								<Box>
 									<Button
 										variant="outlined"
-										onClick={() => arrayHelpers.push({ name: '', description: '', course: '', deploy: '', file: null })}
+										onClick={() => arrayHelpers.push({ name: '', description: '', course: '', file: null })}
 									>
 										Agregar proyecto
 									</Button>
