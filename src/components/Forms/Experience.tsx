@@ -78,7 +78,7 @@ const Experience = ({ checked, setChecked }: Props) => {
 													<RadioGroup
 														aria-labelledby="demo-radio-buttons-group-label"
 														name="radio-buttons-group"
-														defaultValue={experience.type}
+														value={experience.type}
 														onChange={(e) => {
 															formik.setFieldValue(`experiences.${index}.type`, e.target.value);
 															formik.setFieldValue(`experiences.${index}.company`, '');
