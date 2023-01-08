@@ -124,6 +124,7 @@ const StudentPortfolio = ({ user }: { user: UserPortfolio }) => {
 											startedAt={exp.startedAt}
 											endedAt={exp.endedAt || null}
 											description={exp.description}
+											type={exp.type}
 										/>
 									</Grid>
 								))}
