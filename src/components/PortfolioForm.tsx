@@ -26,8 +26,8 @@ const validationSchema = yup.object({
 		company: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
 		position: yup.string().required('Este campo es requerido').matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s-]+$/, 'El texto solo puede contener letras, espacios y guiones').max(50, 'El texto no debe superar los 50 caracteres'),
 		description: yup.string().required('Este campo es requerido').max(600, 'El texto no debe superar los 600 caracteres'),
-		startedAt: yup.date().required('Este campo es requerido'),
-		endedAt: yup.date().nullable().min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio')
+		startedAt: yup.date().required('Este campo es requerido').max(new Date(), 'La fecha de fin no puede ser posterior a la fecha actual'),
+		endedAt: yup.date().nullable().min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio').max(new Date(), 'La fecha de fin no puede ser posterior a la fecha actual'),
 	})),
 	projects: yup.array().of(yup.object().shape({
 		name: yup.string().required('Este campo es requerido').max(50, 'El texto no debe superar los 50 caracteres'),
