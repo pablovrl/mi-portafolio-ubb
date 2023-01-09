@@ -1,7 +1,7 @@
 import { Box, Button, FormControlLabel, Checkbox, Grid, TextField, FormControl, FormLabel, RadioGroup, Radio, TextFieldProps, StandardTextFieldProps } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
-import { Field, FieldArray, FieldArrayRenderProps, FieldProps, useFormikContext } from 'formik';
+import { Field, FieldArray, FieldArrayRenderProps, FieldProps, FormikContextType, useFormikContext } from 'formik';
 import { todayDate } from '../../utils/todayDate';
 import { UserPortfolio } from '../../types';
 import { Header, Layout } from './Layout';
@@ -23,34 +23,36 @@ interface Props {
 interface DataInputProps extends StandardTextFieldProps {
 	gridSize?: number;
 	index: number;
+	formik: FormikContextType<UserPortfolio>
 }
+
+const DataInput = ({ name, index, label, gridSize, type, multiline, minRows, formik }: DataInputProps) => (
+	<Field
+		name={`experiences.${index}.${name}`}
+	>
+		{({
+			field,
+		}: FieldProps) => (
+			<Grid item xs={gridSize || 6}>
+				<TextField
+					{...field}
+					fullWidth
+					type={type || 'text'}
+					label={label}
+					multiline={multiline}
+					minRows={minRows}
+					error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? true : false}
+					helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
+				/>
+			</Grid>
+		)}
+	</Field>
+);
 
 const Experience = ({ checked, setChecked }: Props) => {
 	const formik = useFormikContext<UserPortfolio>();
 	const today = todayDate();
 
-	const DataInput = ({ name, index, label, gridSize, type, multiline, rows }: DataInputProps) => (
-		<Field
-			name={`experiences.${index}.${name}`}
-		>
-			{({
-				field,
-			}: FieldProps) => (
-				<Grid item xs={gridSize || 6}>
-					<TextField
-						{...field}
-						fullWidth
-						type={type || 'text'}
-						label={label}
-						multiline={multiline}
-						rows={rows}
-						error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? true : false}
-						helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
-					/>
-				</Grid>
-			)}
-		</Field>
-	);
 
 	const handleCheckChange = (index: number) => {
 		const newChecked = [...checked];
@@ -123,17 +125,20 @@ const Experience = ({ checked, setChecked }: Props) => {
 												index={index}
 												name={'position'}
 												label={experience.type === 'WORK' ? 'Cargo *' : 'Nombre del proyecto *'}
+												formik={formik}
 											/>
 											<DataInput
 												index={index}
 												name={'company'}
 												label={experience.type === 'WORK' ? 'Empresa *' : 'Ramo *'}
+												formik={formik}
 											/>
 											<DataInput
 												index={index}
 												name='startedAt'
 												type='date'
 												label='Fecha de inicio *'
+												formik={formik}
 											/>
 											{formik.values.experiences[index].endedAt === null ? (
 												<Grid item xs={6}>
@@ -150,14 +155,17 @@ const Experience = ({ checked, setChecked }: Props) => {
 													name='endedAt'
 													type='date'
 													label='Fecha de finalización *'
+													formik={formik}
 												/>
 											)}
 											<DataInput 
 												index={index}
+												label='Descripción'
 												name='description'
 												multiline
 												minRows={3}
 												gridSize={12}
+												formik={formik}
 											/>
 										</Layout>
 									))}
