@@ -60,7 +60,7 @@ apiRoute.delete(async (req: NextApiRequest & { files: Express.Multer.File[] }, r
 
 	return res.status(200).json({ message: 'Portfolio deleted' });
 });
-// route to get the current user
+
 apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res: NextApiResponse) => {
 	const about = req.body.about;
 	const contact = JSON.parse(req.body.contact).map((contact: Partial<Contact>) => {
@@ -145,13 +145,13 @@ apiRoute.post(async (req: NextApiRequest & { files: Express.Multer.File[] }, res
 		},
 	});
 
-	res.status(200).json({ 'message': 'good' });
+	res.status(200).json({ 'message': 'Portfolio created succesfully' });
 
 });
 
 export const config = {
 	api: {
-		bodyParser: false, // Disallow body parsing, consume as stream
+		bodyParser: false, 
 	},
 };
 
