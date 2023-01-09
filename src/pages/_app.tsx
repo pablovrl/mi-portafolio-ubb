@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
 		<QueryClientProvider client={queryClient}>
 			<SessionProvider session={pageProps.session}>
 				<Head>
-					<title>Mi portafolio UBB</title>
+					<title>Mi Portafolio UBB</title>
 					<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
 				</Head>
 				<Toaster toastOptions={{style: {fontFamily: 'sans-serif'}}} />
