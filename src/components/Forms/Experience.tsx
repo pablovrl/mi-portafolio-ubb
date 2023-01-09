@@ -50,7 +50,7 @@ const Experience = ({ checked, setChecked }: Props) => {
 				</Grid>
 			)}
 		</Field>
-	)
+	);
 
 	const handleCheckChange = (index: number) => {
 		const newChecked = [...checked];
@@ -145,12 +145,12 @@ const Experience = ({ checked, setChecked }: Props) => {
 														helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index].endedAt && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors).endedAt ? (formik.errors.experiences[index] as ExperienceErrors).endedAt : null}
 													/>
 												</Grid>) : (
-													<DataInput
-														index={index}
-														name='endedAt'
-														type='date'
-														label='Fecha de finalización *'
-													/>
+												<DataInput
+													index={index}
+													name='endedAt'
+													type='date'
+													label='Fecha de finalización *'
+												/>
 											)}
 											<DataInput 
 												index={index}
