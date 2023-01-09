@@ -1,5 +1,6 @@
-import { Box, Button, FormHelperText, Grid, TextField } from '@mui/material';
-import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
+import { Box, Button, FormHelperText, Grid, StandardTextFieldProps, TextField } from '@mui/material';
+import { Project } from '@prisma/client';
+import { Field, FieldArray, FieldProps, FormikContextType, useFormikContext } from 'formik';
 import { toast } from 'react-hot-toast';
 import { deleteFile } from '../../api/file';
 import { UserPortfolio } from '../../types';
@@ -15,6 +16,34 @@ interface ProjectErrors {
 	course: string;
 	file: string;
 }
+interface DataInputProps extends StandardTextFieldProps {
+	gridSize?: number;
+	index: number;
+	formik: FormikContextType<UserPortfolio>
+}
+
+const DataInput = ({ name, index, label, gridSize, type, multiline, minRows, formik }: DataInputProps) => (
+	<Field
+		name={`projects.${index}.${name}`}
+	>
+		{({
+			field,
+		}: FieldProps) => (
+			<Grid item xs={gridSize || 6}>
+				<TextField
+					{...field}
+					fullWidth
+					type={type || 'text'}
+					label={label}
+					multiline={multiline}
+					minRows={minRows}
+					error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index][name as keyof Project] && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors)[name as keyof ProjectErrors] ? true : false}
+					helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index][name as keyof Project] && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors)[name as keyof ProjectErrors] ? (formik.errors.projects[index] as ProjectErrors)[name as keyof ProjectErrors] : null}
+				/>
+			</Grid>
+		)}
+	</Field>
+);
 
 const Projects = () => {
 	const formik = useFormikContext<UserPortfolio>();
@@ -37,68 +66,34 @@ const Projects = () => {
 											<Layout key={index}>
 												<Header title='proyecto' index={index + 1} file={experience.file} handleDelete={arrayHelpers.handleRemove(index)}
 												/>
-												<Field
-													name={`projects.${index}.name`}
-												>
-													{({ field }: FieldProps) => (
-														<Grid item xs={12}>
-															<TextField
-																{...field}
-																fullWidth
-																label="Nombre *"
-																error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].name && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? true : false}
-																helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].name && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).name ? (formik.errors.projects[index] as ProjectErrors).name : null}
-															/>
-														</Grid>
-													)}
-												</Field>
-												<Field
-													name={`projects.${index}.course`}
-												>
-													{({ field }: FieldProps) => (
-														<Grid item xs={6}>
-															<TextField
-																{...field}
-																fullWidth
-																label="Asignatura *"
-																error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].course && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? true : false}
-																helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].course && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).course ? (formik.errors.projects[index] as ProjectErrors).course : null}
-															/>
-														</Grid>
-													)}
-												</Field>
-												<Field
-													name={`projects.${index}.technology`}
-												>
-													{({ field }: FieldProps) => (
-														<Grid item xs={6}>
-															<TextField
-																{...field}
-																fullWidth
-																label="Lenguaje de programación *"
-																error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].technology && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? true : false}
-																helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].technology && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).technology ? (formik.errors.projects[index] as ProjectErrors).technology : null}
-															/>
-														</Grid>
-													)}
-												</Field>
-												<Field
-													name={`projects.${index}.description`}
-												>
-													{({ field }: FieldProps) => (
-														<Grid item xs={12}>
-															<TextField
-																{...field}
-																fullWidth
-																label="Descripción *"
-																multiline
-																minRows={3}
-																error={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].description && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? true : false}
-																helperText={formik.touched.projects && formik.touched.projects[index] && formik.touched.projects[index].description && formik.errors.projects && formik.errors.projects[index] && (formik.errors.projects[index] as ProjectErrors).description ? (formik.errors.projects[index] as ProjectErrors).description : null}
-															/>
-														</Grid>
-													)}
-												</Field>
+												<DataInput
+													name='name'
+													label="Nombre *"
+													formik={formik}
+													index={index}
+												/>
+												<DataInput
+													name='course'
+													label="Asignatura *"
+													formik={formik}
+													index={index}
+												/>
+												<DataInput
+													name='technology'
+													label="Lenguaje de programación *"
+													formik={formik}
+													index={index}
+													gridSize={12}
+												/>
+												<DataInput
+													name='description'
+													formik={formik}
+													index={index}
+													label="Descripción *"
+													multiline
+													minRows={3}
+													gridSize={12}
+												/>
 												{formik.values.projects[index].file ? (
 													<Grid item xs={12}>
 														<Button variant='outlined' fullWidth color="error" onClick={() => {

@@ -1,4 +1,4 @@
-import { Box, Button, FormControlLabel, Checkbox, Grid, TextField, FormControl, FormLabel, RadioGroup, Radio, TextFieldProps, StandardTextFieldProps } from '@mui/material';
+import { Box, Button, FormControlLabel, Checkbox, Grid, TextField, FormControl, FormLabel, RadioGroup, Radio, StandardTextFieldProps } from '@mui/material';
 import Helptext from './common/Helptext';
 import Title from './common/Title';
 import { Field, FieldArray, FieldArrayRenderProps, FieldProps, FormikContextType, useFormikContext } from 'formik';
@@ -42,7 +42,7 @@ const DataInput = ({ name, index, label, gridSize, type, multiline, minRows, for
 					multiline={multiline}
 					minRows={minRows}
 					error={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? true : false}
-					helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? (formik.errors.experiences[index] as ExperienceErrors).company : null}
+					helperText={formik.touched.experiences && formik.touched.experiences[index] && formik.touched.experiences[index][name as keyof Experience] && formik.errors.experiences && formik.errors.experiences[index] && (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] ? (formik.errors.experiences[index] as ExperienceErrors)[name as keyof ExperienceErrors] : null}
 				/>
 			</Grid>
 		)}
