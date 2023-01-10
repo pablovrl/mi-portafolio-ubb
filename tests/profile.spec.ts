@@ -2,8 +2,8 @@ import { test } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
 	await page.goto('http://localhost:3000/');
-	await page.getByLabel('Correo electrónico').fill('pablo.villarroel1901@alumnos.ubiobio.cl');
-	await page.getByLabel('Contraseña').fill('admin123');
+	await page.getByLabel('Correo electrónico').fill(process.env.TEST_EMAIL || 'test@ubiobio.cl');
+	await page.getByLabel('Contraseña').fill(process.env.TEST_PASSWORD || 'testubb123');
 	await page.getByRole('button', { name: 'Iniciar sesión' }).click();
 });
 
@@ -23,7 +23,7 @@ test('user can change his name', async ({ page }) => {
 	await page.textContent('text=Pablo Villarroel');
 });
 
-test('user can change his password', async ({page}) => {
+test('user can change his password', async ({ page }) => {
 
 	const changePassword = async (oldPass: string, newPass: string) => {
 		await page.textContent('text=Bienvenid@');
@@ -36,14 +36,14 @@ test('user can change his password', async ({page}) => {
 		await page.getByRole('button', { name: 'Guardar' }).click();
 	};
 
-	await changePassword('admin123', 'test1234');
+	await changePassword(process.env.TEST_PASSWORD || 'testubb123', 'test1234');
 
 	await page.getByRole('button', { name: 'Cerrar sesión' }).click();
-	await page.getByLabel('Correo electrónico').fill('pablo.villarroel1901@alumnos.ubiobio.cl');
+	await page.getByLabel('Correo electrónico').fill(process.env.TEST_EMAIL || 'test@ubiobio.cl');
 	await page.getByLabel('Contraseña').fill('test1234');
 	await page.getByRole('button', { name: 'Iniciar sesión' }).click();
 
-	await changePassword('test1234', 'admin123');
+	await changePassword('test1234', process.env.TEST_PASSWORD || 'testubb123');
 });
 
 test('user can change his career', async ({ page }) => {
