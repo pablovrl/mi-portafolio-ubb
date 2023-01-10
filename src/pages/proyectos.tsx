@@ -26,7 +26,7 @@ const ProjectCard = ({ project }: { project: ProjectWithUser }) => (
 		<Typography variant='h4' fontWeight={'bold'}>{project.name.toUpperCase()}</Typography>
 		<Typography fontSize={'15px'} color='grey' fontWeight={'bold'}>{project.course.toUpperCase()}</Typography>
 		<Typography color='grey' textAlign={'justify'}>{project.description}</Typography>
-		<Button href={`${process.env.NEXT_PUBLIC_DEPLOY}/api/file${project.file}`} variant='contained'>Descargar proyecto</Button>
+		<Button href={`${process.env.NEXTAUTH_URL}/api/file${project.file}`} variant='contained'>Descargar proyecto</Button>
 		<Typography color='grey' fontWeight={'bold'}>Desarrollado por {' '}
 			<Link href={`/portafolio/${project.user.email}`}>
 				<MUILink sx={{ cursor: 'pointer' }}>
