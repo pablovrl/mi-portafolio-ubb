@@ -1,34 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mi Portafolio UBB 
 
-## Getting Started
+Mi Portafolio UBB, es mi proyecto de título para titularme de la carrera de Ingeniería de Ejecución en Computación e Informática.
 
-First, run the development server:
+Este proyecto permite a los alumnos de la Universidad del Bío-Bío disponer de una plataforma web en la que podrán crear un portafolio digital en el que mostrarán las tecnologías que dominan, su experiencia profesional y sus proyectos desarrollados. 
 
+De igual manera, la plataforma servirá como administradora de portafolios, por lo que empleadores podrán entrar a ellas, en busca de alumnos para trabajos o prácticas profesionales, facilitando la comunicación entre alumnos y empleadores.
+
+## Primeros Pasos 
+
+A continuación se encuentran las instrucciones que permitirán tener una copia del proyecto corriendo en su máquina local.
+
+### Prerequisitos
+
+- [Node](https://nodejs.org/es/)
+
+### Instalación
+
+Clonar el repositorio
 ```bash
-npm run dev
-# or
-yarn dev
+git clone https://github.com/pablovrl/mi-portafolio-ubb.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Entrar a la carpeta raíz
+```bash
+cd mi-portafolio-ubb
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Crear un archivo .env con las siguientes variables de entorno:
+```bash
+DATABASE_URL='' # string de conexión a la bd.
+NEXTAUTH_URL='' # url del proyecto
+EMAIL='' # email para el envío de correos
+EMAIL_PASSWORD='' # token del email
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+# credenciales para el usuario administrador
+ADMIN_EMAIL=''
+ADMIN_PASSWORD=''
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# credenciales para el usuario que se ocupa en los tests
+TEST_EMAIL=''
+TEST_PASSWORD=''
+```
 
-## Learn More
+Instalar dependencias
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Crear las tablas en la base de datos
+```bash
+npx prisma db push
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Hacer el seeding a la base de datos
+```bash
+npx prisma db seed
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Iniciar proyecto en modo desarrollador
+```bash
+npm start dev
+```
 
-## Deploy on Vercel
+## Tests E2E
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Una vez creamos y hacemos el seeding a la base de datos, podemos correr los tests E2E con la siguiente instrucción (la aplicación debe estar corriendo):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npx playwright test
+```
+## Construido con 
+
+  - [TypeScript](https://www.typescriptlang.org/) - Lenguaje de programación utilizado en todo el proyecto.
+  - [Next.js](https://www.nextjs.org/) - Usado como framework de front-end y back-end.
+  - [MUI](https://mui.com/) - Para los componentes del front-end.
+  - [Prisma.io](https://prisma.io/) - Usado para la comunicación con la base de datos.
+  - [Playwright](https://playwright.dev/) - Para los tests end-to-end.
+  - [NextAuth.js](https://next-auth.js.org/) - Para la autenticación de usuarios.
+## Autor
+
+  - **Pablo Villarroel** - 
+    [pablovrl](https://github.com/pablovrl)
