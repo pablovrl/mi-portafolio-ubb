@@ -46,6 +46,7 @@ Crear un archivo .env con las siguientes variables de entorno:
 ```bash
 DATABASE_URL='' # string de conexión a la bd.
 NEXTAUTH_URL='' # url del proyecto
+NEXT_PUBLIC_HOST='' # url del proyecto
 EMAIL='' # email para el envío de correos
 EMAIL_PASSWORD='' # token del email
 
