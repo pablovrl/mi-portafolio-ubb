@@ -62,7 +62,7 @@ const PortfolioSpeedDial = ({ user }: { user: UserPortfolio }) => {
 					icon={<FileDownloadIcon />}
 					onClick={handleCreatePdf}
 				/>
-				<CopyToClipboard onCopy={handleCopy} text={`${process.env.NEXTAUTH_URL}${router.asPath}`}>
+				<CopyToClipboard onCopy={handleCopy} text={`${process.env.NEXT_PUBLIC_HOST}${router.asPath}`}>
 					<SpeedDialAction
 						tooltipTitle='Compartir'
 						icon={<ShareIcon />}

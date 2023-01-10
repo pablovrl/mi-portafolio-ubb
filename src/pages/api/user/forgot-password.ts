@@ -41,7 +41,7 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
 		html: `
 			<h1>Recuperar contraseña</h1>
 			<p>Haz click en el enlace para recuperar tu contraseña</p>
-			<a href="${env.NEXTAUTH_URL}/reset-password/${token}">Recuperar contraseña</a>
+			<a href="${env.NEXT_PUBLIC_HOST}/reset-password/${token}">Recuperar contraseña</a>
 			`
 	});
 

@@ -133,7 +133,7 @@ const Technologies = ({ technologies }: Props) => {
 								<TableCell>{technology.name.toUpperCase()}</TableCell>
 								{technology.icon.includes('uploads/images') ? (
 									<TableCell>
-										<img src={process.env.NEXTAUTH_URL + '/api/file/' + technology.icon.replace('/public', '')} alt={technology.name} width={30} />
+										<img src={process.env.NEXT_PUBLIC_HOST + '/api/file/' + technology.icon.replace('/public', '')} alt={technology.name} width={30} />
 									</TableCell>
 								) : (
 									<TableCell><i style={{ fontSize: '30px' }} className={technology.icon} /></TableCell>

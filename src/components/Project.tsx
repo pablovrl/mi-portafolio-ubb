@@ -15,7 +15,7 @@ const Project = (props: ProjectProps) => {
 			<Typography variant='h4' fontWeight={'bold'}>{props.name.toUpperCase()}</Typography>
 			<Typography fontSize={'15px'} color='grey' fontWeight={'bold'}>{props.course.toUpperCase()}</Typography>
 			<Typography color='grey' textAlign={'justify'}>{props.description}</Typography>
-			<Button href={`${process.env.NEXTAUTH_URL}/api/file${props.link}`} variant='contained'>Descargar proyecto</Button>
+			<Button href={`${process.env.NEXT_PUBLIC_HOST}/api/file${props.link}`} variant='contained'>Descargar proyecto</Button>
 		</Box>
 	);
 };

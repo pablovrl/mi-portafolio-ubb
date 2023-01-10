@@ -24,7 +24,7 @@ export const createPdf = async (user: UserPortfolio) => {
 			},
 			{
 				text: 'Descargar\n\n',
-				link: `${process.env.NEXTAUTH_URL}/api/file${project.file}`,
+				link: `${process.env.NEXT_PUBLIC_HOST}/api/file${project.file}`,
 				color: 'blue',
 				margin: [0, 5]
 			}
@@ -72,7 +72,7 @@ export const createPdf = async (user: UserPortfolio) => {
 					{
 						width: 'auto',
 						text: 'Portafolio',
-						link: `${process.env.NEXTAUTH_URL}/portafolio/${user.email}`,
+						link: `${process.env.NEXT_PUBLIC_HOST}/portafolio/${user.email}`,
 						color: 'blue'
 					},
 					...ct

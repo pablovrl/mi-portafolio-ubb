@@ -34,6 +34,8 @@ const UserImage = ({ user }: UserImageProps) => {
 		}
 	};
 
+	console.log(process.env);
+
 	return (
 		<>
 			<Title text='Actualiza tu imagen' />
