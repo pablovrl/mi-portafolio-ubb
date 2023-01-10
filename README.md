@@ -4,7 +4,16 @@ Mi Portafolio UBB, es mi proyecto de título para titularme de la carrera de Ing
 
 Este proyecto permite a los alumnos de la Universidad del Bío-Bío disponer de una plataforma web en la que podrán crear un portafolio digital en el que mostrarán las tecnologías que dominan, su experiencia profesional y sus proyectos desarrollados. 
 
-De igual manera, la plataforma servirá como administradora de portafolios, por lo que empleadores podrán entrar a ellas, en busca de alumnos para trabajos o prácticas profesionales, facilitando la comunicación entre alumnos y empleadores.
+De igual manera, la plataforma servirá como administradora de portafolios, por lo que empleadores podrán entrar a ella, en busca de alumnos para trabajos o prácticas profesionales, facilitando la comunicación entre alumnos y empleadores.
+
+## Construido con 
+
+  - [TypeScript](https://www.typescriptlang.org/) - Lenguaje de programación utilizado en todo el proyecto.
+  - [Next.js](https://www.nextjs.org/) - Usado como framework de front-end y back-end.
+  - [MUI](https://mui.com/) - Para los componentes del front-end.
+  - [Prisma.io](https://prisma.io/) - Usado para la comunicación con la base de datos.
+  - [Playwright](https://playwright.dev/) - Para los tests end-to-end.
+  - [NextAuth.js](https://next-auth.js.org/) - Para la autenticación de usuarios.
 
 ## Primeros Pasos 
 
@@ -69,14 +78,7 @@ Una vez creamos y hacemos el seeding a la base de datos, podemos correr los test
 ```bash
 npx playwright test
 ```
-## Construido con 
 
-  - [TypeScript](https://www.typescriptlang.org/) - Lenguaje de programación utilizado en todo el proyecto.
-  - [Next.js](https://www.nextjs.org/) - Usado como framework de front-end y back-end.
-  - [MUI](https://mui.com/) - Para los componentes del front-end.
-  - [Prisma.io](https://prisma.io/) - Usado para la comunicación con la base de datos.
-  - [Playwright](https://playwright.dev/) - Para los tests end-to-end.
-  - [NextAuth.js](https://next-auth.js.org/) - Para la autenticación de usuarios.
 ## Autor
 
   - **Pablo Villarroel** - 
