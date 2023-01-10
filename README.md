@@ -6,6 +6,13 @@ Este proyecto permite a los alumnos de la Universidad del Bío-Bío disponer de 
 
 De igual manera, la plataforma servirá como administradora de portafolios, por lo que empleadores podrán entrar a ella, en busca de alumnos para trabajos o prácticas profesionales, facilitando la comunicación entre alumnos y empleadores.
 
+## Vista previa
+### Crea tu portafolio digital
+<img src="https://github.com/pablovrl/mi-portafolio-ubb/blob/main/public/create-portfolio.gif" width="auto" height="300" />
+
+### Comparte y exporta tu nuevo portafolio
+<img src="https://github.com/pablovrl/mi-portafolio-ubb/blob/main/public/share-portfolio.gif" width="auto" height="300" />
+
 ## Construido con 
 
   - [TypeScript](https://www.typescriptlang.org/) - Lenguaje de programación utilizado en todo el proyecto.
