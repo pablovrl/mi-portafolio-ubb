@@ -6,23 +6,26 @@ import * as yup from 'yup';
 import { password } from '../utils/yupValidations';
 
 interface DialogProps {
-  open: boolean;
-  onClose: () => void;
+	open: boolean;
+	onClose: () => void;
 }
 
 const validationSchema = yup.object({
-	password: password,
+	password,
 	newPassword: password,
-	repeatNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], 'Las contraseña no coincide')
+	confirmNewPassword: yup
+		.string()
+		.required('Confirmar contraseña es requerido')
+		.oneOf([yup.ref('newPassword'), null], 'Las contraseñas no coinciden'),
 });
 
-const ChangePasswordDialog = ({ open, onClose}: DialogProps) => {
+const ChangePasswordDialog = ({ open, onClose }: DialogProps) => {
 	const handleSubmit = async (values: { password: string, newPassword: string }) => {
 		try {
 			await changeUserPassword({ password: values.password, newPassword: values.newPassword });
 			toast.success('Contraseña cambiada con éxito');
 			onClose();
-		} catch(error) {
+		} catch (error) {
 			toast.error('Contraseña incorrecta');
 		}
 	};
@@ -34,13 +37,13 @@ const ChangePasswordDialog = ({ open, onClose}: DialogProps) => {
 				initialValues={{
 					password: '',
 					newPassword: '',
-					repeatNewPassword: ''
+					confirmNewPassword: ''
 				}}
 				onSubmit={handleSubmit}
 			>
 				{props => (
-					<Box component={'form'} onSubmit={props.handleSubmit}>
-						<DialogTitle>Cambia tu nombre o apellido</DialogTitle>
+					<Box width={{ xs: '18rem', md: '25rem' }} component={'form'} onSubmit={props.handleSubmit}>
+						<DialogTitle>Cambia tu contraseña</DialogTitle>
 						<DialogContent>
 							<Box my={1} display={'flex'} gap={2} flexDirection='column'>
 								<FormControl fullWidth >
@@ -71,10 +74,10 @@ const ChangePasswordDialog = ({ open, onClose}: DialogProps) => {
 										type={'password'}
 										label='Repetir nueva contraseña'
 										onChange={props.handleChange}
-										value={props.values.repeatNewPassword}
-										name='repeatNewPassword'
-										error={props.touched.repeatNewPassword && Boolean(props.errors.repeatNewPassword)}
-										helperText={props.touched.repeatNewPassword && props.errors.repeatNewPassword}
+										value={props.values.confirmNewPassword}
+										name='confirmNewPassword'
+										error={props.touched.confirmNewPassword && Boolean(props.errors.confirmNewPassword)}
+										helperText={props.touched.confirmNewPassword && props.errors.confirmNewPassword}
 									/>
 								</FormControl>
 							</Box>
