@@ -77,7 +77,7 @@ npx prisma db seed
 Iniciar proyecto
 ```bash
 # modo desarrollador
-npm start dev
+npm run dev
 
 # para producción
 npm start
