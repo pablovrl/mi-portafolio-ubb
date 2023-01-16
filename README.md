@@ -74,9 +74,13 @@ Hacer el seeding a la base de datos
 npx prisma db seed
 ```
 
-Iniciar proyecto en modo desarrollador
+Iniciar proyecto
 ```bash
+# modo desarrollador
 npm start dev
+
+# para producción
+npm start
 ```
 
 ## Tests E2E
