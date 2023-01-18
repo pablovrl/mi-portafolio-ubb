@@ -87,7 +87,15 @@ npm start
 
 Una vez creamos y hacemos el seeding a la base de datos, podemos correr los tests E2E con la siguiente instrucción (la aplicación debe estar corriendo):
 
+
 ```bash
+# Instalar playwright
+npx playwright install
+
+# Instalar dependencias
+npx playwright install-deps
+
+# Correr tests
 npx playwright test
 ```
 
