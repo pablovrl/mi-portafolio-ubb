@@ -1,6 +1,10 @@
 import { test } from '@playwright/test';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+
 test.beforeEach(async ({ page }) => {
-	await page.goto(process.env.NEXT_PUBLIC_HOST || 'http://localhost:3000');
+	await page.goto(process.env.NEXTAUTH_URL!);
 });
 
 test('user can login', async ({ page }) => {

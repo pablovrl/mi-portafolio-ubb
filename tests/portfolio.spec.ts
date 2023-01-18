@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import path from 'path';
 
 test.beforeEach(async ({ page }) => {
-	await page.goto(process.env.NEXT_PUBLIC_HOST || 'http://localhost:3000');
+	await page.goto(process.env.NEXTAUTH_URL || 'http://localhost:3001');
 	await page.getByLabel('Correo electrónico').fill(process.env.TEST_EMAIL || 'test@ubiobio.cl');
 	await page.getByLabel('Contraseña').fill(process.env.TEST_PASSWORD || 'testubb123');
 	await page.getByRole('button', { name: 'Iniciar sesión' }).click();
