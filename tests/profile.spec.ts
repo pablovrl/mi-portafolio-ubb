@@ -17,10 +17,10 @@ test('user can change his name', async ({ page }) => {
 	await page.textContent('text=Sebastián Antillanca');
 
 	await page.getByRole('button', { name: 'Nombre' }).click();
-	await page.getByRole('textbox', { name: 'Nombre' }).fill('Pablo');
-	await page.getByRole('textbox', { name: 'Apellido' }).fill('Villarroel');
+	await page.getByRole('textbox', { name: 'Nombre' }).fill('Test');
+	await page.getByRole('textbox', { name: 'Apellido' }).fill('User');
 	await page.getByRole('button', { name: 'Guardar' }).click();
-	await page.textContent('text=Pablo Villarroel');
+	await page.textContent('text=Test User');
 });
 
 test('user can change his password', async ({ page }) => {

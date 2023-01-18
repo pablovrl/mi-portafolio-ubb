@@ -25,9 +25,9 @@ async function main() {
 
 	const testUser: User = {
 		id: 2,
-		name: 'Pablo',
+		name: 'Test',
 		about: null,
-		lastName: 'Villarroel',
+		lastName: 'User',
 		email: env.TEST_EMAIL || 'test@ubiobio.cl',
 		password: await bcrypt.hash(env.TEST_PASSWORD || 'testubb123', 10),
 		role: 'USER' as Role,

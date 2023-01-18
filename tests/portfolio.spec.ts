@@ -80,4 +80,6 @@ test('user can create and delete portfolio', async ({ page }) => {
 	await page.getByRole('button', { name: 'tools' }).hover();
 	await page.getByRole('menuitem', { name: 'Eliminar' }).click();
 	await page.getByRole('button', { name: 'Eliminar' }).click();
+	// the page should not contain the text 'Test User'
+	expect(page).not.toContain('text=Test User');
 });
