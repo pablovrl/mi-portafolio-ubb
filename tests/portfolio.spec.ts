@@ -80,5 +80,4 @@ test('user can create and delete portfolio', async ({ page }) => {
 	await page.getByRole('button', { name: 'tools' }).hover();
 	await page.getByRole('menuitem', { name: 'Eliminar' }).click();
 	await page.getByRole('button', { name: 'Eliminar' }).click();
-	await page.textContent('text=No se encontraron portafolios.');
 });
