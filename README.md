@@ -21,6 +21,7 @@ De igual manera, la plataforma servirá como administradora de portafolios, por 
   - [Prisma.io](https://prisma.io/) - Usado para la comunicación con la base de datos.
   - [Playwright](https://playwright.dev/) - Para los tests end-to-end.
   - [NextAuth.js](https://next-auth.js.org/) - Para la autenticación de usuarios.
+  - [Formik](https://formik.org/) - Para las validaciones de los formularios.
 
 ## Primeros Pasos 
 
