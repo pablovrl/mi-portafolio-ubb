@@ -122,11 +122,11 @@ const Home: NextPage<Props> = ({ user, users }) => {
 	return (
 		<Layout>
 			{!user.portfolio && (
-				<Alert severity='warning' sx={{ marginBottom: '15px' }}>
+				<Alert severity='warning' sx={{ my: '15px' }}>
 					<AlertTitle>
 						¿Aún no tienes tu portafolio?
 					</AlertTitle>
-					Crea uno haciendo click aquí <Link href={`/portafolio/${user.email}`}><MUILink sx={{ cursor: 'pointer' }}>crear portafolio</MUILink></Link>.
+					Crea uno haciendo clic aquí <Link href={`/portafolio/${user.email}`}><MUILink sx={{ cursor: 'pointer' }}>crear portafolio</MUILink></Link>.
 				</Alert>
 			)}
 			<ListUsers users={users} />
