@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import { createTechnology, deleteTechnology } from '../api/technology';
 import * as yup from 'yup';
 import { toast } from 'react-hot-toast';
+import { DeleteDialog } from './DeleteDialog';
 
 interface Props {
 	technologies: Technology[];
@@ -26,7 +27,7 @@ interface CreateTechnologyProps {
 const CreateTechnology = ({ open, data, setData, handleClose }: CreateTechnologyProps) => {
 	return (
 		<Dialog open={open} onClose={handleClose}>
-			<Box p={4} width={{xs: 'auto', md: '300px'}}>
+			<Box p={4} width={{ xs: 'auto', md: '300px' }}>
 				<Formik
 					validationSchema={validationSchema}
 					initialValues={{ name: '', icon: undefined }}
@@ -89,6 +90,8 @@ const Technologies = ({ technologies }: Props) => {
 	const [page, setPage] = useState(1);
 	const [data, setData] = useState(technologies);
 	const [open, setOpen] = useState(false);
+	const [openDialog, setOpenDialog] = useState(false);
+	const [technologyToDelete, setTechnologyToDelete] = useState<null | Technology>(null);
 
 	const filteredData = data.filter((technology) =>
 		technology.name.toLowerCase().includes(filter.toLowerCase())
@@ -100,11 +103,13 @@ const Technologies = ({ technologies }: Props) => {
 		setPage(value);
 	};
 
-	const handleDelete = async (id: number) => {
+	const handleDelete = async () => {
+		if(!technologyToDelete) return;
 		try {
-			await deleteTechnology(id);
+			await deleteTechnology(technologyToDelete?.id);
 			toast.success('Tecnología eliminada');
-			setData(data.filter((technology) => technology.id !== id));
+			setOpenDialog(false);
+			setData(data.filter((technology) => technology.id !== technologyToDelete.id));
 		} catch (error) {
 			toast.error('Error al eliminar la tecnología');
 		}
@@ -112,6 +117,7 @@ const Technologies = ({ technologies }: Props) => {
 
 	return (
 		<Box>
+			<DeleteDialog open={openDialog} onClose={() => setOpenDialog(false)} action={handleDelete} />
 			<CreateTechnology open={open} data={data} setData={setData} handleClose={() => setOpen(false)} />
 			<Box mb={2}>
 				<TextField label="Busca tecnologías por su nombre" fullWidth onChange={(e) => { setFilter(e.target.value); setPage(1); }} />
@@ -139,7 +145,7 @@ const Technologies = ({ technologies }: Props) => {
 									<TableCell><i style={{ fontSize: '30px' }} className={technology.icon} /></TableCell>
 								)}
 								<TableCell>
-									<IconButton onClick={() => handleDelete(technology.id)} color='error'>
+									<IconButton onClick={() => { setOpenDialog(true); setTechnologyToDelete(technology); }} color='error'>
 										<DeleteForeverIcon />
 									</IconButton>
 								</TableCell>

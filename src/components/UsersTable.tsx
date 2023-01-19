@@ -5,6 +5,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { useState } from 'react';
+import { DeleteDialog } from './DeleteDialog';
 
 const ROWS = 5;
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
 const UsersTable = ({ users }: Props) => {
 	const [filter, setFilter] = useState('');
 	const [page, setPage] = useState(1);
+	const [openDialog, setOpenDialog] = useState(false);
+	const [email, setEmail] = useState('');
 
 	const filteredData = users.filter((user) =>
 		user.name?.toLowerCase().includes(filter.toLowerCase()) ||
@@ -30,16 +33,26 @@ const UsersTable = ({ users }: Props) => {
 	const deletePortfolio = useMutation((email: string) => deletePortfolioAsAdmin(email), {
 		onSuccess: () => {
 			toast.success('Portafolio eliminado');
-			window.location.reload();
+			filteredData.forEach((user) => {
+				if (user.email === email) {
+					user.portfolio = false;
+				}
+			});
 		}
 	});
 
+	const handleDelete = () => {
+		deletePortfolio.mutate(email);
+		setOpenDialog(false);
+	};
+
 	return (
 		<Box>
+			<DeleteDialog open={openDialog} onClose={() => setOpenDialog(false)} action={handleDelete} />
 			<Box mb={2}>
 				<TextField label="Busca usuarios por su nombre, apellido o correo electrónico" fullWidth onChange={(e) => { setFilter(e.target.value); setPage(1); }} />
 			</Box>
-			<TableContainer sx={{height: '360px'}}>
+			<TableContainer sx={{ height: '360px' }}>
 				<Table>
 					<TableHead>
 						<TableRow>
@@ -66,7 +79,7 @@ const UsersTable = ({ users }: Props) => {
 									)}
 								</TableCell>
 								<TableCell>
-									<IconButton disabled={!user.portfolio} onClick={() => deletePortfolio.mutate(user.email)} color='error'>
+									<IconButton disabled={!user.portfolio} onClick={() => {setOpenDialog(true); setEmail(user.email);}} color='error'>
 										<DeleteForeverIcon />
 									</IconButton>
 								</TableCell>
