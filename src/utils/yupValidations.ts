@@ -26,7 +26,7 @@ export const createPortfolioSchema = yup.object({
 			.matches(/^(?!\s+$).*/, 'El texto no puede contener solo espacios')
 			.max(600, 'El texto no debe superar los 600 caracteres'),
 		startedAt: yup.date().required('Este campo es requerido')
-			.max(new Date(), 'La fecha de fin no puede ser posterior a la fecha actual'),
+			.max(new Date(), 'La fecha de inicio no puede ser posterior a la fecha actual'),
 		endedAt: yup.date().nullable().min(yup.ref('startedAt'), 'La fecha de fin debe ser posterior a la fecha de inicio')
 			.max(new Date(), 'La fecha de fin no puede ser posterior a la fecha actual'),
 	})),
