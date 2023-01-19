@@ -11,7 +11,7 @@ const Layout = ({ children, noNavbar }: LayoutProps) => {
 		<Box pt={noNavbar ? '20px' : {xs: '35px', md: '50px'}}>
 			{noNavbar ? null : <Navbar />}
 			<Container maxWidth='md'>
-				<Box overflow="hidden" pb={2}>
+				<Box overflow="hidden" pb={8}>
 					{children}
 				</Box>
 			</Container>
