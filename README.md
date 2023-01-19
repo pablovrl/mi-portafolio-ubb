@@ -31,7 +31,7 @@ A continuación se encuentran las instrucciones que permitirán tener una copia 
 
 ### Prerequisitos
 
-- [Node](https://nodejs.org/es/)
+- [Node v18.12.1](https://nodejs.org/es/)
 
 ### Instalación
 
