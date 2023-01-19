@@ -29,7 +29,6 @@ const Contact = () => {
 										type="button"
 										onClick={() => arrayHelpers.push({ name: '', url: '' })} // insert an empty string at a position
 										variant='outlined'
-										disabled={formik.values.contacts.length >= 3}
 									>
 										Agregar nueva red de contacto
 									</Button>
