@@ -32,7 +32,7 @@ const Contact = () => {
 									>
 										Agregar nueva red de contacto
 									</Button>
-									<Button onClick={() => arrayHelpers.push({ name: 'Email', url: `mailto:${formik.values.email}` })} variant='outlined' size='small'>Añadir email</Button>
+									<Button disabled={!(formik.values.contacts.filter(contact => contact.name === 'Email').length === 0)} onClick={() => arrayHelpers.push({ name: 'Email', url: `mailto:${formik.values.email}` })} variant='outlined' size='small'>Añadir email</Button>
 								</Box>
 
 								<Grid container spacing={2} mt={1}>
@@ -49,7 +49,7 @@ const Contact = () => {
 														<TextField
 															{...field}
 															fullWidth
-															label='Nombre *'
+															label='Nombre de la red de contacto *'
 															error={formik.touched.contacts && formik.touched.contacts[index] && formik.touched.contacts[index].name && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).name ? true : false}
 															helperText={formik.touched.contacts && formik.touched.contacts[index] && formik.touched.contacts[index].name && formik.errors.contacts && formik.errors.contacts[index] && (formik.errors.contacts[index] as ContactErrors).name ? (formik.errors.contacts[index] as ContactErrors).name : null}
 														/>
