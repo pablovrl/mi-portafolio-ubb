@@ -6,6 +6,7 @@ import { Project, User } from '@prisma/client';
 import { Alert, AlertTitle, Box, Button, Grid, Link as MUILink, Pagination, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import Link from 'next/link';
+import { Card } from '../components/Card';
 
 export const getServerSideProps = requireAuth(async () => {
 	const projects = await prisma.project.findMany({ include: { user: true } });
@@ -21,20 +22,24 @@ interface Props {
 }
 
 const ProjectCard = ({ project }: { project: ProjectWithUser }) => (
-	<Box bgcolor={'#FAFAFA'} p={{ xs: 2, md: 4 }} display='flex' flexDirection={'column'} gap={1}>
-		<Typography fontWeight={'bold'}>{project.technology.toUpperCase()}</Typography>
-		<Typography variant='h4' fontWeight={'bold'}>{project.name.toUpperCase()}</Typography>
-		<Typography fontSize={'15px'} color='grey' fontWeight={'bold'}>{project.course.toUpperCase()}</Typography>
-		<Typography color='grey' textAlign={'justify'}>{project.description}</Typography>
-		<Button href={`${process.env.NEXT_PUBLIC_HOST}/api/file${project.file}`} variant='contained'>Descargar proyecto</Button>
-		<Typography color='grey' fontWeight={'bold'}>Desarrollado por {' '}
-			<Link href={`/portafolio/${project.user.email}`}>
-				<MUILink sx={{ cursor: 'pointer' }}>
-					{project.user.name} {project.user.lastName}
-				</MUILink>
-			</Link>
-		</Typography>
-	</Box>
+	<Card>
+		<Box display={'flex'} flexDirection='column' gap={1}>
+			<Typography fontWeight={'bold'}>{project.technology.toUpperCase()}</Typography>
+			<Typography variant='h4' fontWeight={'bold'}>{project.name.toUpperCase()}</Typography>
+			<Typography fontSize={'15px'} color='grey' fontWeight={'bold'}>{project.course.toUpperCase()}</Typography>
+			<Typography color='grey' textAlign={'justify'}>{project.description}</Typography>
+		</Box>
+		<Box display={'flex'} flexDirection='column' gap={1}>
+			<Button href={`${process.env.NEXT_PUBLIC_HOST}/api/file${project.file}`} variant='contained'>Descargar proyecto</Button>
+			<Typography color='grey' fontWeight={'bold'}>Desarrollado por {' '}
+				<Link href={`/portafolio/${project.user.email}`}>
+					<MUILink sx={{ cursor: 'pointer' }}>
+						{project.user.name} {project.user.lastName}
+					</MUILink>
+				</Link>
+			</Typography>
+		</Box>
+	</Card>
 );
 
 const Proyectos: NextPage<Props> = ({ projects }) => {
