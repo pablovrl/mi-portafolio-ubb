@@ -45,7 +45,7 @@ const UserCard = ({ user }: { user: User }) => (
 	<Link href={`/portafolio/${user.email}`}>
 		<Box bgcolor={'#FAFAFA'} p={5} display='flex' gap={2} flexDirection='column' sx={{ transition: 'transform .2s', '&:hover': { transform: 'scale(1.05)' }, cursor: 'pointer' }}>
 			<Box display='flex' gap={2} alignItems='center'>
-				<Box>
+				<Box width={'100%'}>
 					<Typography variant={'h6'} fontWeight={'bold'}>{user.name?.toUpperCase()} {user.lastName?.toUpperCase()}</Typography>
 					<Typography variant='body2' fontWeight={'bold'} color='grey'>
 						{user.career === 'IECI' ? 'Ingeniería de Ejecución en Computación e Informática' : 'Ingeniería Civil Informática'}
