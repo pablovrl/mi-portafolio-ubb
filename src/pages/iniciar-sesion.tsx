@@ -32,7 +32,9 @@ const validationSchema = yup.object({
 const PasswordRecoveryDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
 	const mutation = useMutation((data: { email: string }) => resetUserPassword(data), {
 		onSuccess: () => {
-			toast.success('Correo enviado');
+			toast.success('Se ha enviado un correo para recuperar tu contraseña', {
+				duration: 5000
+			});
 			onClose();
 		},
 		onError: () => {
