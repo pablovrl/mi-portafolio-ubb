@@ -147,6 +147,19 @@ export default function SignIn() {
 							>
 								Iniciar sesión
 							</Button>
+							<Box display={'flex'} justifyContent='flex-end' width={'100%'}>
+								<Link href={'/portafolios'}>
+									<Button
+										href='/portafolios'
+										type="submit"
+										color="warning"
+										variant="outlined"
+										sx={{ mt: 0, mb: 2, }}
+									>
+										Entrar como invitado
+									</Button>
+								</Link>
+							</Box>
 							<Box mb={1} display={'flex'} justifyContent='flex-end'>
 								<MuiLink onClick={() => setOpen(true)} variant="body2" sx={{ cursor: 'pointer' }}>
 									¿Olvidaste tu contraseña?
