@@ -1,9 +1,9 @@
 import nextConnect from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../utils/db';
-import bcrypt from 'bcryptjs';
 import { transporter } from '../../../utils/nodemailer';
 import { env } from 'process';
+import { v4 as uuidv4 } from 'uuid';
 
 const apiRoute = nextConnect({
 	onError(error, req, res: NextApiResponse) {
@@ -24,7 +24,7 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	});
 	if (!user) return res.status(404).json({ error: 'User not found' });
 
-	const token = ((await bcrypt.hash(email, 10))).replace('/', '');
+	const token = uuidv4();
 	await prisma.user.update({
 		where: {
 			email: email
