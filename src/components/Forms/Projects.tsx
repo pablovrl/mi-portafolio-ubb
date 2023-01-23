@@ -74,7 +74,7 @@ const Projects = () => {
 												/>
 												<DataInput
 													name='course'
-													label="Asignatura *"
+													label="Asignatura o Personal *"
 													formik={formik}
 													index={index}
 												/>
