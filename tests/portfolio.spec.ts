@@ -46,7 +46,7 @@ test('user can create and delete portfolio', async ({ page }) => {
 	// Project section
 	await page.getByRole('button', { name: 'Agregar proyecto' }).click();
 	await page.getByLabel('Nombre *').fill('Proyecto 1');
-	await page.getByLabel('Asignatura *').fill('Ingeniería de Software');
+	await page.getByLabel('Asignatura o Personal *').fill('Ingeniería de Software');
 	await page.getByLabel('Lenguaje de programación *').fill('typescript');
 	await page.getByLabel('Descripción *').fill('Esta es la descripción de mi proyeto.');
 
